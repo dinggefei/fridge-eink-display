@@ -1,5 +1,6 @@
 matplotlib>=3.10,<4
 manifold3d>=3,<4
+mapbox-earcut>=1.0,<2
 networkx>=3,<4
 numpy>=2,<3
 Pillow>=11,<13

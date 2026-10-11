@@ -11,7 +11,7 @@
 - `backend/`：FastAPI 后端、数据库迁移、画面渲染和第三方服务适配。
 - `miniapp/`：微信小程序客户端。
 - `firmware/`：ESP32-S3 配网、低功耗轮询、电子纸刷新和签名 OTA 固件。
-- `hardware/`：外壳生成脚本、STL、装配检具和结构验证文件。
+- `hardware/enclosure_v0_7/`：当前正式外壳的生成脚本、STL、装配检具和结构验证文件。
 - `shared/`：OpenAPI 文档和设备通信协议。
 - `infra/`：本地及自托管部署示例。
 - `kindle/`：可选的 Kindle 显示客户端。
@@ -40,11 +40,10 @@
 - 3.7 V 锂电池
 - 3D 打印前框、中托和后盖
 
-推荐从 [`hardware/enclosure_v0_7`](hardware/enclosure_v0_7/README.md) 开始。
-V0.7 是当前推荐打印结构；
-[`hardware/enclosure_v0_9_ultrathin`](hardware/enclosure_v0_9_ultrathin/README.md)
-是 15 mm 超薄工程样机，完成实物验证前请勿用于送人设备。
-CAD 验证环境和复现命令见 [`hardware/README.md`](hardware/README.md)。
+公开仓库只保留已经投入使用的
+[`hardware/enclosure_v0_7`](hardware/enclosure_v0_7/README.md)。V0.7 外形为
+`120 × 184 × 19 mm`，包含前框、中托、后盖、局部检具、装配说明、生成脚本和
+结构校验程序。打印前请先阅读该目录中的检具顺序与电池安全要求。
 
 ## 本地启动
 

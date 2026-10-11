@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
-"""Generate the compact, fully enclosed FridgeEInkDisplay V0.6 shell.
+"""Standalone geometry primitives and measured V0.7 baseline dimensions.
 
-V0.6 preserves the validated electronic hardware and measured mounting data
-from V0.5, but replaces the oversized 128 x 200 x ~29 mm stack with a compact
-120 x 184 x 21.4 mm three-layer enclosure:
-
-* 2.4 mm clean front bezel with a centred portrait display window;
-* 1.6 mm removable electronics carrier, nested inside the rear shell;
-* 18.0 mm closed rear shell with internal magnets and recessed fasteners.
-
-All units are millimetres.  Boolean operations use Manifold through trimesh.
+This module intentionally lives beside the V0.7 generator so the published
+hardware package does not depend on any removed historical enclosure version.
+All units are millimetres. Boolean operations use Manifold through trimesh.
 """
 
 from __future__ import annotations
 
-import importlib.util
 import json
 import math
 from pathlib import Path
@@ -23,26 +16,13 @@ import zipfile
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+from shapely.geometry import box as shapely_box
 import trimesh
 
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "output"
 PREVIEWS = ROOT / "previews"
-V05_FILE = ROOT.parent / "enclosure_v0_5" / "generate_enclosure_v0_5.py"
-
-
-def load_v05_module():
-    spec = importlib.util.spec_from_file_location("rfm_enclosure_v05_for_v06", V05_FILE)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"Unable to load V0.5 generator: {V05_FILE}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
-v05 = load_v05_module()
-cad = v05.v04.v03
 
 
 P = {
@@ -153,8 +133,8 @@ def lipo_to_carrier(x: float, y: float) -> tuple[float, float]:
 LIPO_HOLES = [lipo_to_carrier(x, y) for x, y in LIPO_MOUNT_HOLES_EAGLE]
 LIPO_USB_C_FACE = lipo_to_carrier(-0.873, 9.779)
 
-BOOT_OFFSET = v05.v04.BOOT_OFFSET
-RESET_OFFSET = v05.v04.RESET_OFFSET
+BOOT_OFFSET = (-8.146, -29.095)
+RESET_OFFSET = (7.242, -29.322)
 BOARD_BOOT = (P["esp_center_x"] + BOOT_OFFSET[0], P["esp_center_y"] + BOOT_OFFSET[1])
 BOARD_RESET = (P["esp_center_x"] + RESET_OFFSET[0], P["esp_center_y"] + RESET_OFFSET[1])
 REAR_BOOT = (-BOARD_BOOT[0], BOARD_BOOT[1])
@@ -177,24 +157,49 @@ MAGNETS_ASSEMBLED = [
 MAGNETS_MODEL = [(-x, y) for x, y in MAGNETS_ASSEMBLED]
 
 
+def rounded_rect_polygon(width: float, height: float, radius: float):
+    radius = max(0.0, min(radius, width / 2.0, height / 2.0))
+    core = shapely_box(
+        -width / 2.0 + radius,
+        -height / 2.0 + radius,
+        width / 2.0 - radius,
+        height / 2.0 - radius,
+    )
+    return core.buffer(radius, quad_segs=12)
+
+
 def rounded_prism(width, height, radius, depth, z0=0.0):
-    return cad.v01.rounded_prism(width, height, radius, depth, z0)
+    mesh = trimesh.creation.extrude_polygon(
+        rounded_rect_polygon(width, height, radius), depth, engine="earcut"
+    )
+    mesh.apply_translation((0.0, 0.0, z0))
+    return mesh
 
 
 def cuboid(size, center):
-    return cad.cuboid(size, center)
+    mesh = trimesh.creation.box(extents=np.asarray(size, dtype=float))
+    mesh.apply_translation(np.asarray(center, dtype=float))
+    return mesh
 
 
 def cylinder(radius, height, center, sections=48):
-    return cad.cylinder(radius, height, center, sections=sections)
+    mesh = trimesh.creation.cylinder(radius=radius, height=height, sections=sections)
+    mesh.apply_translation(np.asarray(center, dtype=float))
+    return mesh
 
 
 def union(meshes):
-    return cad.union(meshes)
+    meshes = [mesh for mesh in meshes if mesh is not None]
+    if len(meshes) == 1:
+        return meshes[0]
+    return trimesh.boolean.union(meshes, engine="manifold")
 
 
 def difference(base, cutters):
-    return cad.difference(base, cutters)
+    cutters = [cutter for cutter in cutters if cutter is not None]
+    if not cutters:
+        return base
+    return trimesh.boolean.difference([base, *cutters], engine="manifold")
 
 
 def intersection(meshes):

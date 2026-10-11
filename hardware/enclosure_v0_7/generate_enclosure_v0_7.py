@@ -41,19 +41,19 @@ import trimesh
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "output"
 PREVIEWS = ROOT / "previews"
-V06_FILE = ROOT.parent / "enclosure_v0_6" / "generate_enclosure_v0_6.py"
+V07_BASE_FILE = ROOT / "_geometry_base_v0_7.py"
 
 
-def load_v06_module():
-    spec = importlib.util.spec_from_file_location("rfm_enclosure_v06_for_v07", V06_FILE)
+def load_v07_base_module():
+    spec = importlib.util.spec_from_file_location("rfm_enclosure_v07_base", V07_BASE_FILE)
     if spec is None or spec.loader is None:
-        raise RuntimeError(f"Unable to load V0.6 generator: {V06_FILE}")
+        raise RuntimeError(f"Unable to load V0.7 geometry base: {V07_BASE_FILE}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
-v06 = load_v06_module()
+v06 = load_v07_base_module()
 
 P = dict(v06.P)
 P.update(

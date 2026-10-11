@@ -55,8 +55,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install CAD validation dependencies
-        run: python -m pip install -r hardware/requirements.txt
+        run: python -m pip install -r hardware/enclosure_v0_7/requirements.txt
       - name: Validate V0.7 enclosure
         run: python hardware/enclosure_v0_7/validate_enclosure_v0_7.py
-      - name: Validate V0.9 engineering enclosure
-        run: python hardware/enclosure_v0_9_ultrathin/validate_enclosure_v0_9.py

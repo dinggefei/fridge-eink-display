@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="128.0mm" height="200.0mm" viewBox="0 0 128.0 200.0">
-  <rect x="0.2" y="0.2" width="127.6" height="199.6" rx="6" fill="white" stroke="#111" stroke-width="0.4"/><circle cx="20.854" cy="109.095" r="2.75" fill="none" stroke="#d9463e" stroke-width="0.4"/><circle cx="20.854" cy="109.095" r="4.25" fill="none" stroke="#d9463e" stroke-dasharray="1,1" stroke-width="0.25"/><text x="20.854" y="116.095" text-anchor="middle" font-size="3">BOOT</text><circle cx="36.242" cy="109.322" r="2.75" fill="none" stroke="#d9463e" stroke-width="0.4"/><circle cx="36.242" cy="109.322" r="4.25" fill="none" stroke="#d9463e" stroke-dasharray="1,1" stroke-width="0.25"/><text x="36.242" y="116.322" text-anchor="middle" font-size="3">RESET</text><rect x="56.000" y="0" width="16.000" height="4.5" fill="none" stroke="#735497" stroke-width="0.4"/><text x="64.000" y="8" text-anchor="middle" font-size="3">USB-C top centre</text>
-  <text x="4" y="196" font-size="2.8">Rear view - print at 100% - verify before full cover print</text>
-</svg>

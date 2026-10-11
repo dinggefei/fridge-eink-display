@@ -243,7 +243,13 @@ V0.7 的电池区域在托板上表面下沉 `0.5 mm`，局部托板剩余 `0.9 
 ## 重新生成与检查
 
 ```bash
-../enclosure_v0_1/.venv-cad/bin/python generate_enclosure_v0_7.py
-../enclosure_v0_1/.venv-cad/bin/python render_enclosure_v0_7.py
-../enclosure_v0_1/.venv-cad/bin/python validate_enclosure_v0_7.py
+cd hardware/enclosure_v0_7
+uv venv .venv-cad --python 3.12
+uv pip install --python .venv-cad/bin/python -r requirements.txt
+.venv-cad/bin/python generate_enclosure_v0_7.py
+.venv-cad/bin/python render_enclosure_v0_7.py
+.venv-cad/bin/python validate_enclosure_v0_7.py
 ```
+
+`generate_enclosure_v0_7.py` 与 `render_enclosure_v0_7.py` 使用本目录内的独立基础
+模块，不依赖任何已删除的历史外壳版本。

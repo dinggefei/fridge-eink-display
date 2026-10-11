@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the actual V0.6 STL geometry with a small Pillow rasterizer."""
+"""Standalone Pillow rasterizer helpers used by the V0.7 renderer."""
 
 from __future__ import annotations
 
@@ -14,11 +14,11 @@ import trimesh
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "output"
 PREVIEWS = ROOT / "previews"
-GENERATOR = ROOT / "generate_enclosure_v0_6.py"
+GENERATOR = ROOT / "_geometry_base_v0_7.py"
 
 
 def load_generator():
-    spec = importlib.util.spec_from_file_location("rfm_enclosure_v06_render", GENERATOR)
+    spec = importlib.util.spec_from_file_location("rfm_enclosure_v07_render_base", GENERATOR)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Unable to load generator: {GENERATOR}")
     module = importlib.util.module_from_spec(spec)

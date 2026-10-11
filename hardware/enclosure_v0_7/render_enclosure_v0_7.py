@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "output"
 PREVIEWS = ROOT / "previews"
 GENERATOR = ROOT / "generate_enclosure_v0_7.py"
-V06_RENDERER = ROOT.parent / "enclosure_v0_6" / "render_enclosure_v0_6.py"
+V07_RENDER_BASE = ROOT / "_render_base_v0_7.py"
 
 
 def load_module(name, path):
@@ -27,7 +27,7 @@ def load_module(name, path):
 
 
 gen = load_module("rfm_enclosure_v07_render_gen", GENERATOR)
-r06 = load_module("rfm_enclosure_v06_render_base", V06_RENDERER)
+r06 = load_module("rfm_enclosure_v07_render_base", V07_RENDER_BASE)
 P = gen.P
 r06.P = P
 r06.OUTPUT = OUTPUT
