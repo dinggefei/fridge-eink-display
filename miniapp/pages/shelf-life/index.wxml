@@ -1,0 +1,56 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">保鲜规则</text>
+    <text class="page-subtitle">按食材准确名称和储存位置计算建议食用日期</text>
+  </view>
+
+  <view class="card" wx:if="{{isAdmin}}">
+    <text class="section-title">新增或修改规则</text>
+    <input
+      class="field"
+      placeholder="食材名称，例如：牛奶"
+      value="{{foodName}}"
+      data-field="foodName"
+      bindinput="onInput"
+    />
+    <picker
+      range="{{locationOptions}}"
+      range-key="label"
+      value="{{locationIndex}}"
+      bindchange="onLocationChange"
+    >
+      <view class="field">{{locationOptions[locationIndex].label}} ›</view>
+    </picker>
+    <input
+      class="field"
+      type="number"
+      placeholder="保鲜天数"
+      value="{{suggestedDays}}"
+      data-field="suggestedDays"
+      bindinput="onInput"
+    />
+    <button class="primary-button save" bindtap="saveRule">保存规则</button>
+  </view>
+
+  <view class="card" wx:else>
+    <text class="muted">只有家庭管理员可以修改规则，所有成员都会使用同一套规则。</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">家庭规则</text>
+    <text class="muted empty" wx:if="{{rules.length === 0}}">尚未添加自定义规则，将使用系统默认值。</text>
+    <view class="rule-row" wx:for="{{rules}}" wx:key="id">
+      <view>
+        <text class="rule-name">{{item.food_name}}</text>
+        <text class="rule-meta">{{item.locationLabel}} · {{item.suggested_days}} 天</text>
+      </view>
+      <button
+        wx:if="{{isAdmin}}"
+        size="mini"
+        class="delete"
+        data-rule="{{item}}"
+        bindtap="deleteRule"
+      >删除</button>
+    </view>
+  </view>
+</view>

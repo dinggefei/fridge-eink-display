@@ -1,0 +1,15 @@
+{
+  "city": "上海",
+  "retrieved_on": "2026-09-15",
+  "source": "Live weather lookup for Shanghai, China, retrieved on 2026-09-15 Asia/Shanghai. This is a public forecast snapshot, not a production QWeather response.",
+  "note": "Forecast text translated to Chinese. Precipitation probabilities were not provided; none are invented. Layout preview only.",
+  "days": [
+    {"date": "2026-09-15", "text": "晴间多云", "min": 21, "max": 30, "icon": "partly", "original": "Sunny to partly cloudy and less humid"},
+    {"date": "2026-09-16", "text": "晴为主", "min": 22, "max": 30, "icon": "sun", "original": "Mostly sunny"},
+    {"date": "2026-09-17", "text": "晴转多云", "min": 23, "max": 30, "icon": "partly", "original": "Some sun, then turning cloudy"},
+    {"date": "2026-09-18", "text": "午后阵雨", "min": 24, "max": 30, "icon": "rain", "original": "Very warm with times of sun and clouds; a couple of afternoon showers"},
+    {"date": "2026-09-19", "text": "午后阵雨", "min": 23, "max": 30, "icon": "rain", "original": "Very warm with intervals of clouds and sunshine; a couple of showers in the afternoon"},
+    {"date": "2026-09-20", "text": "晴间多云", "min": 22, "max": 28, "icon": "partly", "original": "Partly sunny"},
+    {"date": "2026-09-21", "text": "晴间多云", "min": 21, "max": 28, "icon": "partly", "original": "Partly sunny"}
+  ]
+}

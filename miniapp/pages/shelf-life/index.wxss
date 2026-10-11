@@ -1,0 +1,49 @@
+.field {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 86rpx;
+  margin-bottom: 18rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid #dbe1dc;
+  border-radius: 16rpx;
+  background: #fbfcfa;
+  line-height: 86rpx;
+}
+
+.save {
+  margin-top: 8rpx;
+}
+
+.rule-row {
+  display: flex;
+  min-height: 94rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.rule-row:last-child {
+  border-bottom: 0;
+}
+
+.rule-name,
+.rule-meta {
+  display: block;
+}
+
+.rule-meta {
+  margin-top: 5rpx;
+  color: #858c84;
+  font-size: 23rpx;
+}
+
+.delete {
+  border: 1rpx solid #e4b7b3;
+  background: #fff;
+  color: #b8352d;
+}
+
+.empty {
+  display: block;
+  line-height: 1.7;
+}

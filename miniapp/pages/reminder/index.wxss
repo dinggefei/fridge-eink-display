@@ -1,0 +1,54 @@
+.setting-row {
+  display: flex;
+  min-height: 92rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.value {
+  color: #246b4b;
+}
+
+.save-button,
+.grant-button {
+  margin-top: 26rpx;
+}
+
+.description,
+.template-tip {
+  display: block;
+  font-size: 24rpx;
+  line-height: 1.7;
+}
+
+.description {
+  color: #70766d;
+}
+
+.template-tip {
+  margin-top: 14rpx;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.stat-number,
+.stat-label {
+  display: block;
+}
+
+.stat-number {
+  color: #246b4b;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.stat-label {
+  margin-top: 8rpx;
+  color: #858c84;
+  font-size: 23rpx;
+}

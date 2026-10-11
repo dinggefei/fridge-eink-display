@@ -1,0 +1,81 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">{{pageTitle}}</text>
+    <text class="page-subtitle">保存后，设备会在下一次轮询自动刷新画面</text>
+  </view>
+
+  <view class="card form-card">
+    <text class="field-label">食材名称</text>
+    <input
+      class="field-input"
+      placeholder="例如：苹果"
+      value="{{form.name}}"
+      data-field="name"
+      bindinput="onTextInput"
+    />
+
+    <view class="field-grid">
+      <view>
+        <text class="field-label">数量</text>
+        <input
+          class="field-input"
+          type="digit"
+          value="{{form.quantity}}"
+          data-field="quantity"
+          bindinput="onTextInput"
+        />
+      </view>
+      <view>
+        <text class="field-label">单位</text>
+        <input
+          class="field-input"
+          value="{{form.unit}}"
+          data-field="unit"
+          bindinput="onTextInput"
+        />
+      </view>
+    </view>
+
+    <text class="field-label">储存位置</text>
+    <picker
+      range="{{locationOptions}}"
+      range-key="label"
+      value="{{locationIndex}}"
+      bindchange="onLocationChange"
+    >
+      <view class="field-input picker-value">
+        {{locationOptions[locationIndex].label}} ›
+      </view>
+    </picker>
+
+    <text class="field-label">入库日期</text>
+    <picker
+      mode="date"
+      value="{{form.stocked_on}}"
+      data-field="stocked_on"
+      bindchange="onDateChange"
+    >
+      <view class="field-input picker-value">{{form.stocked_on}} ›</view>
+    </picker>
+
+    <text class="field-label">建议食用日期</text>
+    <picker
+      mode="date"
+      value="{{form.suggested_use_by}}"
+      data-field="suggested_use_by"
+      bindchange="onDateChange"
+    >
+      <view class="field-input picker-value">{{form.suggested_use_by}} ›</view>
+    </picker>
+    <button class="rule-button" size="mini" bindtap="suggestUseBy">
+      按家庭保鲜规则重新计算
+    </button>
+  </view>
+
+  <button
+    class="primary-button"
+    loading="{{saving}}"
+    disabled="{{saving}}"
+    bindtap="save"
+  >{{itemId ? "保存修改" : "保存并更新库存"}}</button>
+</view>

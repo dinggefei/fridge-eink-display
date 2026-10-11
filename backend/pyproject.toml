@@ -1,0 +1,30 @@
+[project]
+name = "refrigerator-food-management-backend"
+version = "0.1.0"
+description = "FastAPI backend for RefrigeratorFoodManagement"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.16,<2",
+    "asyncpg>=0.30,<1",
+    "cryptography>=45,<47",
+    "cos-python-sdk-v5>=1.9,<2",
+    "fastapi>=0.116,<1",
+    "httpx>=0.28,<1",
+    "lunar-python==1.4.8",
+    "longbridge>=4.0.5,<5",
+    "pillow>=11,<13",
+    "python-multipart>=0.0.20,<1",
+    "pydantic-settings>=2.10,<3",
+    "sqlalchemy>=2.0,<3",
+    "uvicorn[standard]>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+    "aiosqlite>=0.21,<1",
+    "pytest>=8.4,<9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

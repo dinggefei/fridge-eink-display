@@ -1,0 +1,132 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">课程表管理</text>
+    <text class="page-subtitle">设置每周课程、简短备注及每节课的时间</text>
+  </view>
+
+  <view class="card error-card" wx:if="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="loadTimetable">重新加载</button>
+  </view>
+  <view class="card" wx:if="{{loading}}">正在加载课程表…</view>
+
+  <block wx:if="{{!loading}}">
+    <view class="card">
+      <text class="section-title">水墨屏显示方向</text>
+      <view class="orientation-options">
+        <view
+          wx:for="{{orientationOptions}}"
+          wx:key="value"
+          class="orientation-option {{orientation === item.value ? 'orientation-option-active' : ''}}"
+          data-orientation="{{item.value}}"
+          bindtap="onSelectOrientation"
+        >
+          <text class="orientation-label">{{item.label}}</text>
+          <text class="orientation-description">{{item.description}}</text>
+        </view>
+      </view>
+      <text class="help-text">保存后生效；课程、备注、节次时间和字体自适应规则保持不变。</text>
+    </view>
+
+    <view class="card">
+      <text class="section-title">每天课程节数</text>
+      <view class="count-row">
+        <view class="count-item">
+          <text class="count-label">上午</text>
+          <picker mode="selector" range="{{countOptions}}" value="{{morningCount}}" data-section="morning" bindchange="onCountChange">
+            <view class="picker-value">{{morningCount}} 节</view>
+          </picker>
+        </view>
+        <view class="count-item">
+          <text class="count-label">下午</text>
+          <picker mode="selector" range="{{countOptions}}" value="{{afternoonCount}}" data-section="afternoon" bindchange="onCountChange">
+            <view class="picker-value">{{afternoonCount}} 节</view>
+          </picker>
+        </view>
+      </view>
+      <text class="help-text">上午和下午最多各6节，全天最多10节。</text>
+    </view>
+
+    <view class="card">
+      <text class="section-title">每节课时间</text>
+      <view class="period-setting" wx:for="{{periods}}" wx:key="id">
+        <text class="period-name">{{item.section === 'morning' ? '上午 ' + (index + 1) : '下午 ' + (index - morningCount + 1)}}</text>
+        <picker class="time-picker" mode="time" value="{{item.start_time}}" data-index="{{index}}" data-field="start_time" bindchange="onPeriodTimeChange">
+          <view class="time-value">{{item.start_time}}</view>
+        </picker>
+        <text class="time-separator">—</text>
+        <picker class="time-picker" mode="time" value="{{item.end_time}}" data-index="{{index}}" data-field="end_time" bindchange="onPeriodTimeChange">
+          <view class="time-value">{{item.end_time}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="card course-card">
+      <text class="section-title">每周课程</text>
+      <scroll-view
+        class="weekday-tabs"
+        scroll-x="{{true}}"
+        enhanced="{{true}}"
+        show-scrollbar="{{true}}"
+        scroll-with-animation="{{true}}"
+        scroll-into-view="{{weekdayScrollIntoView}}"
+      >
+        <view class="weekday-tabs-inner">
+          <view
+            wx:for="{{weekdays}}"
+            wx:key="value"
+            id="weekday-{{item.value}}"
+            class="weekday-tab {{selectedWeekday === item.value ? 'weekday-tab-active' : ''}}"
+            data-weekday="{{item.value}}"
+            bindtap="onSelectWeekday"
+          >{{item.label}}</view>
+        </view>
+      </scroll-view>
+      <text class="weekday-scroll-hint">← 左右滑动，可查看周一至周日 →</text>
+
+      <view wx:for="{{dayRows}}" wx:key="id">
+        <view class="lunch-divider" wx:if="{{item.firstAfternoon}}">下午课程</view>
+        <view class="course-row">
+          <view class="course-time">
+            <text>{{item.sectionText}}</text>
+            <text>{{item.start_time}}—{{item.end_time}}</text>
+          </view>
+          <view class="course-inputs">
+            <input
+              class="course-input"
+              value="{{item.courseName}}"
+              maxlength="6"
+              placeholder="课程名称"
+              data-period-id="{{item.id}}"
+              data-field="course_name"
+              bindinput="onEntryInput"
+            />
+            <input
+              class="note-input"
+              value="{{item.note}}"
+              maxlength="8"
+              placeholder="简短备注（选填）"
+              data-period-id="{{item.id}}"
+              data-field="note"
+              bindinput="onEntryInput"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <button class="primary-button save-button" loading="{{saving}}" disabled="{{saving}}" bindtap="saveTimetable">保存课程表</button>
+
+    <view class="preview-section">
+      <text class="section-title">水墨屏实际预览</text>
+      <text class="preview-tip" wx:if="{{orientation === 'portrait'}}">竖屏模式：显示今天、明天和后天的课程。</text>
+      <text class="preview-tip" wx:else>横屏模式：显示周一至周日的一周课程。</text>
+      <text class="preview-status" wx:if="{{previewLoading}}">正在生成预览…</text>
+      <view wx:elif="{{previewError}}">
+        <text class="preview-status">{{previewError}}</text>
+        <button class="secondary-button" bindtap="loadPreview">重新加载</button>
+      </view>
+      <image wx:elif="{{previewPath}}" class="timetable-preview" src="{{previewPath}}" mode="widthFix" binderror="onPreviewError" />
+    </view>
+  </block>
+</view>

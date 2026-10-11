@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">{{householdName}}</text>
+    <text class="page-subtitle">数据版本 {{revision}} · 先处理最需要关注的食材</text>
+  </view>
+
+  <view class="card state-card" wx:if="{{loading}}">
+    <text class="muted">正在读取库存…</text>
+  </view>
+
+  <view class="card state-card" wx:elif="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="retry">重新加载</button>
+  </view>
+
+  <block wx:else>
+  <view class="summary-grid">
+    <view class="summary-card" wx:for="{{summary}}" wx:key="label">
+      <text class="summary-value {{item.className}}">{{item.value}}</text>
+      <text class="summary-label">{{item.label}}</text>
+    </view>
+  </view>
+
+  <view class="action-grid">
+    <button class="primary-button action-button" bindtap="goToQuickEntry">快速记一笔</button>
+    <button class="secondary-button action-button" bindtap="goToImportOrder">导入订单图片</button>
+  </view>
+
+  <view class="card">
+    <text class="section-title">优先处理</text>
+    <text class="muted" wx:if="{{priorityFoods.length === 0}}">暂无临期或超期食材</text>
+    <view class="food-row" wx:for="{{priorityFoods}}" wx:key="id">
+      <view>
+        <text class="food-name">{{item.name}}</text>
+        <text class="food-quantity">{{item.quantityText}}</text>
+      </view>
+      <text class="food-hint {{item.className}}">{{item.hint}}</text>
+    </view>
+  </view>
+
+  <text class="demo-tip">库存修改后，墨水屏会在下一次设备轮询时自动更新。</text>
+  </block>
+</view>

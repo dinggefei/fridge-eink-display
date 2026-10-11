@@ -1,0 +1,204 @@
+.privacy-card {
+  border: 1rpx solid #eed79b;
+  background: #fff9e9;
+}
+
+.privacy-title,
+.privacy-text,
+.setting-title,
+.setting-description,
+.photo-name,
+.sync-tip {
+  display: block;
+}
+
+.privacy-title {
+  color: #8a6413;
+  font-weight: 600;
+}
+
+.privacy-text {
+  margin-top: 8rpx;
+  color: #7f7356;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.setting-row {
+  display: flex;
+  min-height: 92rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+}
+
+.setting-row-link {
+  padding: 8rpx 0;
+}
+
+.setting-title {
+  font-weight: 600;
+}
+
+.setting-description {
+  max-width: 470rpx;
+  margin-top: 6rpx;
+  color: #858c84;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.album-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32rpx 2rpx 18rpx;
+}
+
+.album-count {
+  margin-left: 14rpx;
+  color: #858c84;
+  font-size: 24rpx;
+}
+
+.small-primary-button {
+  min-width: 190rpx;
+  margin: 0;
+  padding: 0 24rpx;
+  background: #246b4b;
+  color: white;
+  font-size: 26rpx;
+  line-height: 70rpx;
+}
+
+.small-primary-button[disabled] {
+  background: #bcc8c0;
+  color: white;
+}
+
+.loading-card,
+.empty-card,
+.error-card {
+  text-align: center;
+}
+
+.empty-title {
+  display: block;
+  margin-bottom: 10rpx;
+  font-weight: 600;
+}
+
+.retry-button {
+  width: 240rpx;
+  margin-top: 18rpx;
+}
+
+.photo-card {
+  margin-bottom: 24rpx;
+}
+
+.pending-card {
+  border: 2rpx solid #e0a000;
+}
+
+.photo-status-row,
+.confirmed-actions,
+.pending-actions {
+  display: flex;
+  align-items: center;
+}
+
+.photo-status-row {
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.photo-status {
+  font-weight: 600;
+}
+
+.status-green {
+  color: #246b4b;
+}
+
+.photo-index {
+  font-size: 23rpx;
+}
+
+.photo-preview,
+.preview-error {
+  width: 100%;
+  height: 720rpx;
+  border-radius: 14rpx;
+  background: #eef1ed;
+}
+
+.preview-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #858c84;
+  font-size: 24rpx;
+}
+
+.photo-name {
+  margin: 14rpx 0 18rpx;
+  overflow: hidden;
+  color: #6f766e;
+  font-size: 23rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pending-actions,
+.confirmed-actions {
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.compact-button,
+.action-button,
+.order-button,
+.text-danger-button {
+  margin: 0;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  line-height: 66rpx;
+}
+
+.compact-button {
+  flex: 1;
+}
+
+.action-button {
+  min-width: 150rpx;
+}
+
+.order-button {
+  border: 1rpx solid #d8ded8;
+  background: white;
+  color: #4c554d;
+}
+
+.text-danger-button {
+  border: 0;
+  background: transparent;
+  color: #c42b25;
+}
+
+.text-danger-button::after,
+.order-button::after {
+  border: 0;
+}
+
+.sync-tip {
+  padding: 10rpx 28rpx 50rpx;
+  color: #858c84;
+  font-size: 23rpx;
+  line-height: 1.6;
+  text-align: center;
+}

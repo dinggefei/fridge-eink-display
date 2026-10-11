@@ -1,0 +1,297 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">水墨屏显示</text>
+    <text class="page-subtitle">家庭成员都可以切换，设备会在下一次联网时更新</text>
+  </view>
+
+  <view class="card error-card" wx:if="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="loadSettings">重新加载</button>
+  </view>
+
+  <view class="card" wx:if="{{loading}}">
+    <text>正在加载显示设置…</text>
+  </view>
+
+  <view class="card" wx:if="{{!loading}}">
+    <text class="section-title">设置对象</text>
+    <picker
+      mode="selector"
+      range="{{scopeOptions}}"
+      range-key="label"
+      value="{{scopeIndex}}"
+      bindchange="onScopeChange"
+    >
+      <view class="field-input">{{scopeOptions[scopeIndex].label}} ›</view>
+    </picker>
+    <text class="sync-tip" wx:if="{{selectedDeviceCode && inheritsHousehold}}">
+      当前跟随家庭默认；选择任一画面后，该设备将独立显示。
+    </text>
+    <text class="sync-tip" wx:elif="{{selectedDeviceCode}}">
+      当前为该设备独立设置，不会改变其他墨水屏。
+    </text>
+    <button
+      class="secondary-button"
+      wx:if="{{selectedDeviceCode && !inheritsHousehold}}"
+      loading="{{saving}}"
+      bindtap="followHouseholdDefault"
+    >恢复跟随家庭默认</button>
+  </view>
+
+  <view class="mode-list" wx:if="{{!loading}}">
+    <view
+      wx:for="{{modes}}"
+      wx:key="value"
+      class="mode-card {{selectedMode === item.value ? 'mode-card-active' : ''}}"
+      data-mode="{{item.value}}"
+      bindtap="onSelectMode"
+    >
+      <view class="mode-copy">
+        <view class="mode-title-row">
+          <text class="mode-title">{{item.title}}</text>
+          <text class="current-badge" wx:if="{{displayMode === item.value}}">当前显示</text>
+        </view>
+        <text class="mode-description">{{item.description}}</text>
+        <text class="album-warning" wx:if="{{item.value === 'weather' && !weatherProviderReady}}">天气服务尚未配置，当前不能切换</text>
+        <text class="album-warning" wx:if="{{item.value === 'album' && !albumReady}}">请先管理相册并确认至少一张照片</text>
+        <text class="album-warning" wx:if="{{item.value === 'market' && !marketReady}}">请先管理行情并添加至少一项资产</text>
+        <text class="album-warning" wx:if="{{item.value === 'timetable' && !timetableReady}}">请先设置课程表并填写至少一门课程</text>
+      </view>
+      <view class="mode-radio {{selectedMode === item.value ? 'mode-radio-active' : ''}}">
+        <view class="mode-radio-dot" wx:if="{{selectedMode === item.value}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weather-settings card" wx:if="{{!loading && (selectedMode === 'almanac' || selectedMode === 'weather')}}">
+    <view class="weather-setting-header">
+      <view class="weather-setting-copy">
+        <text class="weather-setting-title">{{selectedMode === 'weather' ? '七日天气城市' : '显示当天城市天气'}}</text>
+        <text class="weather-setting-subtitle">每 3 小时更新；获取失败时保留最近一次有效天气</text>
+      </view>
+      <switch
+        wx:if="{{selectedMode === 'almanac'}}"
+        checked="{{weatherEnabled}}"
+        disabled="{{weatherSaving || (!weatherProviderReady && !weatherEnabled)}}"
+        color="#246b4b"
+        bindchange="onWeatherToggle"
+      />
+    </view>
+
+    <text class="weather-unavailable" wx:if="{{!weatherProviderReady}}">天气服务尚未配置，暂时无法启用</text>
+    <view class="weather-current" wx:if="{{weatherLocation}}">
+      <view>
+        <text class="weather-current-label">当前城市</text>
+        <text class="weather-current-city">{{weatherLocation.display_name}}</text>
+      </view>
+      <view class="weather-current-value" wx:if="{{weather}}">
+        <text>{{weather.condition_text}}</text>
+        <text>{{weather.temp_min}}~{{weather.temp_max}}℃{{weather.precip_probability !== null ? ' · 降雨 ' + weather.precip_probability + '%' : ''}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{weatherProviderReady}}">
+      <view class="weather-search-row">
+        <input
+          class="weather-search-input"
+          value="{{weatherQuery}}"
+          placeholder="搜索城市，如：上海"
+          confirm-type="search"
+          bindinput="onWeatherQueryInput"
+          bindconfirm="searchWeatherLocations"
+        />
+        <button
+          class="secondary-button weather-search-button"
+          loading="{{weatherSearching}}"
+          disabled="{{weatherSearching || weatherSaving}}"
+          bindtap="searchWeatherLocations"
+        >搜索</button>
+      </view>
+      <view class="weather-location-list" wx:if="{{weatherLocations.length > 0}}">
+        <view
+          class="weather-location-row"
+          wx:for="{{weatherLocations}}"
+          wx:key="location_id"
+          data-index="{{index}}"
+          bindtap="onSelectWeatherLocation"
+        >
+          <text>{{item.display_name}}</text>
+          <text class="weather-location-action">选择</text>
+        </view>
+      </view>
+    </view>
+    <text class="weather-source" bindtap="copyWeatherSource">天气服务由{{weatherSourceName}}驱动 · www.qweather.com</text>
+  </view>
+
+  <view class="preview-section" wx:if="{{!loading && selectedMode === 'weather'}}">
+    <text class="section-title">七日天气实际显示预览</text>
+    <text class="sync-tip" wx:if="{{!weatherLocation}}">请先搜索并选择城市。</text>
+    <text class="sync-tip" wx:elif="{{weatherPreviewLoading}}">正在获取天气预览…</text>
+    <view wx:elif="{{weatherPreviewError}}">
+      <text class="sync-tip">{{weatherPreviewError}}</text>
+      <button class="secondary-button" bindtap="loadWeatherPreview">重新加载</button>
+    </view>
+    <image wx:elif="{{weatherPreviewPath}}" class="weather-week-preview" src="{{weatherPreviewPath}}" mode="widthFix" binderror="onWeatherPreviewError" />
+  </view>
+
+  <view class="preview-section" wx:if="{{!loading && selectedMode === 'timetable'}}">
+    <text class="section-title">课程表实际显示预览</text>
+    <text class="sync-tip" wx:if="{{timetablePreviewLoading}}">正在生成课程表预览…</text>
+    <view wx:elif="{{timetablePreviewError}}">
+      <text class="sync-tip">{{timetablePreviewError}}</text>
+      <button class="secondary-button" bindtap="loadTimetablePreview">重新加载</button>
+    </view>
+    <image wx:elif="{{timetablePreviewPath}}" class="timetable-week-preview" src="{{timetablePreviewPath}}" mode="widthFix" binderror="onTimetablePreviewError" />
+    <text class="timetable-orientation-tip" wx:if="{{timetableOrientation === 'portrait'}}">竖屏模式：自动显示今天、明天和后天的课程。</text>
+    <text class="timetable-orientation-tip" wx:else>横屏模式：自动显示周一至周日的一周课程。</text>
+    <button class="primary-button timetable-button" bindtap="goToTimetable">管理课程表</button>
+  </view>
+
+  <view class="preview-section" wx:if="{{!loading && selectedMode === 'inventory'}}">
+    <text class="section-title">食材内容预览</text>
+    <view class="inventory-paper-preview">
+      <view class="inventory-paper-header">
+        <text class="inventory-paper-title">我的冰箱</text>
+        <view class="inventory-paper-time">
+          <text>{{almanac ? almanac.date_text : ''}}</text>
+          <text>设备同步预览</text>
+        </view>
+      </view>
+
+      <view class="inventory-preview-loading" wx:if="{{inventoryPreviewLoading}}">
+        正在读取食材…
+      </view>
+      <view class="inventory-preview-empty" wx:elif="{{inventoryPreviewItems.length === 0}}">
+        暂无食材，新增后会显示在这里
+      </view>
+      <view class="inventory-preview-list" wx:else>
+        <view
+          class="inventory-preview-row"
+          wx:for="{{inventoryPreviewItems}}"
+          wx:key="id"
+        >
+          <text class="inventory-preview-dot {{item.statusClass}}">●</text>
+          <text class="inventory-preview-name">{{item.name}}</text>
+          <text class="inventory-preview-quantity">{{item.quantityText}}</text>
+          <text class="inventory-preview-status {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+      </view>
+
+      <view class="inventory-paper-footer">
+        <view class="mini-program-placeholder">
+          <text>小程序码</text>
+        </view>
+        <view class="todo-preview-box">
+          <text class="todo-preview-title">待办</text>
+          <text
+            class="todo-preview-item"
+            wx:for="{{inventoryPreviewTodos}}"
+            wx:key="*this"
+          >□ {{item}}</text>
+          <text class="todo-preview-empty" wx:if="{{inventoryPreviewTodos.length === 0}}">暂无待办</text>
+        </view>
+      </view>
+      <text class="inventory-hidden-tip" wx:if="{{inventoryPreviewHiddenCount > 0}}">
+        另有 {{inventoryPreviewHiddenCount}} 项未在预览中显示
+      </text>
+    </view>
+    <button class="secondary-button inventory-todo-button" bindtap="goToTodo">管理待办</button>
+  </view>
+
+  <view class="preview-section" wx:elif="{{!loading && selectedMode === 'almanac' && almanac}}">
+    <text class="section-title">黄历实际内容预览</text>
+    <view class="paper-preview">
+      <view class="paper-header {{weatherEnabled && weather ? 'paper-header-weather' : ''}}">
+        <view class="paper-weather" wx:if="{{weatherEnabled && weather}}">
+          <text class="paper-weather-title">{{weather.location_name}}  {{weather.condition_text}}</text>
+          <text class="paper-weather-detail">{{weather.temp_min}}~{{weather.temp_max}}℃{{weather.precip_probability !== null ? ' · 降雨 ' + weather.precip_probability + '%' : ''}}</text>
+        </view>
+        <text class="paper-date" wx:if="{{!weatherEnabled || !weather}}">{{almanac.date_text}}</text>
+        <view class="paper-date-stack" wx:else>
+          <text>{{almanac.date_text}}</text>
+          <text>{{almanac.weekday}}</text>
+        </view>
+        <text class="paper-weekday" wx:if="{{!weatherEnabled || !weather}}">{{almanac.weekday}}</text>
+      </view>
+      <text class="paper-day">{{almanac.day_number}}</text>
+      <text class="paper-lunar">农历 {{almanac.lunar_date}}</text>
+      <text class="paper-ganzhi">{{almanac.ganzhi}}</text>
+      <text class="paper-season">生肖 {{almanac.zodiac}}{{almanac.seasonal_note ? ' · ' + almanac.seasonal_note : ''}}</text>
+
+      <view class="yi-ji-row">
+        <view class="almanac-card almanac-card-yi">
+          <text class="almanac-badge badge-yi">宜</text>
+          <text class="almanac-item" wx:for="{{almanac.yi}}" wx:key="*this" wx:for-item="yiItem">{{yiItem}}</text>
+        </view>
+        <view class="almanac-card almanac-card-ji">
+          <text class="almanac-badge badge-ji">忌</text>
+          <text class="almanac-item" wx:for="{{almanac.ji}}" wx:key="*this" wx:for-item="jiItem">{{jiItem}}</text>
+        </view>
+      </view>
+      <text class="chong-sha">{{almanac.chong_sha}}</text>
+      <text class="disclaimer">{{almanac.disclaimer}}</text>
+    </view>
+  </view>
+
+  <view class="preview-section" wx:elif="{{!loading && selectedMode === 'market'}}">
+    <text class="section-title">行情内容预览</text>
+    <view class="market-paper-preview">
+      <view class="market-paper-header">
+        <view class="market-paper-title-row">
+          <view class="market-paper-accent"></view>
+          <text class="market-paper-title">行情看板</text>
+        </view>
+        <view class="market-paper-time">
+          <text>{{almanac ? almanac.displayed_on : ''}}</text>
+          <text>设备同步预览</text>
+        </view>
+      </view>
+      <view class="market-preview-loading" wx:if="{{marketPreviewLoading}}">正在读取行情…</view>
+      <view class="market-preview-empty" wx:elif="{{marketPreviewAssets.length === 0}}">添加资产后会显示在这里</view>
+      <view class="market-preview-list" wx:else>
+        <view
+          class="market-preview-row"
+          wx:for="{{marketPreviewAssets}}"
+          wx:key="id"
+        >
+          <view class="market-row-accent {{item.changeClass}}"></view>
+          <view class="market-row-copy">
+            <text class="market-row-name">{{item.name}}</text>
+            <text class="market-row-symbol">{{item.symbol}}</text>
+          </view>
+          <view class="market-row-quote">
+            <text class="market-row-price">{{item.priceText}}</text>
+            <view class="market-row-change-line">
+              <text class="market-row-status">{{item.status}}</text>
+              <text class="market-row-change {{item.changeClass}}">{{item.changeText}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <text class="market-paper-footer">{{marketSourceLabel}} · 每{{marketRefreshMinutes}}分钟更新 · 行情仅供参考</text>
+    </view>
+    <button class="primary-button market-button" bindtap="goToMarket">管理行情</button>
+  </view>
+
+  <view class="preview-section album-preview-section" wx:elif="{{!loading && selectedMode === 'album'}}">
+    <text class="section-title">独立相册</text>
+    <view class="album-preview-card">
+      <view class="album-preview-graphic">
+        <view class="album-preview-photo album-preview-photo-back"></view>
+        <view class="album-preview-photo album-preview-photo-front">
+          <view class="album-preview-sun"></view>
+          <view class="album-preview-mountain"></view>
+        </view>
+      </view>
+      <text class="album-preview-title">照片将以四色全屏轮播</text>
+      <text class="album-preview-description">上传、确认、排序照片并设置轮播周期</text>
+      <text class="album-not-ready" wx:if="{{!albumReady}}">确认至少一张照片后，才能启用独立相册显示。</text>
+      <button class="primary-button album-button" bindtap="goToAlbum">管理相册</button>
+    </view>
+  </view>
+
+  <text class="sync-tip" wx:if="{{!loading && selectedMode === 'album' && !albumReady}}">请先确认照片，返回本页后再选择独立相册。</text>
+  <text class="sync-tip" wx:elif="{{!loading && selectedMode === 'market' && !marketReady}}">请先添加资产，返回本页后再选择行情看板。</text>
+  <text class="sync-tip" wx:elif="{{!loading && selectedMode === 'timetable' && !timetableReady}}">请先填写并保存课程，返回本页后再选择课程表。</text>
+  <text class="sync-tip" wx:elif="{{!loading}}">切换后无需重新烧录固件，最迟约 5 分钟显示。</text>
+</view>

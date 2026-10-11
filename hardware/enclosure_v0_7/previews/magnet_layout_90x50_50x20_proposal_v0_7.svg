@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <style>
+      .title { font: 700 44px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #173b33; }
+      .subtitle { font: 400 25px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #52665f; }
+      .panel-title { font: 700 28px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #173b33; }
+      .label { font: 600 20px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #243f39; }
+      .small { font: 400 18px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #52665f; }
+      .tiny { font: 500 15px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #314b44; }
+    </style>
+    <pattern id="antennaHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#d8463d" stroke-width="3"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#f5f3ed"/>
+  <text x="55" y="62" class="title">V0.7 后盖新磁铁方案示意（确认稿前预览）</text>
+  <text x="58" y="105" class="subtitle">设备背面视角，USB-C 在上；只画方案，暂不修改 STL</text>
+
+  <!-- Panel A -->
+  <rect x="45" y="145" width="730" height="745" rx="28" fill="#ffffff" stroke="#7fa596" stroke-width="4"/>
+  <text x="78" y="192" class="panel-title">方案 A（推荐）：1 块 90×50×2 mm</text>
+  <text x="78" y="226" class="small">磁铁横放在电池背面下半区；不在 ESP32 天线后方放金属</text>
+
+  <!-- enclosure A: 120x184 at 2.75 px/mm -->
+  <rect x="245" y="255" width="330" height="506" rx="23" fill="#f8faf8" stroke="#173b33" stroke-width="5"/>
+  <rect x="397" y="247" width="26" height="8" rx="3" fill="#173b33"/>
+  <text x="430" y="252" class="tiny">USB-C</text>
+  <!-- component outlines -->
+  <rect x="260" y="300" width="70" height="174" rx="8" fill="#dbe9f6" stroke="#35689b" stroke-width="3"/>
+  <text x="295" y="390" text-anchor="middle" class="tiny">ESP32</text>
+  <rect x="260" y="299" width="70" height="48" rx="5" fill="url(#antennaHatch)" stroke="#d8463d" stroke-width="2"/>
+  <text x="295" y="287" text-anchor="middle" class="tiny" fill="#d8463d">天线避让</text>
+  <rect x="384" y="267" width="70" height="112" rx="8" fill="#e8def4" stroke="#7654a3" stroke-width="3"/>
+  <text x="419" y="326" text-anchor="middle" class="tiny">Lipo</text>
+  <rect x="462" y="443" width="116" height="66" rx="8" fill="#d9f0e7" stroke="#287b63" stroke-width="3"/>
+  <text x="520" y="480" text-anchor="middle" class="tiny">DESPI</text>
+  <rect x="278" y="548" width="258" height="171" rx="9" fill="#fff1c9" stroke="#b07400" stroke-width="3"/>
+  <text x="407" y="705" text-anchor="middle" class="tiny">电池 94×62</text>
+  <!-- 90 x 50 magnet center x=0,y=-55 -->
+  <rect x="283" y="592" width="248" height="138" rx="9" fill="#e7aa3e" fill-opacity="0.88" stroke="#7c4d00" stroke-width="4"/>
+  <text x="407" y="649" text-anchor="middle" class="label">90×50×2 mm</text>
+  <text x="407" y="677" text-anchor="middle" class="tiny">1 块｜磁面 4500 mm²</text>
+  <text x="407" y="749" text-anchor="middle" class="tiny">位置建议：X=0，Y≈−55 mm</text>
+
+  <rect x="78" y="790" width="664" height="72" rx="15" fill="#e9f3ed"/>
+  <text x="100" y="820" class="label">优点：零件少、面积最大，比当前 9 条磁铁增加约 46%</text>
+  <text x="100" y="849" class="small">注意：与下方螺丝柱之间保留约 4 mm 塑料连接区，先打印检具验证强度。</text>
+
+  <!-- Panel B -->
+  <rect x="825" y="145" width="730" height="745" rx="28" fill="#ffffff" stroke="#c6d2ce" stroke-width="3"/>
+  <text x="858" y="192" class="panel-title">方案 B（备选）：4 块 50×20×2 mm</text>
+  <text x="858" y="226" class="small">四块分两排放在电池背面；便于逐块粘贴和调整极性</text>
+
+  <rect x="1025" y="255" width="330" height="506" rx="23" fill="#f8faf8" stroke="#173b33" stroke-width="5"/>
+  <rect x="1177" y="247" width="26" height="8" rx="3" fill="#173b33"/>
+  <text x="1210" y="252" class="tiny">USB-C</text>
+  <rect x="1040" y="300" width="70" height="174" rx="8" fill="#dbe9f6" stroke="#35689b" stroke-width="3"/>
+  <text x="1075" y="390" text-anchor="middle" class="tiny">ESP32</text>
+  <rect x="1040" y="299" width="70" height="48" rx="5" fill="url(#antennaHatch)" stroke="#d8463d" stroke-width="2"/>
+  <text x="1075" y="287" text-anchor="middle" class="tiny" fill="#d8463d">天线避让</text>
+  <rect x="1164" y="267" width="70" height="112" rx="8" fill="#e8def4" stroke="#7654a3" stroke-width="3"/>
+  <text x="1199" y="326" text-anchor="middle" class="tiny">Lipo</text>
+  <rect x="1242" y="443" width="116" height="66" rx="8" fill="#d9f0e7" stroke="#287b63" stroke-width="3"/>
+  <text x="1300" y="480" text-anchor="middle" class="tiny">DESPI</text>
+  <rect x="1058" y="548" width="258" height="171" rx="9" fill="#fff1c9" stroke="#b07400" stroke-width="3"/>
+  <text x="1187" y="705" text-anchor="middle" class="tiny">电池 94×62</text>
+  <!-- 4 x 50 x 20 magnets: x=+-26.5, y=-42/-66 -->
+  <rect x="1046" y="588" width="138" height="55" rx="7" fill="#e7aa3e" fill-opacity="0.88" stroke="#7c4d00" stroke-width="3"/>
+  <rect x="1190" y="588" width="138" height="55" rx="7" fill="#e7aa3e" fill-opacity="0.88" stroke="#7c4d00" stroke-width="3"/>
+  <rect x="1046" y="654" width="138" height="55" rx="7" fill="#e7aa3e" fill-opacity="0.88" stroke="#7c4d00" stroke-width="3"/>
+  <rect x="1190" y="654" width="138" height="55" rx="7" fill="#e7aa3e" fill-opacity="0.88" stroke="#7c4d00" stroke-width="3"/>
+  <text x="1115" y="621" text-anchor="middle" class="tiny">50×20</text>
+  <text x="1259" y="621" text-anchor="middle" class="tiny">50×20</text>
+  <text x="1115" y="687" text-anchor="middle" class="tiny">50×20</text>
+  <text x="1259" y="687" text-anchor="middle" class="tiny">50×20</text>
+  <text x="1187" y="749" text-anchor="middle" class="tiny">中心建议：X=±26.5，Y≈−42 / −66 mm</text>
+
+  <rect x="858" y="790" width="664" height="72" rx="15" fill="#f0f3f1"/>
+  <text x="880" y="820" class="label">优点：布置灵活；总磁面 4000 mm²，比当前方案增加约 30%</text>
+  <text x="880" y="849" class="small">需要 4 块同规格磁铁；四块朝冰箱门的一面必须保持同一磁极。</text>
+
+  <!-- Cross section -->
+  <rect x="45" y="920" width="1510" height="145" rx="24" fill="#ffffff" stroke="#c9d5d1" stroke-width="3"/>
+  <text x="75" y="960" class="panel-title">两种方案共用的磁铁槽剖面建议</text>
+  <rect x="555" y="945" width="320" height="20" fill="#b9ccc3" stroke="#173b33" stroke-width="2"/>
+  <rect x="555" y="965" width="320" height="72" fill="#e7aa3e" stroke="#7c4d00" stroke-width="3"/>
+  <rect x="555" y="1037" width="320" height="8" fill="#eef1ef" stroke="#879993" stroke-width="1"/>
+  <text x="900" y="962" class="label">内侧装配余量 0.2 mm</text>
+  <text x="900" y="1002" class="label">磁铁厚度 2.0 mm</text>
+  <text x="900" y="1042" class="label">外侧 PETG 皮 0.4 mm（两层）</text>
+  <text x="75" y="1010" class="small">局部磁铁座总高约 2.6 mm；不建议低于 0.4 mm，否则容易缺层、破皮或被磁铁顶穿。</text>
+  <text x="75" y="1044" class="small">A、B 为二选一方案，不叠装；上半部维持无磁铁区，优先保护 ESP32 Wi-Fi 天线。</text>
+</svg>

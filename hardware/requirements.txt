@@ -1,0 +1,8 @@
+matplotlib>=3.10,<4
+manifold3d>=3,<4
+networkx>=3,<4
+numpy>=2,<3
+Pillow>=11,<13
+scipy>=1.15,<2
+shapely>=2,<3
+trimesh>=4.8,<5

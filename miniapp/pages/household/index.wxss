@@ -1,0 +1,92 @@
+.picker-value,
+.member-row,
+.invite-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.picker-value {
+  min-height: 84rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #dbe1dc;
+  border-radius: 16rpx;
+}
+
+.member-row {
+  min-height: 94rpx;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.member-row:last-child {
+  border-bottom: 0;
+}
+
+.member-name,
+.member-role {
+  display: block;
+}
+
+.member-role {
+  margin-top: 4rpx;
+  color: #858c84;
+  font-size: 23rpx;
+}
+
+.remove-button {
+  border: 1rpx solid #e4b7b3;
+  background: #fff;
+  color: #b8352d;
+}
+
+.help {
+  display: block;
+  font-size: 24rpx;
+}
+
+.action {
+  margin-top: 24rpx;
+}
+
+.invite-result {
+  margin-top: 24rpx;
+  padding: 22rpx;
+  border-radius: 16rpx;
+  background: #eef5f1;
+}
+
+.invite-code {
+  color: #246b4b;
+  font-size: 38rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+}
+
+.copy-button {
+  color: #246b4b;
+}
+
+.text-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 88rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid #dbe1dc;
+  border-radius: 16rpx;
+  background: #fbfcfa;
+}
+
+.name-input {
+  margin-top: 20rpx;
+}
+
+.permission-tip {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+}
+
+.error {
+  display: block;
+  margin-top: 12rpx;
+}

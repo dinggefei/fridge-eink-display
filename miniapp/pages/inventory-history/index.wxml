@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">操作历史</text>
+    <text class="page-subtitle">仅最近一次食材操作可在 24 小时内撤销</text>
+  </view>
+
+  <view class="card" wx:if="{{loading}}">
+    <text class="muted">正在加载…</text>
+  </view>
+  <view class="card" wx:elif="{{items.length === 0}}">
+    <text class="muted">暂无操作记录</text>
+  </view>
+  <view class="card history-card" wx:else>
+    <view class="history-row" wx:for="{{items}}" wx:key="id">
+      <view class="history-main">
+        <text class="history-title">{{item.actionLabel}} · {{item.food_name}}</text>
+        <text class="history-meta">
+          {{item.quantity}} {{item.unit}} · {{item.actor_name || "家庭成员"}} · {{item.timeText}}
+        </text>
+        <text class="history-reason" wx:if="{{!item.reversible}}">{{item.reverse_reason}}</text>
+      </view>
+      <button
+        wx:if="{{item.reversible}}"
+        size="mini"
+        class="restore-button"
+        data-item="{{item}}"
+        bindtap="restore"
+      >撤销</button>
+    </view>
+  </view>
+</view>

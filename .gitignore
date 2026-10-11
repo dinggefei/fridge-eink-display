@@ -1,0 +1,47 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.venv-cad/
+backend/data/
+*.db
+*.sqlite*
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+firmware/**/secrets.h
+firmware/**/device_secrets.h
+firmware/**/factory_pairing_frame.h
+firmware/**/ota_public_key.h
+miniapp/config.local.js
+miniapp/project.private.config.json
+kindle/rfm-dashboard/config.sh
+
+# ESP32 build and factory artifacts
+firmware/**/build/
+*.bin
+*.elf
+*.map
+.pio/
+factory-output/
+
+# Runtime and generated private data
+/output/
+/tmp/
+infra/production/backups/
+hardware/enclosure_v0_5/RFM_enclosure_v0_5_STL 2/
+hardware/**/RFM_enclosure_*_STL/
+hardware/**/RFM_enclosure_*_STL.zip
+*.log
+
+# Editors
+.idea/
+.vscode/

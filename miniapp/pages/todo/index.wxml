@@ -1,0 +1,86 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">待办</text>
+    <text class="page-subtitle">设置后会显示在水墨屏小程序码右侧</text>
+  </view>
+
+  <view class="card state-card" wx:if="{{loading}}">
+    <text class="muted">正在读取待办…</text>
+  </view>
+
+  <view class="card state-card" wx:elif="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="retry">重新加载</button>
+  </view>
+
+  <block wx:else>
+    <view class="card household-card">
+      <text class="field-label">当前家庭</text>
+      <picker
+        range="{{households}}"
+        range-key="name"
+        bindchange="switchHousehold"
+      >
+        <view class="picker-value">
+          <text>{{currentHouseholdName}}</text>
+          <text class="muted">切换 ›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="card todo-card">
+      <view class="section-heading">
+        <view>
+          <text class="section-title todo-title">水墨屏待办</text>
+          <text class="muted help">最多 10 条；水墨屏显示前 3 条。</text>
+        </view>
+        <text class="todo-count">{{displayTodos.length}}/10</text>
+      </view>
+
+      <view
+        class="todo-edit-row"
+        wx:for="{{displayTodos}}"
+        wx:key="index"
+      >
+        <text class="todo-index">{{index + 1}}</text>
+        <input
+          class="text-input todo-input"
+          value="{{item}}"
+          maxlength="40"
+          data-index="{{index}}"
+          bindinput="onTodoInput"
+          placeholder="例如：买牛奶"
+          disabled="{{saving}}"
+        />
+        <button
+          class="todo-remove-button"
+          size="mini"
+          data-index="{{index}}"
+          bindtap="removeTodo"
+          disabled="{{saving}}"
+        >删除</button>
+      </view>
+
+      <view class="empty-state" wx:if="{{displayTodos.length === 0}}">
+        <text class="empty-title">暂无待办</text>
+        <text class="muted empty-help">新增后会在水墨屏下一次刷新时显示。</text>
+      </view>
+
+      <view class="todo-actions">
+        <button
+          class="secondary-button todo-action-button"
+          bindtap="addTodo"
+          disabled="{{saving || displayTodos.length >= 10}}"
+        >新增一条</button>
+        <button
+          class="primary-button todo-action-button"
+          bindtap="saveDisplayTodos"
+          loading="{{saving}}"
+          disabled="{{saving}}"
+        >保存待办</button>
+      </view>
+    </view>
+
+    <text class="screen-tip">保存后，设备会在下一次轮询时自动刷新水墨屏。</text>
+  </block>
+</view>

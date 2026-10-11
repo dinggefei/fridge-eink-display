@@ -1,0 +1,192 @@
+.privacy-card {
+  border-color: #f0dfb5;
+  background: #fff9e9;
+}
+
+.privacy-title,
+.privacy-text {
+  display: block;
+}
+
+.privacy-title {
+  color: #7d570b;
+  font-weight: 650;
+}
+
+.privacy-text {
+  margin-top: 8rpx;
+  color: #7d6840;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14rpx;
+  margin-bottom: 28rpx;
+}
+
+.image-item,
+.add-image {
+  position: relative;
+  overflow: hidden;
+  height: 200rpx;
+  border-radius: 18rpx;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.remove-button {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.62);
+  color: #ffffff;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.add-image {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx dashed #bdc8bf;
+  color: #6e766e;
+}
+
+.add-symbol {
+  font-size: 48rpx;
+}
+
+.progress-card {
+  padding: 48rpx 32rpx;
+  text-align: center;
+}
+
+.loading-dot {
+  width: 24rpx;
+  height: 24rpx;
+  margin: 0 auto 24rpx;
+  border-radius: 50%;
+  background: #246b4b;
+}
+
+.progress-title,
+.progress-tip {
+  display: block;
+}
+
+.progress-title {
+  font-size: 30rpx;
+  font-weight: 650;
+}
+
+.progress-tip,
+.review-tip,
+.specification {
+  margin-top: 12rpx;
+  color: #7a8179;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+
+.text-button {
+  margin-top: 24rpx;
+  color: #6e766e;
+  background: transparent;
+  font-size: 25rpx;
+}
+
+.review-section {
+  margin-top: 12rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.review-tip {
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.result-card {
+  margin-bottom: 18rpx;
+}
+
+.result-header,
+.review-grid,
+.date-grid {
+  display: flex;
+  gap: 16rpx;
+  align-items: center;
+}
+
+.result-header {
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.confidence {
+  color: #59625a;
+  font-size: 23rpx;
+}
+
+.review-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 82rpx;
+  margin-bottom: 14rpx;
+  padding: 18rpx 22rpx;
+  border: 1rpx solid #dbe1db;
+  border-radius: 16rpx;
+  background: #ffffff;
+}
+
+.review-grid .review-input {
+  flex: 1;
+}
+
+.date-grid {
+  align-items: stretch;
+}
+
+.date-grid picker {
+  flex: 1;
+}
+
+.date-value {
+  padding: 16rpx 10rpx;
+  border-radius: 12rpx;
+  background: #f4f6f2;
+  color: #59625a;
+  font-size: 22rpx;
+}
+
+.warning-card {
+  margin-bottom: 18rpx;
+  background: #fff9e9;
+}
+
+.warning-text,
+.needs-confirmation {
+  display: block;
+  color: #7d570b;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+
+.cancel-button {
+  margin-top: 16rpx;
+}

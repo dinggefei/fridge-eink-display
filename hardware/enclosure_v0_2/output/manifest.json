@@ -1,0 +1,110 @@
+{
+  "design": "RefrigeratorFoodManagement replacement middle carrier V0.2",
+  "units": "mm",
+  "reuse_without_reprint": [
+    "front_bezel_v0_1.stl",
+    "rear_cover_v0_1.stl"
+  ],
+  "rear_cover_fasteners": {
+    "active": [
+      [
+        54.5,
+        -90.0
+      ],
+      [
+        -54.5,
+        90.0
+      ],
+      [
+        54.5,
+        90.0
+      ]
+    ],
+    "unused_due_to_lipo_conflict": [
+      -54.5,
+      -90.0
+    ]
+  },
+  "layout": {
+    "battery_center": [
+      -20.0,
+      0.0
+    ],
+    "esp32_center": [
+      31.0,
+      61.0
+    ],
+    "despi_center": [
+      39.0,
+      -7.9
+    ],
+    "lipo_rider_center": [
+      -45.461,
+      -77.4
+    ],
+    "lipo_mount_holes": [
+      [
+        -55.788,
+        -87.061
+      ],
+      [
+        -35.261,
+        -87.061
+      ],
+      [
+        -55.788,
+        -59.502
+      ],
+      [
+        -35.261,
+        -59.502
+      ]
+    ],
+    "lipo_usb_c_center": [
+      -40.0,
+      -91.362
+    ],
+    "lipo_usb_c_face": [
+      -40.0,
+      -98.712
+    ],
+    "existing_rear_charge_cutout_center": [
+      -40.0,
+      -99.0
+    ]
+  },
+  "verified_clearances_mm": {
+    "battery_to_esp32_horizontal": 6.0,
+    "battery_to_despi_horizontal": 6.5,
+    "battery_to_lipo_vertical": 9.462,
+    "despi_to_esp32_vertical": 24.4,
+    "lipo_usb_c_x_to_existing_cutout": 0.0,
+    "lipo_usb_c_face_y_to_existing_cutout_center": 0.288
+  },
+  "part": {
+    "file": "middle_carrier_v0_2.stl",
+    "watertight": true,
+    "is_volume": true,
+    "body_count": 1,
+    "vertices": 1880,
+    "faces": 3828,
+    "volume_mm3": 48801.6,
+    "bounds_mm": [
+      [
+        -61.5,
+        -97.5,
+        0.0
+      ],
+      [
+        61.5,
+        97.5,
+        7.0
+      ]
+    ],
+    "size_mm": [
+      123.0,
+      195.0,
+      7.0
+    ]
+  }
+}

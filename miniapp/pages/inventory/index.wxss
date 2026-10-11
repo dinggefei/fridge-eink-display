@@ -1,0 +1,117 @@
+.filter-scroll {
+  width: 100%;
+  margin-bottom: 24rpx;
+  white-space: nowrap;
+}
+
+.filter-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.filter-chip {
+  flex: none;
+  padding: 14rpx 28rpx;
+  border: 1rpx solid #dbe1db;
+  border-radius: 999rpx;
+  background: #ffffff;
+  color: #596159;
+}
+
+.filter-chip-active {
+  border-color: #246b4b;
+  background: #e5f0e9;
+  color: #246b4b;
+  font-weight: 600;
+}
+
+.inventory-card {
+  padding-top: 6rpx;
+  padding-bottom: 6rpx;
+}
+
+.inventory-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.inventory-row:last-child {
+  border-bottom: 0;
+}
+
+.inventory-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.inventory-name {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.inventory-meta {
+  margin-top: 8rpx;
+  color: #7d847c;
+  font-size: 24rpx;
+}
+
+.inventory-status {
+  font-size: 25rpx;
+  font-weight: 600;
+}
+
+.inventory-actions {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.row-links {
+  display: flex;
+  margin-top: 10rpx;
+  gap: 20rpx;
+}
+
+.edit-link,
+.delete-link {
+  color: #929890;
+  font-size: 22rpx;
+}
+
+.edit-link {
+  color: #246b4b;
+}
+
+.state-card {
+  text-align: center;
+}
+
+.retry-button {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}
+.add-button {
+  margin-bottom: 24rpx;
+}
+
+.top-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+}
+
+.history-button {
+  margin-bottom: 24rpx;
+}
+
+.consume-link {
+  color: #246b4b;
+}
+
+.discard-link {
+  color: #a66b00;
+}

@@ -1,0 +1,273 @@
+{
+  "result": "PASS",
+  "stl_checks": {
+    "front_bezel_v0_7.stl": "PASS",
+    "electronics_carrier_v0_7.stl": "PASS",
+    "rear_cover_v0_7.stl": "PASS",
+    "rear_cover_v0_7_soft_magnets_2x90x50_1x50x20.stl": "PASS",
+    "rear_cover_v0_7_rev_e_dfm_clearance.stl": "PASS",
+    "rear_cover_v0_7_rev_f_flat_left_wall_0p8mm.stl": "PASS",
+    "rear_cover_v0_7_rev_g_lipo_switch_access.stl": "PASS",
+    "rear_cover_v0_7_rev_h_combined_lipo_led_switch_opening.stl": "PASS",
+    "rear_cover_v0_7_rev_i_regular_lipo_led_switch_opening.stl": "PASS",
+    "fit_test_soft_magnet_2mm_skin_0p4_v0_7.stl": "PASS",
+    "fit_test_lipo_usb_led_openings_v0_7.stl": "PASS",
+    "fit_test_lipo_usb_led_switch_openings_v0_7_rev_g.stl": "PASS",
+    "fit_test_lipo_combined_led_switch_opening_v0_7_rev_h.stl": "PASS",
+    "fit_test_lipo_regular_led_switch_opening_v0_7_rev_i.stl": "PASS",
+    "fit_test_usb_c_opening_11p5x7p5_v0_7.stl": "PASS",
+    "fit_test_rear_left_flat_wall_0p8mm_v0_7_rev_f.stl": "PASS",
+    "fit_test_boot_reset_labels_v0_7.stl": "PASS",
+    "fit_test_front_corner_v0_7_rev_b_uniform_3_6mm.stl": "PASS",
+    "fit_test_front_left_retainer_v0_7_rev_e_square_inner.stl": "PASS",
+    "fit_test_front_right_open_v0_7_rev_f_continuous_edge.stl": "PASS",
+    "fit_test_carrier_corner_v0_7_rev_b_boss_relief_r2_9.stl": "PASS",
+    "fit_test_rear_corner_v0_7_rev_b_opposite_side.stl": "PASS",
+    "fit_test_rear_corner_v0_7_rev_c_boss_relief_r2_9.stl": "PASS",
+    "fit_test_rear_corner_clearance_v0_7_rev_e.stl": "PASS"
+  },
+  "outer_size_mm": [
+    120.0,
+    184.0,
+    19.0
+  ],
+  "carrier_fit_per_side_mm": 0.5,
+  "screen_clearance_per_side_mm": [
+    0.3999999999999986,
+    0.4000000000000057
+  ],
+  "front_retainer_rev_f": {
+    "retained_sides": [
+      "top",
+      "bottom",
+      "left",
+      "upper-right arc",
+      "lower-right arc"
+    ],
+    "right_retainer_removed": true,
+    "width_mm": 2.9,
+    "left_right_outer_edge_inset_mm": 3.6,
+    "top_bottom_outer_edge_inset_mm": 3.6,
+    "outer_corner_radius_mm": 4.4,
+    "right_transition_inner_radius_mm": 1.5,
+    "left_inner_corner_radius_mm": 0.0,
+    "left_inner_corner_style": "square_90_degree",
+    "rear_inner_corner_radius_mm": 6.2,
+    "radial_clearance_to_rear_mm": 1.8,
+    "four_corner_arc_probe_volumes_mm3": {
+      "upper_left": 0.3875,
+      "upper_right": 0.3875,
+      "lower_left": 0.3875,
+      "lower_right": 0.3875
+    },
+    "left_square_corner_residual_probe_volumes_mm3": {
+      "upper_left": 0.0,
+      "lower_left": 0.0
+    },
+    "right_end_style": "continuous_inner_edges_to_outer_arcs_no_step",
+    "independent_clear_span_constraint_mm": null,
+    "natural_right_opening_span_mm": 171.0,
+    "actual_right_opening_span_from_stl_mm": 171.0,
+    "right_horizontal_edge_probe_volumes_mm3": {
+      "upper_right": 0.3875,
+      "lower_right": 0.3875
+    },
+    "right_clearance_probe_volumes_mm3": {
+      "upper_right": 0.0,
+      "lower_right": 0.0
+    },
+    "right_no_step_probe_volumes_mm3": {
+      "upper_right": 0.0,
+      "lower_right": 0.0
+    },
+    "left_overlap_on_physical_panel_mm": 2.1,
+    "measured_left_inactive_border_remaining_mm": 6.9,
+    "actual_left_probe_volume_mm3": 179.8,
+    "actual_right_probe_volume_mm3": 0.0
+  },
+  "component_edge_margins_mm": {
+    "battery": 8.2,
+    "esp32": 3.0,
+    "despi": 7.7,
+    "lipo": 1.773
+  },
+  "normal_height_from_carrier_underside_mm": 13.6,
+  "component_height_clearance_mm": {
+    "battery_normal_zone": 2.5,
+    "esp32": 1.4,
+    "despi": 8.2,
+    "lipo": 2.1
+  },
+  "battery_magnet_bar_clearance_mm": 1.3,
+  "battery_to_fastener_tube_mm": 3.2,
+  "magnet_clearances_mm": {
+    "magnet_to_esp32_board": 3.55,
+    "boss_to_esp32_board": 2.75,
+    "magnet_to_esp32_antenna": 51.85,
+    "boss_to_esp32_antenna": 51.05,
+    "magnet_to_despi_c02": 0.0,
+    "boss_to_despi_c02": 0.0,
+    "magnet_to_lipo_rider": 17.499,
+    "boss_to_lipo_rider": 16.699,
+    "boss_to_fastener_tube": 2.1,
+    "boss_to_button_counterbore": 1.478,
+    "boss_to_boss": 0.0,
+    "nominal_face_area_total_mm2": 10000.0
+  },
+  "magnet_boss_to_case_edge_mm": 2.9,
+  "m2x14_engagement_mm": 3.4,
+  "usb_c_opening_mm": [
+    11.5,
+    7.5
+  ],
+  "usb_c_opening_center_z_mm": 7.0,
+  "usb_c_vertical_drop_mm": 3.0,
+  "usb_c_geometry_probe_volumes_mm3": {
+    "new_centre_open": 0.0,
+    "upper_inside_open": 0.0,
+    "lower_inside_open": 0.0,
+    "above_new_opening_closed": 0.063999,
+    "below_new_opening_closed": 0.063999
+  },
+  "usb_c_face_to_case_outer_edge_mm": 3.2,
+  "rear_left_edge_revision": {
+    "pure_straight_length_mm": 168.0,
+    "corner_transition_extension_each_end_mm": 1.0,
+    "required_flat_thinned_span_mm": 170.0,
+    "edge_drop_mm": 0.0,
+    "required_lower_wall_thickness_mm": 1.8,
+    "actual_lower_wall_thickness_from_stl_mm": 1.8,
+    "required_restored_band_height_mm": 1.8,
+    "required_restored_band_thickness_mm": 0.8,
+    "actual_restored_band_thickness_from_stl_mm": 0.8,
+    "actual_flat_edge_height_from_stl_mm": 16.6,
+    "inward_ledge_removed": true,
+    "opposite_right_edge_restored": true,
+    "geometry_probe_volumes_mm3": {
+      "restored_top_band_outer_wall": 0.064,
+      "restored_top_band_inner_clearance": 0.0,
+      "removed_inward_ledge": 0.0,
+      "original_lower_wall_inner_part": 0.064,
+      "lower_wall_interior_clearance": 0.0,
+      "upper_wall_outside_170mm_zone": 0.063999,
+      "lower_wall_outside_170mm_zone": 0.063999
+    },
+    "right_restore_probe_volumes_mm3": {
+      "restored_wall_top": 0.064,
+      "restored_inward_ledge": 0.064
+    }
+  },
+  "lipo_indicator_window_mm": [
+    4.5,
+    12.0
+  ],
+  "lipo_indicator_window_assembled_center_mm": [
+    16.41,
+    70.824
+  ],
+  "lipo_led_min_window_edge_margin_mm": 2.246,
+  "regular_opening_to_magnet_boss_mm": 16.216,
+  "lipo_switch_access_mm": [
+    3.8,
+    7.0
+  ],
+  "lipo_switch_access_assembled_center_mm": [
+    15.407,
+    59.352
+  ],
+  "lipo_switch_to_indicator_original_gap_removed_mm": 1.972,
+  "lipo_switch_to_magnet_boss_mm": 17.593,
+  "lipo_regular_opening_mm": [
+    5.2,
+    21.0
+  ],
+  "lipo_regular_opening_corner_radius_mm": 1.0,
+  "lipo_regular_opening_assembled_center_mm": [
+    16.084,
+    66.338
+  ],
+  "lipo_regular_opening_geometry_probe_volumes_mm3": {
+    "centre_open": 0.0,
+    "led_centre_open": 0.0,
+    "switch_centre_open": 0.0,
+    "left_skin_closed": 0.008,
+    "right_skin_closed": 0.008,
+    "lower_skin_closed": 0.008,
+    "upper_skin_closed": 0.008
+  },
+  "front_screw_post_radius_mm": 2.6,
+  "rear_internal_boss_relief_radius_mm": 3.3,
+  "carrier_front_boss_relief_radius_mm": 2.9,
+  "boss_relief_radial_clearance_mm": 0.7,
+  "rear_boss_relief_axial_depth_into_tube_mm": 0.6,
+  "rear_boss_relief_entry_chamfer_mm": 0.5,
+  "rear_boss_dfm_probe_volumes_mm3": {
+    "inside_relief_0_3mm_into_tube": 0.0,
+    "tube_preserved_below_0_6mm_relief": 0.064,
+    "mouth_chamfer_outer_radius": 0.0
+  },
+  "rear_corner_entry_dfm": {
+    "base_corner_radius_mm": 6.2,
+    "entry_depth_mm": 1.2,
+    "radial_relief_mm": 0.4,
+    "entry_radius_mm": 6.6,
+    "mouth_chamfer_mm": 0.5,
+    "contact_relief_mm": 0.3,
+    "geometry_probe_volumes_mm3": {
+      "base_cavity_unchanged_below_entry": 0.001,
+      "radial_relief_in_first_1_2mm": 0.0,
+      "mouth_chamfer_at_r6_8": 4e-06,
+      "r6_8_preserved_below_chamfer": 0.001
+    }
+  },
+  "front_to_rear_corner_collision_volume_mm3": {
+    "-38.0,-87.9": 4e-06,
+    "38.0,-87.9": 4e-06,
+    "-38.0,87.9": 3e-06,
+    "38.0,87.9": 4e-06
+  },
+  "three_layer_corner_collision_volume_mm3": {
+    "front_carrier": {
+      "-38.0,-87.9": 0.0,
+      "38.0,-87.9": 0.0,
+      "-38.0,87.9": 0.0,
+      "38.0,87.9": 0.0
+    },
+    "carrier_rear": {
+      "-38.0,-87.9": 0.0,
+      "38.0,-87.9": 0.0,
+      "-38.0,87.9": 0.0,
+      "38.0,87.9": 0.0
+    }
+  },
+  "corner_coupon_raw_hole_centres_mm": {
+    "front": [
+      13.0,
+      32.9
+    ],
+    "carrier": [
+      13.0,
+      32.9
+    ],
+    "rear_rev_b": [
+      22.0,
+      32.9
+    ]
+  },
+  "corner_coupon_assembled_hole_centres_mm": {
+    "front": [
+      13.0,
+      32.9
+    ],
+    "carrier": [
+      13.0,
+      32.9
+    ],
+    "rear_rev_b_after_turnover": [
+      13.0,
+      32.9
+    ]
+  },
+  "physical_validation": "PENDING: first print fit_test_front_left_retainer_v0_7_rev_e_square_inner.stl and fit_test_front_right_open_v0_7_rev_f_continuous_edge.stl to verify the square left inner corners and continuous right horizontal edges before printing the full front bezel; print fit_test_lipo_regular_led_switch_opening_v0_7_rev_i.stl and confirm all five LEDs remain visible plus full ON/OFF travel before printing the full rear cover; other rear-cover coupons remain required",
+  "zip_crc": "PASS"
+}

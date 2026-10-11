@@ -1,0 +1,14 @@
+#pragma once
+
+// Generated public key only. The matching private key must remain offline and
+// must never be copied into this repository, a device, or the production host.
+//
+// Generate ota_public_key.h with Arduino-ESP32's bin_signing.py:
+//   python bin_signing.py --extract-pubkey /secure/ota-private-key.pem \
+//     --out /tmp/ota_public_key.pem
+// Copy the generated /tmp/ota_public_key.h beside this example file.
+
+const uint8_t PUBLIC_KEY[] PROGMEM = {
+    // Replace with the generated ECDSA P-256 public key byte array.
+};
+const size_t PUBLIC_KEY_LEN = 0;

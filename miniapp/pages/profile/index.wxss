@@ -1,0 +1,36 @@
+.setting-row {
+  display: flex;
+  min-height: 84rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+}
+
+.setting-row-link {
+  padding: 10rpx 0;
+}
+
+.setting-title,
+.setting-description {
+  display: block;
+}
+
+.setting-title {
+  font-weight: 600;
+}
+
+.setting-description {
+  margin-top: 6rpx;
+  color: #858c84;
+  font-size: 23rpx;
+}
+
+.profile-error {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+}

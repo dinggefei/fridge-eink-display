@@ -1,0 +1,95 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">墨水屏相册</text>
+    <text class="page-subtitle">照片会转换成黑、白、黄、红四色并全屏显示</text>
+  </view>
+
+  <view class="card privacy-card">
+    <text class="privacy-title">照片隐私</text>
+    <text class="privacy-text">原图仅用于生成预览，处理完成后立即删除；确认后的四色图片保存在私有存储中。</text>
+  </view>
+
+  <view class="card" wx:if="{{!loading}}">
+    <picker
+      range="{{rotationOptions}}"
+      range-key="label"
+      value="{{rotationIndex}}"
+      bindchange="onRotationChange"
+    >
+      <view class="setting-row setting-row-link">
+        <text>轮播周期</text>
+        <text class="muted">{{rotationOptions[rotationIndex].label}} ›</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="loading-card card" wx:if="{{loading}}">
+    <text>正在加载相册…</text>
+  </view>
+  <view class="card error-card" wx:if="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="loadAlbum">重新加载</button>
+  </view>
+
+  <view class="album-header" wx:if="{{!loading}}">
+    <view>
+      <text class="section-title">家庭相册</text>
+      <text class="album-count">{{photos.length}} / {{maxPhotos}} 张</text>
+    </view>
+    <button
+      class="small-primary-button"
+      disabled="{{uploading || photos.length >= maxPhotos}}"
+      loading="{{uploading}}"
+      bindtap="choosePhoto"
+    >上传照片</button>
+  </view>
+
+  <view class="empty-card card" wx:if="{{!loading && photos.length === 0}}">
+    <text class="empty-title">还没有照片</text>
+    <text class="muted">上传后先核对四色预览，确认后才会加入轮播。</text>
+  </view>
+
+  <view
+    class="photo-card card {{item.status === 'pending' ? 'pending-card' : ''}}"
+    wx:for="{{photos}}"
+    wx:key="id"
+  >
+    <view class="photo-status-row">
+      <text class="photo-status {{item.status === 'pending' ? 'status-yellow' : 'status-green'}}">
+        {{item.status === 'pending' ? '待确认预览' : (item.is_active ? '当前显示' : '已加入轮播')}}
+      </text>
+      <text class="muted photo-index">第 {{index + 1}} 张</text>
+    </view>
+    <image
+      wx:if="{{item.localPath}}"
+      class="photo-preview"
+      src="{{item.localPath}}"
+      mode="aspectFit"
+    />
+    <view class="preview-error" wx:else>
+      <text>预览加载失败，请重新进入页面</text>
+    </view>
+    <text class="photo-name">{{item.original_filename}}</text>
+
+    <view class="pending-actions" wx:if="{{item.status === 'pending'}}">
+      <button class="primary-button compact-button" data-id="{{item.id}}" bindtap="confirmPhoto">
+        确认加入轮播
+      </button>
+      <button class="text-danger-button" data-id="{{item.id}}" bindtap="deletePhoto">
+        放弃并删除
+      </button>
+    </view>
+    <view class="confirmed-actions" wx:else>
+      <button class="secondary-button action-button" data-id="{{item.id}}" bindtap="showNow">
+        立即显示
+      </button>
+      <button class="order-button" data-id="{{item.id}}" data-direction="-1" bindtap="movePhoto">上移</button>
+      <button class="order-button" data-id="{{item.id}}" data-direction="1" bindtap="movePhoto">下移</button>
+      <button class="text-danger-button" data-id="{{item.id}}" bindtap="deletePhoto">删除</button>
+    </view>
+  </view>
+
+  <text class="sync-tip" wx:if="{{!loading && confirmedCount > 0}}">
+    设置变更后，墨水屏会在下一次联网轮询时更新。
+  </text>
+</view>

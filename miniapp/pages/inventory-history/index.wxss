@@ -1,0 +1,47 @@
+.history-card {
+  padding-top: 8rpx;
+  padding-bottom: 8rpx;
+}
+
+.history-row {
+  display: flex;
+  min-height: 116rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.history-row:last-child {
+  border-bottom: 0;
+}
+
+.history-main {
+  max-width: 78%;
+}
+
+.history-title,
+.history-meta,
+.history-reason {
+  display: block;
+}
+
+.history-title {
+  font-weight: 600;
+}
+
+.history-meta,
+.history-reason {
+  margin-top: 7rpx;
+  color: #858c84;
+  font-size: 22rpx;
+}
+
+.history-reason {
+  color: #a66b00;
+}
+
+.restore-button {
+  border: 1rpx solid #b8d3c4;
+  background: #fff;
+  color: #246b4b;
+}

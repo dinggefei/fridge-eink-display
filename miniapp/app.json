@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/today/index",
+    "pages/inventory/index",
+    "pages/todo/index",
+    "pages/inventory-edit/index",
+    "pages/profile/index",
+    "pages/quick-entry/index",
+    "pages/import-order/index",
+    "pages/device/index",
+    "pages/household/index",
+    "pages/reminder/index",
+    "pages/inventory-history/index",
+    "pages/shelf-life/index",
+    "pages/recognition-history/index",
+    "pages/display-settings/index",
+    "pages/display-timetable/index",
+    "pages/display-market/index",
+    "pages/display-album/index",
+    "pages/privacy-data/index"
+  ],
+  "window": {
+    "backgroundColor": "#F4F6F2",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F4F6F2",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "冰箱食材"
+  },
+  "tabBar": {
+    "color": "#70766D",
+    "selectedColor": "#246B4B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/today/index",
+        "text": "今日"
+      },
+      {
+        "pagePath": "pages/inventory/index",
+        "text": "食材"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

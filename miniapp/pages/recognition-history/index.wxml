@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">识别记录</text>
+    <text class="page-subtitle">
+      {{metrics && metrics.scope === "household" ? "家庭汇总指标与我的记录" : "我的识别指标与记录"}}
+    </text>
+  </view>
+
+  <view class="card" wx:if="{{metrics}}">
+    <text class="section-title">识别质量</text>
+    <view class="metrics-grid">
+      <view class="metric"><text class="metric-value">{{metrics.task_count}}</text><text class="metric-label">任务</text></view>
+      <view class="metric"><text class="metric-value">{{metrics.successRateText}}</text><text class="metric-label">成功率</text></view>
+      <view class="metric"><text class="metric-value">{{metrics.confidenceText}}</text><text class="metric-label">平均置信度</text></view>
+      <view class="metric"><text class="metric-value">{{metrics.durationText}}</text><text class="metric-label">平均耗时</text></view>
+      <view class="metric"><text class="metric-value">{{metrics.image_count}}</text><text class="metric-label">图片数</text></view>
+      <view class="metric"><text class="metric-value">{{metrics.correctionRateText}}</text><text class="metric-label">纠正率</text></view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">我的识别历史</text>
+    <text class="muted" wx:if="{{loading}}">正在加载…</text>
+    <text class="muted" wx:elif="{{items.length === 0}}">暂无识别记录</text>
+    <view class="task-row" wx:for="{{items}}" wx:key="id">
+      <view class="task-header">
+        <text class="task-source">{{item.sourceLabel}}</text>
+        <text class="{{item.status === 'failed' ? 'status-red' : 'status-green'}}">{{item.statusLabel}}</text>
+      </view>
+      <text class="task-input" wx:if="{{item.input_text}}">{{item.input_text}}</text>
+      <text class="task-meta">
+        识别 {{item.recognized_action_count}} 项 · 确认 {{item.confirmed_action_count}} 项 · {{item.timeText}}
+      </text>
+    </view>
+  </view>
+</view>

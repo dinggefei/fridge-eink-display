@@ -1,0 +1,135 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">导入订单图片</text>
+    <text class="page-subtitle">支持一张完整订单图或最多 9 张连续截图</text>
+  </view>
+
+  <view class="card privacy-card">
+    <text class="privacy-title">隐私说明</text>
+    <text class="privacy-text">图片仅用于识别商品。识别完成后删除，异常文件最长保留 24 小时。</text>
+  </view>
+
+  <view class="image-grid" wx:if="{{phase === 'select'}}">
+    <view class="image-item" wx:for="{{images}}" wx:key="*this">
+      <image class="preview-image" src="{{item}}" mode="aspectFill" />
+      <view class="remove-button" data-index="{{index}}" bindtap="removeImage">×</view>
+    </view>
+    <view class="add-image" wx:if="{{images.length < 9}}" bindtap="chooseImages">
+      <text class="add-symbol">＋</text>
+      <text>选择图片</text>
+    </view>
+  </view>
+
+  <button
+    wx:if="{{phase === 'select'}}"
+    class="primary-button"
+    disabled="{{images.length === 0}}"
+    bindtap="startImport"
+  >
+    开始识别（{{images.length}}/9）
+  </button>
+
+  <view wx:if="{{phase === 'uploading' || phase === 'processing'}}" class="card progress-card">
+    <view class="loading-dot"></view>
+    <text class="progress-title">{{progressText}}</text>
+    <text class="progress-tip">可以停留在此页面等待，库存暂时不会发生变化。</text>
+    <button class="text-button" bindtap="cancelImport">取消任务</button>
+  </view>
+
+  <view wx:if="{{phase === 'review'}}" class="review-section">
+    <text class="section-title">识别结果</text>
+    <text class="review-tip">请核对商品、数量和储存位置，确认后才会写入库存。</text>
+
+    <view wx:if="{{warnings.length}}" class="card warning-card">
+      <text wx:for="{{warnings}}" wx:key="*this" class="warning-text">{{item}}</text>
+    </view>
+
+    <view class="card result-card" wx:for="{{items}}" wx:key="action_id">
+      <view class="result-header">
+        <text class="confidence">
+          置信度 {{item.confidenceText}}
+        </text>
+        <switch
+          checked="{{item.selected}}"
+          data-index="{{index}}"
+          bindchange="onItemSelected"
+          color="#246B4B"
+        />
+      </view>
+      <input
+        class="review-input"
+        value="{{item.name}}"
+        data-index="{{index}}"
+        data-field="name"
+        bindinput="onItemInput"
+        placeholder="商品名称"
+      />
+      <text wx:if="{{item.specification}}" class="specification">
+        规格：{{item.specification}}
+      </text>
+      <view class="review-grid">
+        <input
+          class="review-input"
+          type="digit"
+          value="{{item.quantity}}"
+          data-index="{{index}}"
+          data-field="quantity"
+          bindinput="onItemInput"
+          placeholder="数量"
+        />
+        <input
+          class="review-input"
+          value="{{item.unit}}"
+          data-index="{{index}}"
+          data-field="unit"
+          bindinput="onItemInput"
+          placeholder="单位"
+        />
+      </view>
+      <picker
+        range="{{locationOptions}}"
+        range-key="label"
+        value="{{item.locationIndex}}"
+        data-index="{{index}}"
+        bindchange="onLocationChange"
+      >
+        <view class="review-input picker-value">
+          {{locationOptions[item.locationIndex].label}} ›
+        </view>
+      </picker>
+      <view class="date-grid">
+        <picker
+          mode="date"
+          value="{{item.stocked_on}}"
+          data-index="{{index}}"
+          data-field="stocked_on"
+          bindchange="onDateChange"
+        >
+          <view class="date-value">入库：{{item.stocked_on}} ›</view>
+        </picker>
+        <picker
+          mode="date"
+          value="{{item.suggested_use_by}}"
+          data-index="{{index}}"
+          data-field="suggested_use_by"
+          bindchange="onDateChange"
+        >
+          <view class="date-value">建议：{{item.suggested_use_by}} ›</view>
+        </picker>
+      </view>
+      <text wx:if="{{item.needs_confirmation}}" class="needs-confirmation">
+        此项识别不确定，请重点核对
+      </text>
+    </view>
+
+    <button
+      class="primary-button"
+      loading="{{confirming}}"
+      disabled="{{confirming}}"
+      bindtap="confirmImport"
+    >确认并批量入库</button>
+    <button class="secondary-button cancel-button" bindtap="cancelImport">
+      放弃本次识别
+    </button>
+  </view>
+</view>

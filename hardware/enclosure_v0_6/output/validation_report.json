@@ -1,0 +1,43 @@
+{
+  "result": "PASS",
+  "stl_checks": {
+    "front_bezel_v0_6.stl": "PASS",
+    "electronics_carrier_v0_6.stl": "PASS",
+    "rear_cover_v0_6.stl": "PASS"
+  },
+  "outer_size_mm": [
+    120.0,
+    184.0,
+    21.4
+  ],
+  "carrier_fit_per_side_mm": 0.5,
+  "screen_clearance_per_side_mm": [
+    0.3999999999999986,
+    0.4000000000000057
+  ],
+  "component_edge_margins_mm": {
+    "battery": 8.2,
+    "esp32": 3.0,
+    "despi": 7.7,
+    "lipo": 1.773
+  },
+  "available_height_above_carrier_mm": 11.8,
+  "component_height_clearance_mm": {
+    "battery": 1.8,
+    "esp32": 1.2,
+    "despi": 7.8,
+    "lipo": 1.9
+  },
+  "battery_to_fastener_tube_mm": 3.2,
+  "magnet_clearances_mm": {
+    "esp32_board": 22.15,
+    "esp32_antenna": 40.946,
+    "despi_c02": 9.222,
+    "lipo_rider": 16.85,
+    "magnet_to_fastener_tube": 6.064,
+    "magnet_to_magnet": 18.6
+  },
+  "m2x16_engagement_mm": 3.0,
+  "physical_validation": "PENDING: print and test four coupons before full parts",
+  "zip_crc": "PASS"
+}

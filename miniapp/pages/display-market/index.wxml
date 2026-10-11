@@ -1,0 +1,159 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">行情看板</text>
+    <text class="page-subtitle">家庭成员都可以管理，可分别搜索数字货币、美股、A 股和港股，最多展示 6 项</text>
+  </view>
+
+  <view class="card notice-card">
+    <text class="notice-title">行情快照</text>
+    <text class="notice-text">{{sourceLabel || '行情数据源'}} · {{disclaimer}}</text>
+  </view>
+
+  <view class="card error-card" wx:if="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="loadDashboard">重新加载</button>
+  </view>
+
+  <view class="card" wx:if="{{loading}}">
+    <text>正在加载行情设置…</text>
+  </view>
+
+  <view class="card" wx:if="{{!loading}}">
+    <picker
+      range="{{refreshOptions}}"
+      range-key="label"
+      value="{{refreshIndex}}"
+      bindchange="onRefreshChange"
+    >
+      <view class="setting-row setting-row-link">
+        <view>
+          <text class="setting-title">刷新周期</text>
+          <text class="setting-description">ESP32 仍每 5 分钟检查，行情按此周期生成新画面</text>
+        </view>
+        <text class="muted">{{refreshOptions[refreshIndex].label}} ›</text>
+      </view>
+    </picker>
+    <view class="setting-row">
+      <view>
+        <text class="setting-title">夜间暂停</text>
+        <text class="setting-description">北京时间 23:00–07:00 不主动获取新行情</text>
+      </view>
+      <switch
+        color="#246b4b"
+        checked="{{nightPause}}"
+        bindchange="onNightPauseChange"
+      />
+    </view>
+  </view>
+
+  <view class="card search-card" wx:if="{{!loading}}">
+    <text class="section-title">搜索并添加</text>
+    <view class="search-type-tabs">
+      <view
+        class="search-type-tab {{searchType === item.value ? 'search-type-tab-active' : ''}}"
+        wx:for="{{searchTypes}}"
+        wx:key="value"
+        data-value="{{item.value}}"
+        bindtap="onSearchTypeTap"
+      >{{item.label}}</view>
+    </view>
+    <view class="search-row">
+      <input
+        class="search-input"
+        value="{{searchQuery}}"
+        placeholder="{{searchPlaceholder}}"
+        confirm-type="search"
+        bindinput="onSearchInput"
+        bindconfirm="searchAssets"
+      />
+      <button
+        class="search-button"
+        loading="{{searching}}"
+        disabled="{{searching}}"
+        bindtap="searchAssets"
+      >搜索</button>
+    </view>
+
+    <view class="search-empty" wx:if="{{!searching && searchPerformed && searchResults.length === 0}}">
+      <text class="muted">没有找到匹配结果，请尝试代码、中文名或英文名。</text>
+    </view>
+    <view
+      class="search-result"
+      wx:for="{{searchResults}}"
+      wx:key="key"
+    >
+      <view class="search-result-copy">
+        <text class="search-result-name">{{item.name}}</text>
+        <text class="search-result-symbol">{{item.symbol}} · {{item.typeLabel}}</text>
+      </view>
+      <button
+        class="result-add-button {{item.selected ? 'result-added-button' : ''}}"
+        data-key="{{item.key}}"
+        disabled="{{saving || item.selected || assets.length >= maxAssets}}"
+        bindtap="addSearchResult"
+      >{{item.selected ? '已添加' : '添加'}}</button>
+    </view>
+  </view>
+
+  <view class="card index-card" wx:if="{{!loading && indexOptions.length > 0}}">
+    <text class="section-title">常用指数</text>
+    <view
+      class="search-result"
+      wx:for="{{indexOptions}}"
+      wx:key="symbol"
+    >
+      <view class="search-result-copy">
+        <text class="search-result-name">{{item.name}}</text>
+        <text class="search-result-symbol">{{item.symbol}} · 指数</text>
+      </view>
+      <button
+        class="result-add-button {{item.selected ? 'result-added-button' : ''}}"
+        data-symbol="{{item.symbol}}"
+        disabled="{{saving || item.selected || assets.length >= maxAssets}}"
+        bindtap="addIndexAsset"
+      >{{item.selected ? '已添加' : '添加'}}</button>
+    </view>
+  </view>
+
+  <view class="asset-heading" wx:if="{{!loading}}">
+    <text class="section-title">当前展示顺序</text>
+    <text class="muted">{{assets.length}} / {{maxAssets}} 项</text>
+  </view>
+
+  <view class="card empty-card" wx:if="{{!loading && assets.length === 0}}">
+    <text class="empty-title">还没有添加资产</text>
+    <text class="muted">添加后即可启用行情看板。</text>
+  </view>
+
+  <view
+    class="card asset-card"
+    wx:for="{{assets}}"
+    wx:key="id"
+  >
+    <view class="asset-main">
+      <view class="asset-copy">
+        <text class="asset-name">{{item.name}}</text>
+        <text class="asset-symbol">{{item.symbol}} · {{item.typeLabel}}</text>
+      </view>
+      <view class="asset-quote">
+        <text class="asset-price">{{item.priceText}}</text>
+        <text class="asset-change {{item.changeClass}}">{{item.changeText}}</text>
+      </view>
+    </view>
+    <view class="asset-footer">
+      <text class="quote-status {{item.stale ? 'status-yellow' : ''}}">{{item.status}}</text>
+      <view class="asset-actions">
+        <view class="order-button" data-id="{{item.id}}" data-direction="-1" bindtap="moveAsset">上移</view>
+        <view class="order-button" data-id="{{item.id}}" data-direction="1" bindtap="moveAsset">下移</view>
+        <view class="remove-button" data-id="{{item.id}}" bindtap="removeAsset">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <button
+    class="primary-button activate-button"
+    wx:if="{{!loading && assets.length > 0 && displayMode !== 'market'}}"
+    bindtap="activateMarket"
+  >设为墨水屏当前显示</button>
+  <text class="active-tip" wx:if="{{!loading && displayMode === 'market'}}">当前已显示行情看板，设置变化会在设备下一次联网时更新。</text>
+</view>

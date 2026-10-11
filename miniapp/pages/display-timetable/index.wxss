@@ -1,0 +1,238 @@
+.count-row,
+.count-item,
+.orientation-options,
+.period-setting,
+.course-row,
+.weekday-tabs-inner {
+  display: flex;
+  align-items: center;
+}
+
+.orientation-options {
+  gap: 16rpx;
+}
+
+.orientation-option {
+  box-sizing: border-box;
+  width: calc(50% - 8rpx);
+  padding: 22rpx 18rpx;
+  border: 2rpx solid #dfe5df;
+  border-radius: 16rpx;
+  background: #ffffff;
+}
+
+.orientation-label,
+.orientation-description {
+  display: block;
+}
+
+.orientation-label {
+  color: #252525;
+  font-size: 27rpx;
+  font-weight: 650;
+}
+
+.orientation-description {
+  margin-top: 8rpx;
+  color: #747c74;
+  font-size: 21rpx;
+}
+
+.orientation-option-active {
+  border-color: #246b4b;
+  background: #edf7f0;
+  box-shadow: inset 0 0 0 2rpx #246b4b;
+}
+
+.orientation-option-active .orientation-label {
+  color: #246b4b;
+}
+
+.count-row {
+  gap: 20rpx;
+}
+
+.count-item {
+  box-sizing: border-box;
+  width: calc(50% - 10rpx);
+  justify-content: space-between;
+  padding: 20rpx;
+  border: 2rpx solid #dfe5df;
+  border-radius: 16rpx;
+}
+
+.count-label {
+  font-size: 28rpx;
+  font-weight: 650;
+}
+
+.picker-value,
+.time-value {
+  color: #246b4b;
+  font-weight: 650;
+}
+
+.help-text,
+.preview-tip,
+.preview-status {
+  display: block;
+  color: #747c74;
+  font-size: 22rpx;
+}
+
+.help-text {
+  margin-top: 18rpx;
+}
+
+.period-setting {
+  min-height: 78rpx;
+  border-bottom: 1rpx solid #edf0ed;
+}
+
+.period-setting:last-child {
+  border-bottom: 0;
+}
+
+.period-name {
+  width: 150rpx;
+  flex: 0 0 150rpx;
+  font-size: 25rpx;
+}
+
+.time-picker {
+  flex: 1;
+}
+
+.time-value {
+  padding: 15rpx 12rpx;
+  border-radius: 12rpx;
+  background: #f3f8f4;
+  text-align: center;
+}
+
+.time-separator {
+  padding: 0 12rpx;
+}
+
+.weekday-tabs {
+  width: 100%;
+  padding-bottom: 10rpx;
+  white-space: nowrap;
+}
+
+.weekday-tabs-inner {
+  display: inline-flex;
+  min-width: 100%;
+  gap: 12rpx;
+}
+
+.weekday-tab {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  min-width: 86rpx;
+  padding: 15rpx 13rpx;
+  border: 2rpx solid #dfe5df;
+  border-radius: 999rpx;
+  background: #ffffff;
+  color: #747c74;
+  font-size: 23rpx;
+  text-align: center;
+}
+
+.weekday-scroll-hint {
+  display: block;
+  margin: 2rpx 0 18rpx;
+  color: #747c74;
+  font-size: 21rpx;
+  text-align: center;
+}
+
+.weekday-tab-active {
+  border-color: #246b4b;
+  background: #246b4b;
+  color: #ffffff;
+}
+
+.lunch-divider {
+  margin: 18rpx 0 4rpx;
+  padding: 9rpx 0;
+  border-top: 2rpx solid #d99a00;
+  color: #a66b00;
+  font-size: 22rpx;
+  font-weight: 650;
+}
+
+.course-row {
+  min-height: 126rpx;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #edf0ed;
+}
+
+.course-time,
+.course-time text {
+  display: block;
+}
+
+.course-time {
+  width: 180rpx;
+  flex: 0 0 180rpx;
+  color: #747c74;
+  font-size: 20rpx;
+  line-height: 1.55;
+}
+
+.course-inputs {
+  min-width: 0;
+  flex: 1;
+}
+
+.course-input,
+.note-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 54rpx;
+  padding: 0 15rpx;
+  border: 2rpx solid #dfe5df;
+  border-radius: 12rpx;
+  background: #ffffff;
+}
+
+.course-input {
+  font-size: 25rpx;
+  font-weight: 650;
+}
+
+.note-input {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+}
+
+.save-button {
+  margin-top: 8rpx;
+}
+
+.preview-section {
+  margin-top: 36rpx;
+  padding-bottom: 40rpx;
+}
+
+.preview-tip {
+  margin-bottom: 18rpx;
+}
+
+.preview-status {
+  padding: 36rpx 0;
+  text-align: center;
+}
+
+.timetable-preview {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border: 2rpx solid #252525;
+  background: #ffffff;
+}
+
+.retry-button {
+  margin-top: 18rpx;
+}

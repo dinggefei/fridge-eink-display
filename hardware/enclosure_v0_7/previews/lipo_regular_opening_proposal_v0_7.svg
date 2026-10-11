@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto-start-reverse">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#425a54"/>
+    </marker>
+    <style>
+      .title { font: 700 42px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #173b33; }
+      .subtitle { font: 400 24px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #50645f; }
+      .panel-title { font: 700 30px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #173b33; }
+      .label { font: 500 23px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #243f39; }
+      .small { font: 400 20px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #60736e; }
+      .dim { font: 600 22px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; fill: #425a54; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="#f5f3ed"/>
+  <text x="60" y="70" class="title">V0.7 后盖：Lipo Rider 开口修改示意</text>
+  <text x="60" y="112" class="subtitle">本图仅用于确认形状，不修改 STL</text>
+
+  <rect x="45" y="150" width="520" height="650" rx="28" fill="#ffffff" stroke="#c9d5d1" stroke-width="3"/>
+  <rect x="635" y="150" width="520" height="650" rx="28" fill="#ffffff" stroke="#88aa9f" stroke-width="4"/>
+
+  <text x="80" y="205" class="panel-title">现在：连续异形开口</text>
+  <text x="670" y="205" class="panel-title">建议：一个规则圆角长方形</text>
+
+  <!-- rear-cover skin -->
+  <rect x="190" y="245" width="230" height="480" rx="22" fill="#b8c6c1" stroke="#879993" stroke-width="3"/>
+  <rect x="780" y="245" width="230" height="480" rx="22" fill="#b8c6c1" stroke="#879993" stroke-width="3"/>
+
+  <!-- Current Rev H opening, proportionally based on 4.5 x 12 and 3.8 x 7 mm with 1 mm offset -->
+  <rect x="262" y="285" width="90" height="240" rx="30" fill="#ffffff"/>
+  <path d="M302 508 L322 508 L302 565 L282 565 Z" fill="#ffffff"/>
+  <rect x="282" y="548" width="76" height="140" rx="20" fill="#ffffff"/>
+  <text x="205" y="758" class="small">上下宽度不同，并存在约 1 mm 横向错位</text>
+
+  <!-- Proposed regular opening, exact union envelope rounded to 5.2 x 21 mm -->
+  <rect x="843" y="268" width="104" height="420" rx="20" fill="#ffffff" stroke="#e3a500" stroke-width="4"/>
+  <line x1="843" y1="238" x2="947" y2="238" stroke="#425a54" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="843" y1="246" x2="843" y2="228" stroke="#425a54" stroke-width="2"/>
+  <line x1="947" y1="246" x2="947" y2="228" stroke="#425a54" stroke-width="2"/>
+  <text x="868" y="220" class="dim">5.2 mm</text>
+
+  <line x1="979" y1="268" x2="979" y2="688" stroke="#425a54" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="957" y1="268" x2="991" y2="268" stroke="#425a54" stroke-width="2"/>
+  <line x1="957" y1="688" x2="991" y2="688" stroke="#425a54" stroke-width="2"/>
+  <text x="998" y="487" class="dim">21.0 mm</text>
+
+  <circle cx="895" cy="350" r="8" fill="#dc332c"/>
+  <circle cx="895" cy="390" r="8" fill="#dc332c"/>
+  <circle cx="895" cy="430" r="8" fill="#dc332c"/>
+  <circle cx="895" cy="470" r="8" fill="#dc332c"/>
+  <circle cx="895" cy="510" r="8" fill="#dc332c"/>
+  <rect x="879" y="590" width="32" height="54" rx="6" fill="#3c4d48"/>
+  <text x="716" y="758" class="small">同一宽度、同一中心线、四边连续，圆角 R1.0 mm</text>
+
+  <rect x="60" y="825" width="1080" height="52" rx="15" fill="#e7efe9"/>
+  <text x="86" y="859" class="label">拟确认方案：规则开口净尺寸 5.2 × 21.0 mm，圆角 R1.0 mm，覆盖全部 LED 和 SW1 操作范围。</text>
+</svg>

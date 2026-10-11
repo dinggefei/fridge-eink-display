@@ -1,0 +1,79 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">全部食材</text>
+    <text class="page-subtitle">数据版本 {{revision}} · 优先显示最早建议食用批次</text>
+  </view>
+
+  <view class="top-actions">
+    <button class="primary-button add-button" bindtap="goToAdd">新增食材</button>
+    <button class="secondary-button history-button" bindtap="goToHistory">操作历史</button>
+  </view>
+
+  <scroll-view class="filter-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="filter-row">
+      <view
+        wx:for="{{filters}}"
+        wx:key="value"
+        class="filter-chip {{selectedFilter === item.value ? 'filter-chip-active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="selectFilter"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="card state-card" wx:if="{{loading}}">
+    <text class="muted">正在读取库存…</text>
+  </view>
+
+  <view class="card state-card" wx:elif="{{errorMessage}}">
+    <text class="status-red">{{errorMessage}}</text>
+    <button class="secondary-button retry-button" bindtap="loadInventory">重新加载</button>
+  </view>
+
+  <view class="card state-card" wx:elif="{{foods.length === 0}}">
+    <text class="muted">当前筛选条件下没有食材。</text>
+  </view>
+
+  <view class="card inventory-card" wx:else>
+    <view class="inventory-row" wx:for="{{foods}}" wx:key="id">
+      <view class="inventory-main">
+        <text class="inventory-name">{{item.name}}</text>
+        <text class="inventory-meta">{{item.locationLabel}} · {{item.quantityText}}</text>
+      </view>
+      <view class="inventory-actions">
+        <text class="inventory-status {{item.statusClass}}">{{item.statusText}}</text>
+        <view class="row-links">
+          <text
+            class="consume-link"
+            data-id="{{item.id}}"
+            data-name="{{item.name}}"
+            data-quantity="{{item.quantity}}"
+            data-action="consume"
+            bindtap="applyOperation"
+          >消耗</text>
+          <text
+            class="discard-link"
+            data-id="{{item.id}}"
+            data-name="{{item.name}}"
+            data-quantity="{{item.quantity}}"
+            data-action="discard"
+            bindtap="applyOperation"
+          >丢弃</text>
+          <text
+            class="edit-link"
+            data-id="{{item.id}}"
+            bindtap="goToEdit"
+          >编辑</text>
+          <text
+            class="delete-link"
+            data-id="{{item.id}}"
+            data-name="{{item.name}}"
+            bindtap="deleteItem"
+          >删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

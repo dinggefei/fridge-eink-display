@@ -1,0 +1,329 @@
+{
+  "design": "RefrigeratorFoodManagement V0.9 ultrathin enclosure prototype",
+  "units": "mm",
+  "status": "engineering prototype; print all required coupons before full shell",
+  "preserves": [
+    "V0.7 source and generated files remain unchanged",
+    "120 x 184 mm outer footprint",
+    "V0.7 front opening and XY component layout",
+    "two 90 x 50 x 2 mm plus one 50 x 20 x 2 mm flexible magnets",
+    "0.6 mm PLA skin outside the magnets",
+    "V0.7 USB-C opening size 11.5 x 7.5 mm"
+  ],
+  "target_outer_size": [
+    120.0,
+    184.0,
+    15.0
+  ],
+  "front": {
+    "face_thickness": 1.0,
+    "local_post_root_reinforcement": "tapered R4.0 to R2.6, 0.8 mm high",
+    "feature_depth": 4.6,
+    "screen_locator_depth": 1.8
+  },
+  "carrier": {
+    "thickness": 1.2,
+    "battery_local_floor": 0.6,
+    "assembled_z_from_front_outer_face": 2.6,
+    "esp_post_top": 2.6,
+    "lipo_post_top": 1.8,
+    "lipo_under_board_clearance": 0.6,
+    "lipo_post_diameter": 6.2,
+    "lipo_post_centers_xy": [
+      [
+        15.788,
+        77.149
+      ],
+      [
+        -4.739,
+        77.149
+      ],
+      [
+        15.788,
+        49.59
+      ],
+      [
+        -4.739,
+        49.59
+      ]
+    ]
+  },
+  "rear": {
+    "depth": 14.0,
+    "normal_skin": 1.0,
+    "magnet_outer_skin": 0.6,
+    "left_restored_band_thickness": 1.2,
+    "button_access_holes": [],
+    "integrated_buttons": [
+      "BOOT",
+      "RESET"
+    ],
+    "button_centers_xy": {
+      "BOOT": [
+        50.146,
+        14.905
+      ],
+      "RESET": [
+        34.758,
+        14.678
+      ]
+    },
+    "button_type": "semi-enclosed 270-degree arc slot with 90-degree upper hinge",
+    "button_union_overlap_diameter": 7.4,
+    "button_center_island_diameter": 4.6,
+    "button_arc_slot": {
+      "width": 0.8,
+      "inner_diameter": 4.6,
+      "outer_diameter": 6.199999999999999,
+      "open_arc_degrees": 270.0
+    },
+    "button_hinge": {
+      "connected_arc_degrees": 90.0,
+      "direction": "positive model Y / upper side",
+      "thickness": 0.4
+    },
+    "button_plunger_diameter": 1.8,
+    "button_plunger_projection_from_inner_face": 4.5,
+    "button_plunger_tip_chamfer": 0.2,
+    "button_plunger_tip_diameter": 1.4,
+    "button_plunger_tip_model_z": 5.5,
+    "button_resting_clearance": 0.7,
+    "button_stack_calculation": {
+      "rear_inner_global_z": 14.0,
+      "esp_board_underside_global_z": 5.199999999999999,
+      "esp_pcb_thickness": 1.6,
+      "switch_height_above_pcb": 2.0,
+      "switch_top_global_z": 8.799999999999999,
+      "unpressed_gap": 5.200000000000001
+    },
+    "engraved_button_labels": [],
+    "removed_engraved_button_labels": [
+      "BOOT",
+      "RESET"
+    ],
+    "former_button_label_regions_xy": {
+      "BOOT": [
+        44.506,
+        19.115,
+        55.786,
+        22.695
+      ],
+      "RESET": [
+        27.668,
+        18.888,
+        41.848,
+        22.468
+      ]
+    }
+  },
+  "lipo_indicator_opening": {
+    "width": 5.2,
+    "total_height": 18.0,
+    "straight_length": 16.0,
+    "corner_radius": 1.0,
+    "model_center": [
+      -16.084,
+      64.838
+    ],
+    "lower_edge_y": 55.838,
+    "upper_edge_y": 73.838,
+    "lower_edge_preserved": true,
+    "upper_edge_reduction": 3.0
+  },
+  "usb_c_opening": {
+    "size": [
+      11.5,
+      7.5
+    ],
+    "model_center": [
+      0.0,
+      91.0,
+      6.6
+    ],
+    "lipo_usb_face_xy": [
+      0.0,
+      88.8
+    ],
+    "calculation": {
+      "carrier_assembled_z": 2.6,
+      "lipo_board_mount_z": 1.7999999999999998,
+      "connector_center_above_board": 4.0,
+      "connector_global_z": 8.4,
+      "rear_model_z": 6.6
+    }
+  },
+  "clearances": {
+    "battery_to_magnet_pocket": 0.8,
+    "m2x12_estimated_engagement": 3.2
+  },
+  "print_material": "PLA, 0.4 mm nozzle",
+  "required_coupons": [
+    "fit_test_front_corner_v0_9_1p0mm.stl",
+    "fit_test_usb_c_opening_11p5x7p5_v0_9.stl",
+    "fit_test_boot_reset_buttons_4p5mm_v0_9.stl",
+    "fit_test_lipo_indicator_opening_5p2x18_v0_9.stl"
+  ],
+  "parts": [
+    {
+      "file": "front_bezel_v0_9_1p0mm.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          -60.0,
+          -92.0,
+          0.0
+        ],
+        [
+          60.0,
+          92.0,
+          4.6
+        ]
+      ],
+      "extents_mm": [
+        120.0,
+        184.0,
+        4.6
+      ],
+      "volume_mm3": 7813.187,
+      "triangles": 5182
+    },
+    {
+      "file": "electronics_carrier_v0_9_1p2mm.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          -57.7,
+          -89.7,
+          0.0
+        ],
+        [
+          57.7,
+          89.7,
+          3.7
+        ]
+      ],
+      "extents_mm": [
+        115.4,
+        179.4,
+        3.7
+      ],
+      "volume_mm3": 21934.115,
+      "triangles": 4100
+    },
+    {
+      "file": "rear_cover_v0_9_15p0mm.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          -60.0,
+          -92.0,
+          0.0
+        ],
+        [
+          60.0,
+          92.0,
+          14.0
+        ]
+      ],
+      "extents_mm": [
+        120.0,
+        184.0,
+        14.0
+      ],
+      "volume_mm3": 33718.486,
+      "triangles": 8726
+    },
+    {
+      "file": "fit_test_front_corner_v0_9_1p0mm.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          35.0,
+          37.0,
+          4.6
+        ]
+      ],
+      "extents_mm": [
+        35.0,
+        37.0,
+        4.6
+      ],
+      "volume_mm3": 811.549,
+      "triangles": 1308
+    },
+    {
+      "file": "fit_test_usb_c_opening_11p5x7p5_v0_9.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          20.0,
+          8.0,
+          14.0
+        ]
+      ],
+      "extents_mm": [
+        20.0,
+        8.0,
+        14.0
+      ],
+      "volume_mm3": 530.35,
+      "triangles": 48
+    },
+    {
+      "file": "fit_test_boot_reset_buttons_4p5mm_v0_9.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          30.5,
+          13.5,
+          5.5
+        ]
+      ],
+      "extents_mm": [
+        30.5,
+        13.5,
+        5.5
+      ],
+      "volume_mm3": 409.982,
+      "triangles": 2596
+    },
+    {
+      "file": "fit_test_lipo_indicator_opening_5p2x18_v0_9.stl",
+      "watertight": true,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          39.0,
+          37.0,
+          14.0
+        ]
+      ],
+      "extents_mm": [
+        39.0,
+        37.0,
+        14.0
+      ],
+      "volume_mm3": 2219.938,
+      "triangles": 260
+    }
+  ]
+}

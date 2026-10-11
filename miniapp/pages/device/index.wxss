@@ -1,0 +1,189 @@
+.step-row {
+  display: flex;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.step-row:last-child {
+  border-bottom: 0;
+}
+
+.step-number {
+  display: flex;
+  width: 52rpx;
+  height: 52rpx;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e5f0e9;
+  color: #246b4b;
+  font-weight: 700;
+}
+
+.step-content {
+  margin-left: 20rpx;
+}
+
+.step-title,
+.step-description {
+  display: block;
+}
+
+.step-title {
+  font-weight: 600;
+}
+
+.step-description {
+  margin-top: 6rpx;
+  color: #858c84;
+  font-size: 23rpx;
+}
+
+.device-tip {
+  display: block;
+  margin-top: 20rpx;
+  text-align: center;
+  color: #858c84;
+  font-size: 23rpx;
+}
+
+.form-card {
+  padding-bottom: 12rpx;
+}
+
+.field-label {
+  display: block;
+  margin: 8rpx 0 12rpx;
+  color: #4e574f;
+  font-size: 25rpx;
+  font-weight: 600;
+}
+
+.field-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 88rpx;
+  margin-bottom: 24rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid #d8dfd8;
+  border-radius: 16rpx;
+  background: #fafcf9;
+}
+
+.password-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.password-label {
+  margin-top: 0;
+}
+
+.password-toggle {
+  color: #246b4b;
+  font-size: 24rpx;
+}
+
+.binding-status {
+  margin: 0 0 20rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 16rpx;
+  background: #ffffff;
+  text-align: center;
+}
+
+.code-warning {
+  border: 1rpx solid #ead29b;
+  background: #fff8e7;
+  color: #8a5a00;
+}
+
+.bound-device {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.bound-device:last-child {
+  border-bottom: 0;
+}
+
+.bound-device-code,
+.bound-device-state {
+  display: block;
+}
+
+.bound-device-code {
+  font-weight: 600;
+}
+
+.bound-device-state {
+  margin-top: 6rpx;
+  font-size: 23rpx;
+}
+
+.unbind-button {
+  border: 1rpx solid #e2c7c3;
+  background: #ffffff;
+  color: #b8352d;
+}
+
+.device-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.code-button {
+  border: 1rpx solid #c4d8cb;
+  background: #ffffff;
+  color: #246b4b;
+}
+
+.entry-state-card {
+  padding: 60rpx 36rpx;
+  text-align: center;
+}
+
+.entry-state-icon {
+  display: flex;
+  width: 92rpx;
+  height: 92rpx;
+  margin: 0 auto 28rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e5f0e9;
+  color: #246b4b;
+  font-size: 42rpx;
+  font-weight: 700;
+}
+
+.entry-state-warning {
+  background: #f8e9e6;
+  color: #b8352d;
+}
+
+.entry-state-title,
+.entry-state-description {
+  display: block;
+}
+
+.entry-state-title {
+  line-height: 1.7;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.entry-state-description {
+  margin-top: 14rpx;
+  color: #858c84;
+  font-size: 24rpx;
+}
+
+.entry-secondary-button {
+  margin-top: 18rpx;
+}

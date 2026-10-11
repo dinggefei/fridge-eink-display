@@ -1,0 +1,56 @@
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24rpx 12rpx;
+}
+
+.metric {
+  text-align: center;
+}
+
+.metric-value,
+.metric-label {
+  display: block;
+}
+
+.metric-value {
+  color: #246b4b;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.metric-label {
+  margin-top: 6rpx;
+  color: #858c84;
+  font-size: 21rpx;
+}
+
+.task-row {
+  padding: 22rpx 0;
+  border-top: 1rpx solid #eef1ed;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-source {
+  font-weight: 650;
+}
+
+.task-input,
+.task-meta {
+  display: block;
+  margin-top: 9rpx;
+}
+
+.task-input {
+  line-height: 1.6;
+}
+
+.task-meta {
+  color: #858c84;
+  font-size: 22rpx;
+}

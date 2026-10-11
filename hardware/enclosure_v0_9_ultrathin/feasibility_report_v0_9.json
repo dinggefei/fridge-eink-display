@@ -1,0 +1,59 @@
+{
+  "design": "V0.9 ultrathin layout study",
+  "status": "ENGINEERING PROTOTYPE STL GENERATED - COUPONS REQUIRED",
+  "preserves": [
+    "hardware/enclosure_v0_7 remains unchanged",
+    "120 x 184 mm exterior footprint",
+    "current V0.7 component and magnet XY positions for the 15.0 mm proposal",
+    "two 90 x 50 x 2 mm and one 50 x 20 x 2 mm flexible magnets",
+    "0.4 mm PLA skin outside the magnets"
+  ],
+  "key_result_mm": {
+    "with_existing_1p0_tape_formal_minimum": 15.8,
+    "with_0p2_transfer_tape_formal_target": 15.0,
+    "with_0p2_transfer_tape_prototype_limit": 14.8,
+    "with_0p2_tape_and_1p0_magnets_prototype": 13.8
+  },
+  "recommended_15p0_stack_mm": {
+    "front_frame_locator_and_carrier_datum": 2.6,
+    "battery_carrier_floor_tape_and_cell": 8.6,
+    "battery_clearance": 1.2,
+    "magnet_adhesive_and_outer_skin": 2.6,
+    "total": 15.0
+  },
+  "available_heights_mm": {
+    "normal_zone": 11.6,
+    "magnet_zone": 9.8
+  },
+  "component_stacks_mm": {
+    "battery_with_0p2_tape": 8.6,
+    "esp32_revised_solderless_mount": 10.2,
+    "lipo_rider_low_mount": 9.7,
+    "despi_c02_low_mount": 4.8
+  },
+  "component_clearances_mm": {
+    "battery_in_magnet_zone": 1.2,
+    "esp32_normal_zone": 1.4,
+    "lipo_rider_normal_zone": 1.9,
+    "despi_c02_in_magnet_zone": 5.0
+  },
+  "m2x12_fastener_study_mm": {
+    "screw_length": 12.0,
+    "counterbore_depth": 1.6,
+    "front_post_top_from_front_outer_face": 4.6,
+    "estimated_engagement": 3.2
+  },
+  "physical_gates_before_full_print": [
+    "print and pass the 1.0 mm front corner and M2 x 12 fastener coupon",
+    "print and pass the 11.5 x 7.5 mm USB-C opening coupon with the installed low Lipo Rider mount",
+    "replace 1.0 mm battery foam tape with <=0.2 mm acrylic transfer tape",
+    "verify the actual maximum battery thickness including protection board and folded wire exit",
+    "verify that the revised solderless ESP32 terminal clamp leaves 1.4 mm below the PCB without exposing conductive pins"
+  ],
+  "stop_conditions": [
+    "battery plus selected adhesive measures above 8.2 mm at any point",
+    "ESP32 revised clamp needs more than 1.4 mm below the PCB",
+    "any conductive terminal can touch the carrier or display backplane",
+    "M2 x 12 screw bottoms out or produces less than 3.0 mm thread engagement"
+  ]
+}

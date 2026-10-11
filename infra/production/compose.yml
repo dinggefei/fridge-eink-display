@@ -1,0 +1,182 @@
+name: refrigerator-food-management
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB is required}
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    command:
+      - postgres
+      - -c
+      - shared_buffers=128MB
+      - -c
+      - effective_cache_size=384MB
+      - -c
+      - work_mem=4MB
+      - -c
+      - maintenance_work_mem=64MB
+      - -c
+      - max_connections=50
+    shm_size: 128mb
+    mem_limit: 512m
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - internal
+
+  recognition-storage-init:
+    image: refrigerator-food-management-backend:local
+    user: "0:0"
+    command:
+      - sh
+      - -c
+      - >-
+        mkdir -p /app/data/recognition
+        && chown -R 10001:10001 /app/data/recognition
+    restart: "no"
+    volumes:
+      - recognition_tmp:/app/data/recognition
+    networks:
+      - internal
+
+  firmware-storage-init:
+    image: refrigerator-food-management-backend:local
+    user: "0:0"
+    command:
+      - sh
+      - -c
+      - >-
+        mkdir -p /app/data/firmware-releases
+        && chown -R 10001:10001 /app/data/firmware-releases
+    restart: "no"
+    volumes:
+      - firmware_releases:/app/data/firmware-releases
+    networks:
+      - internal
+
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+      args:
+        PYPI_INDEX_URL: ${PYPI_INDEX_URL:-https://pypi.org/simple}
+    image: refrigerator-food-management-backend:local
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: >-
+        postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      RECOGNITION_UPLOAD_DIR: /app/data/recognition
+      OTA_FIRMWARE_STORAGE_DIR: /app/data/firmware-releases
+    command:
+      - sh
+      - -c
+      - alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      recognition-storage-init:
+        condition: service_completed_successfully
+      firmware-storage-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:8000:8000"
+    mem_limit: 640m
+    volumes:
+      - recognition_tmp:/app/data/recognition
+      - firmware_releases:/app/data/firmware-releases
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          urllib.request.urlopen("http://127.0.0.1:8000/health", timeout=3)
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - internal
+
+  recognition-worker:
+    image: refrigerator-food-management-backend:local
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: >-
+        postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      RECOGNITION_UPLOAD_DIR: /app/data/recognition
+      OTA_FIRMWARE_STORAGE_DIR: /app/data/firmware-releases
+    command:
+      - python
+      - -m
+      - app.worker
+    depends_on:
+      backend:
+        condition: service_healthy
+    mem_limit: 384m
+    volumes:
+      - recognition_tmp:/app/data/recognition
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - internal
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      API_DOMAIN: ${API_DOMAIN:?API_DOMAIN is required}
+      ACME_EMAIL: ${ACME_EMAIL:?ACME_EMAIL is required}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+    mem_limit: 128m
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - internal
+
+networks:
+  internal:
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:
+  recognition_tmp:
+  firmware_releases:

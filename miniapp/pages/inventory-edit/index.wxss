@@ -1,0 +1,40 @@
+.form-card {
+  padding-bottom: 12rpx;
+}
+
+.field-label {
+  display: block;
+  margin: 4rpx 0 10rpx;
+  color: #596159;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.field-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 82rpx;
+  margin-bottom: 24rpx;
+  padding: 18rpx 22rpx;
+  border: 1rpx solid #dbe1db;
+  border-radius: 16rpx;
+  background: #fafbf9;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+}
+
+.picker-value {
+  color: #26342b;
+  line-height: 44rpx;
+}
+
+.rule-button {
+  margin-top: 18rpx;
+  border: 1rpx solid #cfd8d1;
+  background: #ffffff;
+  color: #246b4b;
+}

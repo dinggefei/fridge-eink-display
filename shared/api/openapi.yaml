@@ -1,0 +1,1808 @@
+openapi: 3.1.0
+info:
+  title: RefrigeratorFoodManagement API
+  version: 0.1.0
+  description: 微信小程序、服务端与 ESP32 设备共同使用的 MVP API 基线。
+servers:
+  - url: https://api.example.com
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      tags: [system]
+      responses:
+        "200":
+          description: 服务正常
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+  /v1/auth/wechat:
+    post:
+      operationId: loginWithWechat
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [code]
+              properties:
+                code:
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+      responses:
+        "200":
+          description: 微信 code 已换取应用登录态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          description: 微信拒绝该 code
+        "503":
+          description: 后端未配置微信登录或微信服务暂不可用
+  /v1/auth/dev-login:
+    post:
+      operationId: loginForLocalDevelopment
+      tags: [auth]
+      description: 仅限本机开发；生产环境必须禁用。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                nickname:
+                  type: string
+                  default: 本地开发用户
+      responses:
+        "200":
+          description: 返回本地开发登录态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "404":
+          description: 开发登录已禁用
+  /v1/me:
+    get:
+      operationId: getCurrentSession
+      tags: [auth]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: 当前用户和可访问的家庭空间
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          description: 登录态缺失、无效或已过期
+    delete:
+      operationId: deletePersonalAccount
+      tags: [privacy]
+      description: >-
+        匿名化微信身份并删除个人偏好和识别任务；仅由当前用户管理且没有其他
+        成员的家庭会一并删除，绑定设备解除家庭归属。
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: 个人账号和相关数据已删除，当前登录态立即失效
+        "409":
+          description: 用户管理的家庭仍有其他成员，必须先处理成员关系
+  /v1/households/{householdId}/leave:
+    post:
+      operationId: leaveHousehold
+      tags: [privacy]
+      description: 普通成员退出当前家庭并自动切换到仍保留的家庭。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 已退出家庭并返回新的登录态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "409":
+          description: 当前用户是管理员，或退出后将没有任何可用家庭
+  /v1/households/{householdId}/inventory:
+    get:
+      operationId: listInventory
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - name: location
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/StorageLocation"
+      responses:
+        "200":
+          description: 当前家庭库存，按到期优先级排序
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryListResponse"
+    post:
+      operationId: createInventoryItem
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryItemWrite"
+      responses:
+        "201":
+          description: 创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryItem"
+        "422":
+          description: 输入校验失败
+  /v1/households/{householdId}/inventory/{itemId}:
+    put:
+      operationId: replaceInventoryItem
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/InventoryItemId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryItemWrite"
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryItem"
+        "404":
+          description: 食材不存在
+    delete:
+      operationId: deleteInventoryItem
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/InventoryItemId"
+      responses:
+        "204":
+          description: 删除成功
+        "404":
+          description: 食材不存在
+  /v1/households/{householdId}/inventory/settings/household:
+    put:
+      operationId: renameHousehold
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 40
+      responses:
+        "200":
+          description: 家庭名称已更新
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryListResponse"
+        "403":
+          description: 只有家庭管理员可以修改冰箱名称
+  /v1/households/{householdId}/inventory/settings/display-todos:
+    get:
+      operationId: getDisplayTodos
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 返回当前家庭的水墨屏待办
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayTodosResponse"
+    put:
+      operationId: replaceDisplayTodos
+      tags: [inventory]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [items]
+              properties:
+                items:
+                  type: array
+                  maxItems: 10
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 40
+      responses:
+        "200":
+          description: 水墨屏待办已保存，设备下一轮询将取得新画面
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayTodosResponse"
+        "403":
+          description: 当前用户不是该家庭的有效成员
+  /v1/households/{householdId}/display-settings:
+    get:
+      operationId: getDisplaySettings
+      tags: [display-settings]
+      description: 返回当前互斥显示模式、今日黄历预览、相册、行情及课程表可用状态。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 家庭水墨屏显示设置
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplaySettingsResponse"
+        "403":
+          description: 当前用户不是该家庭的有效成员
+    put:
+      operationId: updateDisplaySettings
+      tags: [display-settings]
+      description: 家庭管理员和普通成员均可切换食材、黄历、天气、课程表、行情或独立相册模式。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisplaySettingsWrite"
+      responses:
+        "200":
+          description: 显示模式已更新，设备下一轮询将取得对应画面
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplaySettingsResponse"
+        "409":
+          description: 尚无确认照片、自选资产或课程，不能开启对应显示模式
+  /v1/households/{householdId}/display-settings/weather-preview:
+    get:
+      operationId: previewWeatherWeek
+      tags: [display-settings]
+      description: 家庭成员获取与实体屏一致的七日天气竖版预览，共享三小时缓存；失败显示缓存或占位提示。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 480×800 PNG 图片，Cache-Control 为 private, no-store
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "401":
+          description: 未登录
+        "404":
+          description: 无权访问家庭
+  /v1/households/{householdId}/display-settings/weather-locations:
+    get:
+      operationId: searchWeatherLocations
+      tags: [display-settings]
+      description: 搜索中国城市，供家庭成员选择黄历天气位置。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 40
+      responses:
+        "200":
+          description: 匹配的城市列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WeatherLocation"
+        "503":
+          description: 天气服务未配置或暂时不可用
+  /v1/households/{householdId}/display-settings/weather:
+    put:
+      operationId: updateAlmanacWeather
+      tags: [display-settings]
+      description: 家庭管理员和普通成员均可选择城市并启停黄历天气。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WeatherSettingsWrite"
+      responses:
+        "200":
+          description: 天气设置已保存
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplaySettingsResponse"
+        "422":
+          description: 启用天气前未选择城市
+        "503":
+          description: 天气服务未配置
+  /v1/households/{householdId}/display-timetable:
+    get:
+      operationId: getDisplayTimetable
+      tags: [display-timetable]
+      description: 家庭成员读取每周课程、自定义上午下午节数和每节课时间。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 当前家庭课程表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimetableResponse"
+        "404":
+          description: 无权访问家庭
+    put:
+      operationId: replaceDisplayTimetable
+      tags: [display-timetable]
+      description: 家庭管理员和普通成员均可整体保存课程节次、时间、课程名称和简短备注。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimetableWrite"
+      responses:
+        "200":
+          description: 课程表已保存，设备下一轮询将取得新画面
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimetableResponse"
+        "422":
+          description: 时间重叠、节数超限或课程内容无效
+  /v1/households/{householdId}/display-timetable/preview:
+    get:
+      operationId: previewDisplayTimetable
+      tags: [display-timetable]
+      description: 按家庭保存的方向返回竖屏三日或横屏一周课程表预览。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 竖屏为 480×800，横屏为 800×480 的四色 PNG 图片
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /v1/households/{householdId}/display-market:
+    get:
+      operationId: getDisplayMarket
+      tags: [display-market]
+      description: 返回家庭行情设置、自选资产、缓存报价和可选资产目录。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 家庭行情看板
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketDashboardResponse"
+        "403":
+          description: 当前用户不是该家庭的有效成员
+    put:
+      operationId: updateDisplayMarket
+      tags: [display-market]
+      description: 家庭管理员和普通成员均可更新自选资产、顺序和刷新策略。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MarketDashboardWrite"
+      responses:
+        "200":
+          description: 行情看板设置已更新
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketDashboardResponse"
+        "422":
+          description: 超过6项、存在重复项或资产不在支持目录中
+  /v1/households/{householdId}/display-market/search:
+    get:
+      operationId: searchDisplayMarketAssets
+      tags: [display-market]
+      description: 按数字货币、美股、A股或港股分类搜索可添加的行情标的。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - name: asset_type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [crypto, us_stock, cn_stock, hk_stock]
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 40
+      responses:
+        "200":
+          description: 最多20个匹配结果
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 20
+                items:
+                  $ref: "#/components/schemas/MarketSearchResult"
+        "503":
+          description: 上游行情搜索暂时不可用
+  /v1/households/{householdId}/display-market/assets:
+    post:
+      operationId: addDisplayMarketAsset
+      tags: [display-market]
+      description: 校验搜索结果并添加到当前水墨屏行情列表。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MarketAssetCreate"
+      responses:
+        "201":
+          description: 资产已添加
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketDashboardResponse"
+        "409":
+          description: 资产已在当前展示列表中
+        "422":
+          description: 资产无效或已经达到6项上限
+        "503":
+          description: 上游行情校验暂时不可用
+  /v1/households/{householdId}/display-market/assets/{assetId}:
+    delete:
+      operationId: deleteDisplayMarketAsset
+      tags: [display-market]
+      description: 从当前展示列表删除一项；删除最后一项时自动切回食材模式。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - name: assetId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 资产已删除
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketDashboardResponse"
+        "404":
+          description: 资产不存在或不属于当前家庭
+  /v1/households/{householdId}/display-album:
+    get:
+      operationId: getDisplayAlbum
+      tags: [display-album]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 返回当前家庭的显示模式、轮播设置和照片清单
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayAlbumResponse"
+        "403":
+          description: 当前用户不是该家庭的有效成员
+  /v1/households/{householdId}/display-album/photos:
+    post:
+      operationId: uploadDisplayPhoto
+      tags: [display-album]
+      description: >-
+        接收单张 JPG 或 PNG，在内存中裁切为 3:5 并转换为黑白黄红四色 PNG；
+        仅保存处理结果，照片在用户确认前不会加入轮播。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image]
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: 返回待确认的四色预览
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayPhoto"
+        "409":
+          description: 当前家庭已达到 6 张照片上限
+        "413":
+          description: 图片超过 5 MB
+        "415":
+          description: 图片不是 JPG 或 PNG
+        "422":
+          description: 图片损坏或无法处理
+  /v1/households/{householdId}/display-album/photos/{photoId}/image:
+    get:
+      operationId: getDisplayPhotoImage
+      tags: [display-album]
+      description: 通过家庭成员权限校验后返回私有存储中的四色预览。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/DisplayPhotoId"
+      responses:
+        "200":
+          description: 480×800 黑白黄红四色 PNG
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: 照片不存在
+  /v1/households/{householdId}/display-album/photos/{photoId}/confirm:
+    post:
+      operationId: confirmDisplayPhoto
+      tags: [display-album]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/DisplayPhotoId"
+      responses:
+        "200":
+          description: 照片已确认并加入轮播
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayAlbumResponse"
+        "404":
+          description: 照片不存在
+  /v1/households/{householdId}/display-album/photos/{photoId}:
+    delete:
+      operationId: deleteDisplayPhoto
+      tags: [display-album]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/DisplayPhotoId"
+      responses:
+        "200":
+          description: 照片已永久删除；删除最后一张确认照片时自动回到食材清单模式
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayAlbumResponse"
+        "404":
+          description: 照片不存在
+  /v1/households/{householdId}/display-album/order:
+    put:
+      operationId: replaceDisplayPhotoOrder
+      tags: [display-album]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisplayPhotoOrderWrite"
+      responses:
+        "200":
+          description: 轮播顺序已更新
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayAlbumResponse"
+        "409":
+          description: 照片清单已变化，需要重新加载
+  /v1/households/{householdId}/display-album/settings:
+    put:
+      operationId: updateDisplayAlbumSettings
+      tags: [display-album]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisplayAlbumSettingsWrite"
+      responses:
+        "200":
+          description: 显示模式、轮播周期或当前照片已更新
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisplayAlbumResponse"
+        "409":
+          description: 尚无确认照片，不能开启相册模式
+        "422":
+          description: 轮播周期不是 6、12 或 24 小时
+  /v1/households/{householdId}/quick-entry/parse:
+    post:
+      operationId: parseQuickEntry
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "201":
+          description: 返回待用户确认的结构化新增、消耗或丢弃操作
+        "503":
+          description: 模型服务暂不可用
+  /v1/households/{householdId}/quick-entry/{taskId}/confirm:
+    post:
+      operationId: confirmQuickEntry
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/RecognitionTaskId"
+      responses:
+        "200":
+          description: 确认操作已事务性写入库存
+        "409":
+          description: 库存版本已变化，需要重新解析
+  /v1/households/{householdId}/imports:
+    post:
+      operationId: createOrderImport
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "201":
+          description: 创建订单图片识别任务
+  /v1/households/{householdId}/imports/{taskId}/images:
+    post:
+      operationId: uploadOrderImage
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/RecognitionTaskId"
+      responses:
+        "201":
+          description: 图片验证、去除元数据并保存到临时存储
+        "422":
+          description: 图片损坏、超限或格式不支持
+  /v1/households/{householdId}/imports/{taskId}/start:
+    post:
+      operationId: startOrderImport
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/RecognitionTaskId"
+      responses:
+        "200":
+          description: 识别任务已进入处理队列
+  /v1/households/{householdId}/imports/{taskId}:
+    get:
+      operationId: getOrderImport
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/RecognitionTaskId"
+      responses:
+        "200":
+          description: 返回任务状态或待确认商品清单
+  /v1/households/{householdId}/imports/{taskId}/confirm:
+    post:
+      operationId: confirmOrderImport
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/RecognitionTaskId"
+      responses:
+        "200":
+          description: 选中商品已一次性批量入库
+        "409":
+          description: 任务状态或库存版本冲突
+  /v1/households/{householdId}/imports/{taskId}/cancel:
+    post:
+      operationId: cancelOrderImport
+      tags: [recognition]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/RecognitionTaskId"
+      responses:
+        "200":
+          description: 任务取消且临时图片已删除
+  /v1/households/{householdId}/devices:
+    get:
+      operationId: listHouseholdDevices
+      tags: [device]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      responses:
+        "200":
+          description: 返回当前家庭已绑定设备
+  /v1/households/{householdId}/devices/provisioning-sessions:
+    post:
+      operationId: createDeviceProvisioningSession
+      tags: [device]
+      description: 仅家庭管理员可创建；Wi-Fi 配置只在设备密钥加密后返回。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [device_code, challenge, wifi_ssid]
+              properties:
+                device_code:
+                  type: string
+                  minLength: 3
+                  maxLength: 64
+                challenge:
+                  type: string
+                  pattern: "^[0-9A-Fa-f]{32}$"
+                wifi_ssid:
+                  type: string
+                  maxLength: 32
+                wifi_password:
+                  type: string
+                  maxLength: 63
+      responses:
+        "201":
+          description: 返回一次性配网会话和 AES-GCM 密文
+        "403":
+          description: 当前用户不是家庭管理员
+        "409":
+          description: 设备已绑定其他家庭或没有可用出厂密钥
+  /v1/households/{householdId}/devices/provisioning-sessions/{sessionId}:
+    get:
+      operationId: getDeviceProvisioningSession
+      tags: [device]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 返回 pending、completed、expired 或 cancelled 状态
+  /v1/devices/{deviceCode}/entry:
+    get:
+      operationId: resolveDeviceEntry
+      tags: [device]
+      description: >-
+        解析水墨屏小程序码入口。已绑定且当前用户为家庭成员时返回家庭编号；
+        未绑定时引导配网；已绑定但无权限时不返回家庭或库存信息。
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/DeviceCode"
+      responses:
+        "200":
+          description: 返回 accessible、unbound 或 unavailable 分流状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceEntryResponse"
+        "401":
+          description: 用户尚未登录或登录态无效
+        "404":
+          description: 设备编号未登记
+  /v1/devices/{deviceCode}/provisioning/complete:
+    post:
+      operationId: completeDeviceProvisioning
+      tags: [device]
+      description: 由设备使用密文中的一次性绑定令牌调用。
+      parameters:
+        - $ref: "#/components/parameters/DeviceCode"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [session_id, binding_token]
+              properties:
+                session_id:
+                  type: string
+                  format: uuid
+                binding_token:
+                  type: string
+      responses:
+        "200":
+          description: 设备已原子绑定到会话指定家庭
+        "401":
+          description: 一次性令牌不正确
+        "409":
+          description: 会话已使用或设备归属冲突
+        "410":
+          description: 会话已过期
+  /v1/households/{householdId}/devices/{deviceCode}/unbind:
+    post:
+      operationId: unbindDevice
+      tags: [device]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/DeviceCode"
+      responses:
+        "200":
+          description: 设备已解绑，未完成配网会话已取消
+  /v1/households/{householdId}/devices/{deviceCode}/mini-program-code:
+    post:
+      operationId: refreshDeviceMiniProgramCode
+      tags: [device]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/DeviceCode"
+      responses:
+        "200":
+          description: 微信小程序码已生成并缓存，设备下一轮询将取得新画面
+        "502":
+          description: 微信服务暂时不可用或拒绝生成
+    get:
+      operationId: getDeviceMiniProgramCode
+      tags: [device]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/HouseholdId"
+        - $ref: "#/components/parameters/DeviceCode"
+      responses:
+        "200":
+          description: 返回缓存的小程序码 PNG
+          content:
+            image/png: {}
+        "404":
+          description: 设备或小程序码不存在
+  /v1/devices/{deviceCode}/frame:
+    get:
+      operationId: getDeviceFrame
+      tags: [device]
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: "#/components/parameters/DeviceCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/DeviceTimestamp"
+        - $ref: "#/components/parameters/DeviceNonce"
+      responses:
+        "200":
+          description: 返回新的 GDEM075F53 原生四色帧
+          headers:
+            ETag:
+              required: true
+              schema:
+                type: string
+            X-Frame-Version:
+              required: true
+              schema:
+                type: string
+            X-Frame-SHA256:
+              required: true
+              schema:
+                type: string
+                pattern: "^[0-9a-f]{64}$"
+            X-Panel-Model:
+              required: true
+              schema:
+                type: string
+                const: GDEM075F53
+            X-Firmware-Update:
+              description: OTA 能力设备的更新状态；available 时同时返回协议文档定义的发布头。
+              schema:
+                type: string
+                enum: [none, available]
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "304":
+          description: ETag 未变化；设备不得下载或刷新屏幕
+        "401":
+          description: 设备签名无效或请求已过期
+        "404":
+          description: 设备不存在或尚未生成画面
+  /v1/devices/{deviceCode}/firmware/{releaseId}:
+    get:
+      operationId: downloadDeviceFirmware
+      tags: [device]
+      description: >-
+        仅向当前发布策略命中的设备返回私有 ECDSA 签名固件包；设备必须使用
+        HMAC v2 上报当前版本、构建号、硬件型号和空请求体 SHA-256。
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: "#/components/parameters/DeviceCode"
+        - $ref: "#/components/parameters/FirmwareReleaseId"
+      responses:
+        "200":
+          description: 返回签名固件包
+          headers:
+            X-Firmware-SHA256:
+              schema:
+                type: string
+                pattern: "^[0-9a-f]{64}$"
+            X-Firmware-Size:
+              schema:
+                type: integer
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "401":
+          description: 设备签名无效或请求已过期
+        "404":
+          description: 发布不存在或该设备不在发布范围内
+  /v1/devices/{deviceCode}/firmware/report:
+    post:
+      operationId: reportDeviceFirmwareResult
+      tags: [device]
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: "#/components/parameters/DeviceCode"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FirmwareUpdateReport"
+      responses:
+        "204":
+          description: 下载、安装、失败或回滚状态已记录
+        "401":
+          description: HMAC v2 签名或请求体 SHA-256 无效
+        "404":
+          description: 发布不存在
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 微信登录或本地开发登录后由后端签发的应用登录态。
+    deviceSignature:
+      type: apiKey
+      in: header
+      name: X-Device-Signature
+      description: 使用设备密钥计算的 HMAC-SHA256 小写十六进制签名。
+  parameters:
+    HouseholdId:
+      name: householdId
+      in: path
+      required: true
+      schema:
+        type: string
+    InventoryItemId:
+      name: itemId
+      in: path
+      required: true
+      schema:
+        type: string
+    RecognitionTaskId:
+      name: taskId
+      in: path
+      required: true
+      schema:
+        type: string
+    DisplayPhotoId:
+      name: photoId
+      in: path
+      required: true
+      schema:
+        type: string
+    DeviceCode:
+      name: deviceCode
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 64
+    IfNoneMatch:
+      name: If-None-Match
+      in: header
+      required: false
+      schema:
+        type: string
+    DeviceTimestamp:
+      name: X-Device-Timestamp
+      in: header
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: Unix 秒时间戳。
+    DeviceNonce:
+      name: X-Device-Nonce
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 64
+    FirmwareReleaseId:
+      name: releaseId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    FirmwareUpdateReport:
+      type: object
+      additionalProperties: false
+      required: [release_id, event]
+      properties:
+        release_id:
+          type: string
+          format: uuid
+        event:
+          type: string
+          enum: [downloaded, installed, failed, rolled_back]
+        detail:
+          type: [string, "null"]
+          maxLength: 255
+    SessionUser:
+      type: object
+      additionalProperties: false
+      required: [id, nickname, avatar_url]
+      properties:
+        id:
+          type: string
+        nickname:
+          type: [string, "null"]
+        avatar_url:
+          type: [string, "null"]
+    SessionHousehold:
+      type: object
+      additionalProperties: false
+      required:
+        [id, name, role, member_count, inventory_revision, updated_at]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+          enum: [admin, member]
+        member_count:
+          type: integer
+          minimum: 1
+        inventory_revision:
+          type: integer
+          minimum: 1
+        updated_at:
+          type: string
+          format: date-time
+    SessionResponse:
+      type: object
+      additionalProperties: false
+      required:
+        [access_token, token_type, user, households, current_household_id]
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          const: bearer
+        user:
+          $ref: "#/components/schemas/SessionUser"
+        households:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/SessionHousehold"
+        current_household_id:
+          type: string
+    DeviceEntryResponse:
+      type: object
+      additionalProperties: false
+      required: [state, household_id]
+      properties:
+        state:
+          type: string
+          enum: [accessible, unbound, unavailable]
+        household_id:
+          type: [string, "null"]
+          description: 仅 accessible 状态返回当前用户可访问的设备所属家庭编号。
+    StorageLocation:
+      type: string
+      enum: [refrigerated, frozen, room_temperature]
+    FoodStatus:
+      type: string
+      enum: [normal, eat_soon, eat_today, overdue, no_date]
+    InventoryItemWrite:
+      type: object
+      additionalProperties: false
+      required: [name, quantity, unit, location, stocked_on]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 60
+        quantity:
+          type: number
+          exclusiveMinimum: 0
+        unit:
+          type: string
+          minLength: 1
+          maxLength: 20
+        location:
+          $ref: "#/components/schemas/StorageLocation"
+        stocked_on:
+          type: string
+          format: date
+        suggested_use_by:
+          type: [string, "null"]
+          format: date
+    InventoryItem:
+      type: object
+      additionalProperties: false
+      required:
+        [id, name, quantity, unit, quantity_text, location, stocked_on,
+         suggested_use_by, status, status_text, days_remaining]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        quantity:
+          type: string
+        unit:
+          type: string
+        quantity_text:
+          type: string
+        location:
+          $ref: "#/components/schemas/StorageLocation"
+        stocked_on:
+          type: string
+          format: date
+        suggested_use_by:
+          type: [string, "null"]
+          format: date
+        status:
+          $ref: "#/components/schemas/FoodStatus"
+        status_text:
+          type: string
+        days_remaining:
+          type: [integer, "null"]
+    InventorySummary:
+      type: object
+      additionalProperties: false
+      required: [total, eat_today, eat_soon, overdue, normal, no_date]
+      properties:
+        total: {type: integer, minimum: 0}
+        eat_today: {type: integer, minimum: 0}
+        eat_soon: {type: integer, minimum: 0}
+        overdue: {type: integer, minimum: 0}
+        normal: {type: integer, minimum: 0}
+        no_date: {type: integer, minimum: 0}
+    InventoryListResponse:
+      type: object
+      additionalProperties: false
+      required:
+        [household_name, revision, updated_at, summary, items]
+      properties:
+        household_name:
+          type: string
+        revision:
+          type: integer
+          minimum: 1
+        updated_at:
+          type: string
+          format: date-time
+        summary:
+          $ref: "#/components/schemas/InventorySummary"
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/InventoryItem"
+    DisplayTodosResponse:
+      type: object
+      additionalProperties: false
+      required: [items, revision, updated_at]
+      properties:
+        items:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            minLength: 1
+            maxLength: 40
+        revision:
+          type: integer
+          minimum: 1
+        updated_at:
+          type: string
+          format: date-time
+    DisplayMode:
+      type: string
+      enum: [inventory, almanac, album, market, weather, timetable]
+    AlmanacDay:
+      type: object
+      additionalProperties: false
+      required:
+        [displayed_on, date_text, day_number, weekday, lunar_date, ganzhi,
+         zodiac, seasonal_note, yi, ji, chong_sha, disclaimer]
+      properties:
+        displayed_on:
+          type: string
+          format: date
+        date_text:
+          type: string
+        day_number:
+          type: integer
+          minimum: 1
+          maximum: 31
+        weekday:
+          type: string
+        lunar_date:
+          type: string
+        ganzhi:
+          type: string
+        zodiac:
+          type: string
+        seasonal_note:
+          type: string
+        yi:
+          type: array
+          maxItems: 4
+          items:
+            type: string
+        ji:
+          type: array
+          maxItems: 4
+          items:
+            type: string
+        chong_sha:
+          type: string
+        disclaimer:
+          type: string
+          const: 传统民俗，仅供参考
+    WeatherLocation:
+      type: object
+      additionalProperties: false
+      required: [location_id, name, adm1, display_name, latitude, longitude]
+      properties:
+        location_id:
+          type: string
+        name:
+          type: string
+        adm1:
+          type: string
+        display_name:
+          type: string
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+    WeatherSummary:
+      type: object
+      additionalProperties: false
+      required:
+        [location_name, condition_text, temp_min, temp_max,
+         precip_probability]
+      properties:
+        location_name:
+          type: string
+        condition_text:
+          type: string
+        temp_min:
+          type: integer
+        temp_max:
+          type: integer
+        precip_probability:
+          type: [integer, "null"]
+          minimum: 0
+          maximum: 100
+    DisplaySettingsResponse:
+      type: object
+      additionalProperties: false
+      required:
+        [weather_mode_available, timetable_mode_available, display_mode, album_ready, market_ready,
+         timetable_ready, timetable_orientation, almanac, weather_enabled,
+         weather_provider_ready, weather_location, weather,
+         weather_source_name, weather_source_url]
+      properties:
+        weather_mode_available:
+          type: boolean
+          description: 后端支持独立七日天气模式；旧后端缺少此字段时客户端不显示入口。
+        timetable_mode_available:
+          type: boolean
+          description: 后端支持课程表模式；旧后端缺少此字段时客户端不显示入口。
+        display_mode:
+          $ref: "#/components/schemas/DisplayMode"
+        album_ready:
+          type: boolean
+        market_ready:
+          type: boolean
+        timetable_ready:
+          type: boolean
+        timetable_orientation:
+          type: string
+          enum: [portrait, landscape]
+        almanac:
+          $ref: "#/components/schemas/AlmanacDay"
+        weather_enabled:
+          type: boolean
+        weather_provider_ready:
+          type: boolean
+        weather_location:
+          oneOf:
+            - $ref: "#/components/schemas/WeatherLocation"
+            - type: "null"
+        weather:
+          oneOf:
+            - $ref: "#/components/schemas/WeatherSummary"
+            - type: "null"
+        weather_source_name:
+          type: string
+          const: 和风天气
+        weather_source_url:
+          type: string
+          format: uri
+    DisplaySettingsWrite:
+      type: object
+      additionalProperties: false
+      required: [display_mode]
+      properties:
+        display_mode:
+          $ref: "#/components/schemas/DisplayMode"
+    WeatherSettingsWrite:
+      type: object
+      additionalProperties: false
+      properties:
+        enabled:
+          type: [boolean, "null"]
+          description: 黄历天气开关；省略或 null 时只修改城市，不改变黄历开关。
+        location:
+          oneOf:
+            - $ref: "#/components/schemas/WeatherLocation"
+            - type: "null"
+    TimetablePeriod:
+      type: object
+      additionalProperties: false
+      required: [id, section, start_time, end_time]
+      properties:
+        id:
+          type: string
+          pattern: "^[a-z0-9-]+$"
+          maxLength: 24
+        section:
+          type: string
+          enum: [morning, afternoon]
+        start_time:
+          type: string
+          pattern: "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+        end_time:
+          type: string
+          pattern: "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+    TimetableEntry:
+      type: object
+      additionalProperties: false
+      required: [weekday, period_id, course_name, note]
+      properties:
+        weekday:
+          type: integer
+          minimum: 1
+          maximum: 7
+        period_id:
+          type: string
+          minLength: 1
+          maxLength: 24
+        course_name:
+          type: string
+          minLength: 1
+          maxLength: 6
+        note:
+          type: string
+          maxLength: 8
+    TimetableWrite:
+      type: object
+      additionalProperties: false
+      required: [orientation, periods, entries]
+      properties:
+        orientation:
+          type: string
+          description: 竖屏显示三日课程；横屏显示周一至周日。
+          enum: [portrait, landscape]
+        periods:
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            $ref: "#/components/schemas/TimetablePeriod"
+        entries:
+          type: array
+          maxItems: 70
+          items:
+            $ref: "#/components/schemas/TimetableEntry"
+    TimetableResponse:
+      allOf:
+        - $ref: "#/components/schemas/TimetableWrite"
+        - type: object
+          required: [ready, max_total_periods, max_periods_per_section]
+          properties:
+            ready:
+              type: boolean
+            max_total_periods:
+              type: integer
+              const: 10
+            max_periods_per_section:
+              type: integer
+              const: 6
+    MarketAssetType:
+      type: string
+      description: >-
+        Searchable asset types include crypto, US, CN and HK stocks. Indexes
+        remain available through the curated catalog.
+      enum: [crypto, us_stock, cn_stock, hk_stock, index]
+    MarketCatalogItem:
+      type: object
+      additionalProperties: false
+      required: [asset_type, symbol, name, currency]
+      properties:
+        asset_type:
+          $ref: "#/components/schemas/MarketAssetType"
+        symbol:
+          type: string
+        name:
+          type: string
+        currency:
+          type: string
+          enum: [USD, CNY, HKD]
+    MarketAssetSelection:
+      type: object
+      additionalProperties: false
+      required: [asset_type, symbol]
+      properties:
+        asset_type:
+          $ref: "#/components/schemas/MarketAssetType"
+        symbol:
+          type: string
+          minLength: 1
+          maxLength: 32
+    MarketAssetCreate:
+      type: object
+      additionalProperties: false
+      required: [asset_type, provider_symbol]
+      properties:
+        asset_type:
+          type: string
+          enum: [crypto, us_stock, cn_stock, hk_stock]
+        provider_symbol:
+          type: string
+          minLength: 1
+          maxLength: 64
+    MarketSearchResult:
+      type: object
+      additionalProperties: false
+      required: [asset_type, symbol, name, currency, provider_symbol]
+      properties:
+        asset_type:
+          type: string
+          enum: [crypto, us_stock, cn_stock, hk_stock]
+        symbol:
+          type: string
+        name:
+          type: string
+        currency:
+          type: string
+          enum: [USD, CNY, HKD]
+        provider_symbol:
+          type: string
+    MarketDashboardWrite:
+      type: object
+      additionalProperties: false
+      properties:
+        refresh_minutes:
+          type: integer
+          enum: [15, 30, 60]
+        night_pause:
+          type: boolean
+        assets:
+          type: array
+          maxItems: 6
+          uniqueItems: true
+          items:
+            $ref: "#/components/schemas/MarketAssetSelection"
+    MarketAsset:
+      type: object
+      additionalProperties: false
+      required:
+        [id, asset_type, symbol, name, currency, sequence, price,
+         change_percent, status, quoted_at, stale]
+      properties:
+        id:
+          type: string
+        asset_type:
+          $ref: "#/components/schemas/MarketAssetType"
+        symbol:
+          type: string
+        name:
+          type: string
+        currency:
+          type: string
+          enum: [USD, CNY, HKD]
+        sequence:
+          type: integer
+          minimum: 0
+        price:
+          type: [string, "null"]
+        change_percent:
+          type: [string, "null"]
+        status:
+          type: string
+        quoted_at:
+          type: [string, "null"]
+          format: date-time
+        stale:
+          type: boolean
+    MarketDashboardResponse:
+      type: object
+      additionalProperties: false
+      required:
+        [display_mode, refresh_minutes, night_pause, max_assets, assets,
+         catalog, source_label, disclaimer]
+      properties:
+        display_mode:
+          $ref: "#/components/schemas/DisplayMode"
+        refresh_minutes:
+          type: integer
+          enum: [15, 30, 60]
+        night_pause:
+          type: boolean
+        max_assets:
+          type: integer
+          const: 6
+        assets:
+          type: array
+          maxItems: 6
+          items:
+            $ref: "#/components/schemas/MarketAsset"
+        catalog:
+          type: array
+          items:
+            $ref: "#/components/schemas/MarketCatalogItem"
+        source_label:
+          type: string
+        disclaimer:
+          type: string
+          const: 行情仅供参考
+    DisplayPhotoStatus:
+      type: string
+      enum: [pending, confirmed]
+    DisplayPhoto:
+      type: object
+      additionalProperties: false
+      required:
+        [id, status, sequence, original_filename, byte_size, width, height,
+         confirmed_at, created_at, is_active, image_path]
+      properties:
+        id:
+          type: string
+        status:
+          $ref: "#/components/schemas/DisplayPhotoStatus"
+        sequence:
+          type: integer
+          minimum: 0
+        original_filename:
+          type: string
+        byte_size:
+          type: integer
+          minimum: 1
+        width:
+          type: integer
+          const: 480
+        height:
+          type: integer
+          const: 800
+        confirmed_at:
+          type: [string, "null"]
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        is_active:
+          type: boolean
+        image_path:
+          type: string
+          description: 需要应用登录态和家庭成员权限的私有预览接口路径。
+    DisplayAlbumResponse:
+      type: object
+      additionalProperties: false
+      required:
+        [display_mode, rotation_hours, active_photo_id, max_photos, photos]
+      properties:
+        display_mode:
+          $ref: "#/components/schemas/DisplayMode"
+        rotation_hours:
+          type: integer
+          enum: [1, 3, 6, 12, 24]
+        active_photo_id:
+          type: [string, "null"]
+        max_photos:
+          type: integer
+          const: 6
+        photos:
+          type: array
+          maxItems: 6
+          items:
+            $ref: "#/components/schemas/DisplayPhoto"
+    DisplayPhotoOrderWrite:
+      type: object
+      additionalProperties: false
+      required: [photo_ids]
+      properties:
+        photo_ids:
+          type: array
+          minItems: 1
+          maxItems: 6
+          uniqueItems: true
+          items:
+            type: string
+    DisplayAlbumSettingsWrite:
+      type: object
+      additionalProperties: false
+      properties:
+        display_mode:
+          $ref: "#/components/schemas/DisplayMode"
+        rotation_hours:
+          type: integer
+          enum: [1, 3, 6, 12, 24]
+        active_photo_id:
+          type: string
+    HealthResponse:
+      type: object
+      additionalProperties: false
+      required: [service, status]
+      properties:
+        service:
+          type: string
+          const: refrigerator-food-management
+        status:
+          type: string
+          const: ok

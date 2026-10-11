@@ -1,0 +1,126 @@
+<view class="page">
+  <block wx:if="{{entryResolving}}">
+    <view class="page-header">
+      <text class="page-title">正在打开冰箱</text>
+      <text class="page-subtitle">正在确认设备归属和家庭权限</text>
+    </view>
+    <view class="card entry-state-card">
+      <view class="entry-state-icon">···</view>
+      <text class="entry-state-title">{{entryMessage}}</text>
+      <text class="entry-state-description">请稍候，不需要重复扫码</text>
+    </view>
+  </block>
+
+  <block wx:elif="{{entryBlocked}}">
+    <view class="page-header">
+      <text class="page-title">无法打开这台冰箱</text>
+      <text class="page-subtitle">设备信息不会向无权限用户展示</text>
+    </view>
+    <view class="card entry-state-card">
+      <view class="entry-state-icon entry-state-warning">!</view>
+      <text class="entry-state-title">{{entryMessage}}</text>
+    </view>
+    <button class="primary-button" bindtap="retryDeviceEntry">重新检查</button>
+    <button class="secondary-button entry-secondary-button" bindtap="goToToday">返回今日</button>
+  </block>
+
+  <block wx:else>
+  <view class="page-header">
+    <text class="page-title">绑定墨水屏</text>
+    <text class="page-subtitle">整个过程在微信小程序内完成，不需要打开网页</text>
+  </view>
+
+  <view class="card">
+    <view class="step-row" wx:for="{{steps}}" wx:key="number">
+      <view class="step-number">{{item.number}}</view>
+      <view class="step-content">
+        <text class="step-title">{{item.title}}</text>
+        <text class="step-description">{{item.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{devices.length}}">
+    <text class="section-title">已绑定设备</text>
+    <view class="bound-device" wx:for="{{devices}}" wx:key="device_code">
+      <view>
+        <text class="bound-device-code">{{item.device_code}}</text>
+        <text class="bound-device-state {{item.status === 'online' ? 'status-green' : 'muted'}}">
+          {{item.status === "online" ? "在线" : "离线"}}
+          · {{item.mini_program_code_ready ? "小程序码已生成" : "小程序码待生成"}}
+        </text>
+      </view>
+      <view class="device-actions">
+        <button
+          class="code-button"
+          size="mini"
+          data-code="{{item.device_code}}"
+          bindtap="refreshMiniProgramCode"
+        >更新码</button>
+        <button
+          class="unbind-button"
+          size="mini"
+          data-code="{{item.device_code}}"
+          bindtap="unbindDevice"
+        >解绑</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="card form-card">
+    <text class="section-title">设备与网络</text>
+    <text class="field-label">设备编号</text>
+    <input
+      class="field-input"
+      value="{{deviceCode}}"
+      data-field="deviceCode"
+      bindinput="updateField"
+      placeholder="例如 RFM-S3-000001"
+      disabled="{{binding}}"
+    />
+    <text class="field-label">2.4GHz Wi-Fi 名称</text>
+    <input
+      class="field-input"
+      value="{{wifiSsid}}"
+      data-field="wifiSsid"
+      bindinput="updateField"
+      placeholder="请输入 SSID"
+      disabled="{{binding}}"
+    />
+    <view class="password-header">
+      <text class="field-label password-label">Wi-Fi 密码</text>
+      <text class="password-toggle" bindtap="togglePassword">
+        {{showPassword ? "隐藏" : "显示"}}
+      </text>
+    </view>
+    <input
+      class="field-input"
+      value="{{wifiPassword}}"
+      data-field="wifiPassword"
+      bindinput="updateField"
+      placeholder="开放网络可留空"
+      password="{{!showPassword}}"
+      disabled="{{binding}}"
+    />
+  </view>
+
+  <view class="binding-status status-green" wx:if="{{progressText}}">
+    {{progressText}}
+  </view>
+  <view class="binding-status status-red" wx:if="{{errorText}}">
+    {{errorText}}
+  </view>
+  <view class="binding-status code-warning" wx:if="{{codeWarning}}">
+    {{codeWarning}}
+  </view>
+  <button
+    class="primary-button"
+    bindtap="startBinding"
+    loading="{{binding}}"
+    disabled="{{binding}}"
+  >
+    {{success ? "重新配网" : (binding ? "绑定中…" : "开始绑定")}}
+  </button>
+  <text class="device-tip">配网时不会在业务日志中保存 Wi-Fi 密码。</text>
+  </block>
+</view>

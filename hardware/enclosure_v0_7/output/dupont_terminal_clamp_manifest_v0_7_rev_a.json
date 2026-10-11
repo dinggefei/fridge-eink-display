@@ -1,0 +1,124 @@
+{
+  "design": "V0.7 ESP32 solderless Dupont-terminal clamp Rev A",
+  "units": "mm",
+  "status": "fit coupon required before installation",
+  "preserves": [
+    "front_bezel_v0_7.stl unchanged",
+    "electronics_carrier_v0_7.stl unchanged",
+    "rear_cover_v0_7_rev_f_flat_left_wall_0p8mm.stl unchanged",
+    "ESP32, BOOT, RESET, Lipo Rider, DESPI-C02 and battery positions unchanged",
+    "120 x 184 x 19 mm exterior unchanged"
+  ],
+  "connection": {
+    "method": "housing-free pre-crimped male Dupont terminal retained by PETG C-rail; no solder",
+    "wire_functions": [
+      "3V3",
+      "GPIO7",
+      "GPIO8",
+      "GPIO9",
+      "GPIO10",
+      "GPIO11",
+      "GPIO12",
+      "GND"
+    ],
+    "male_pin_housing": "remove the black 1P shell without cutting the crimped terminal",
+    "wire_exit": "open side of rail toward board interior and DESPI-C02",
+    "power_warning": "3V3 must never be connected to 5V, VIN or VBUS"
+  },
+  "fasteners": {
+    "left_two": "M2x6 self-tapping, 2 pcs",
+    "right_two": "M2x4 self-tapping, 2 pcs",
+    "nominal_left_thread_engagement_mm": 2.6
+  },
+  "clearance": {
+    "nominal_pin_protrusion_below_pcb_mm": 2.2,
+    "v07_under_board_clearance_mm": 2.8,
+    "nominal_pin_to_carrier_clearance_mm": 0.6,
+    "clamp_height_above_pcb_mm": 5.2,
+    "existing_esp32_component_envelope_mm": 8.0
+  },
+  "coupon_acceptance": [
+    "three terminals insert without cutting or forcing",
+    "M2x6 screws tighten without bottoming out",
+    "metal pins remain above the coupon floor",
+    "formal assembly has no adjacent-pin short circuit",
+    "each contact remains stable while each wire is gently moved",
+    "DESPI 3V3 remains stable during a complete display refresh"
+  ],
+  "print": {
+    "material": "PETG",
+    "nozzle_mm": 0.4,
+    "layer_height_mm": 0.16,
+    "walls": 4,
+    "supports": "none; rotate the clamp so the open C-channel faces upward",
+    "scale": "100%; do not mirror"
+  },
+  "parameters": {
+    "mount_hole_pitch": 60.0,
+    "overall_length": 66.0,
+    "overall_width": 6.0,
+    "screw_clearance_diameter": 2.3,
+    "screw_ear_thickness": 1.8,
+    "terminal_rail_length": 54.0,
+    "terminal_shelf_height": 2.2,
+    "terminal_cavity_height": 1.8,
+    "terminal_roof_thickness": 1.2,
+    "terminal_outer_wall_thickness": 1.0,
+    "terminal_pin_slot_width": 1.25,
+    "terminal_pin_slot_offset": 0.15,
+    "nominal_male_pin_length": 6.0,
+    "nominal_pcb_thickness": 1.6,
+    "v07_under_board_clearance": 2.8,
+    "wire_count": 8,
+    "wire_functions": [
+      "3V3",
+      "GPIO7",
+      "GPIO8",
+      "GPIO9",
+      "GPIO10",
+      "GPIO11",
+      "GPIO12",
+      "GND"
+    ],
+    "left_screw": "M2x6 self-tapping, 2 pcs",
+    "right_screw": "M2x4 self-tapping, 2 pcs"
+  },
+  "parts": {
+    "esp32_dupont_terminal_clamp_v0_7_rev_a": {
+      "file": "esp32_dupont_terminal_clamp_v0_7_rev_a.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        6.0,
+        66.0,
+        5.2
+      ],
+      "volume_mm3": 1164.09
+    },
+    "fit_test_dupont_terminal_clamp_v0_7_rev_a": {
+      "file": "fit_test_dupont_terminal_clamp_v0_7_rev_a.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        6.0,
+        22.0,
+        5.2
+      ],
+      "volume_mm3": 308.29
+    },
+    "fit_test_dupont_terminal_base_v0_7_rev_a": {
+      "file": "fit_test_dupont_terminal_base_v0_7_rev_a.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        10.0,
+        24.0,
+        5.8
+      ],
+      "volume_mm3": 787.01
+    }
+  }
+}

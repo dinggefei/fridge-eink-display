@@ -1,0 +1,127 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">快速记一笔</text>
+    <text class="page-subtitle">可以键入文字，也可以使用手机输入法自带的语音输入</text>
+  </view>
+
+  <view class="card">
+    <textarea
+      class="entry-textarea"
+      maxlength="300"
+      placeholder="例如：今天买了两盒牛奶和一斤西红柿"
+      value="{{text}}"
+      bindinput="onInput"
+    />
+    <text class="character-count">{{text.length}} / 300</text>
+  </view>
+
+  <button
+    class="primary-button"
+    loading="{{parsing}}"
+    disabled="{{!canSubmit || parsing}}"
+    bindtap="submit"
+  >生成确认卡片</button>
+  <text class="safe-tip">所有写操作都会先展示确认结果，不会直接修改库存。</text>
+
+  <view wx:if="{{warnings.length}}" class="card warning-card">
+    <text wx:for="{{warnings}}" wx:key="*this" class="warning-text">{{item}}</text>
+  </view>
+
+  <view wx:if="{{queryResults.length}}" class="review-section">
+    <text class="section-title">查询结果</text>
+    <view class="card query-card" wx:for="{{queryResults}}" wx:key="query_id">
+      <text class="query-title">{{item.title}}</text>
+      <text class="muted query-empty" wx:if="{{item.items.length === 0}}">没有符合条件的食材</text>
+      <view class="query-row" wx:for="{{item.items}}" wx:key="id" wx:for-item="food">
+        <text>{{food.name}}</text>
+        <text class="status-green">{{food.quantity}} {{food.unit}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{actions.length}}" class="review-section">
+    <text class="section-title">请确认以下操作</text>
+    <view class="card action-card" wx:for="{{actions}}" wx:key="action_id">
+      <view class="action-header">
+        <text class="action-type action-{{item.type}}">{{item.typeLabel}}</text>
+        <switch
+          checked="{{item.selected}}"
+          data-index="{{index}}"
+          bindchange="onActionSelected"
+          color="#246B4B"
+        />
+      </view>
+      <input
+        class="review-input"
+        value="{{item.name}}"
+        data-index="{{index}}"
+        data-field="name"
+        bindinput="onActionInput"
+        placeholder="食材名称"
+      />
+      <view class="review-grid">
+        <input
+          class="review-input"
+          type="digit"
+          value="{{item.quantity}}"
+          data-index="{{index}}"
+          data-field="quantity"
+          bindinput="onActionInput"
+          placeholder="数量"
+        />
+        <input
+          class="review-input"
+          value="{{item.unit}}"
+          data-index="{{index}}"
+          data-field="unit"
+          bindinput="onActionInput"
+          placeholder="单位"
+        />
+      </view>
+      <picker
+        wx:if="{{item.type === 'add' || item.type === 'edit'}}"
+        range="{{locationOptions}}"
+        range-key="label"
+        value="{{item.locationIndex}}"
+        data-index="{{index}}"
+        bindchange="onLocationChange"
+      >
+        <view class="review-input picker-value">
+          {{locationOptions[item.locationIndex].label}} ›
+        </view>
+      </picker>
+      <view wx:if="{{item.type === 'edit'}}">
+        <text class="edit-field-label">入库日期</text>
+        <picker
+          mode="date"
+          value="{{item.stocked_on}}"
+          data-index="{{index}}"
+          data-field="stocked_on"
+          bindchange="onDateChange"
+        >
+          <view class="review-input picker-value">{{item.stocked_on}} ›</view>
+        </picker>
+        <text class="edit-field-label">建议食用日期</text>
+        <picker
+          mode="date"
+          value="{{item.suggested_use_by}}"
+          data-index="{{index}}"
+          data-field="suggested_use_by"
+          bindchange="onDateChange"
+        >
+          <view class="review-input picker-value">{{item.suggested_use_by}} ›</view>
+        </picker>
+      </view>
+      <text wx:if="{{item.needs_confirmation}}" class="needs-confirmation">
+        没有唯一匹配的库存，请重点核对名称和单位
+      </text>
+      <text wx:if="{{item.note}}" class="action-note">{{item.note}}</text>
+    </view>
+    <button
+      class="primary-button"
+      loading="{{confirming}}"
+      disabled="{{confirming}}"
+      bindtap="confirm"
+    >确认并更新库存</button>
+  </view>
+</view>

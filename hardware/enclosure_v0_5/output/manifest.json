@@ -1,0 +1,504 @@
+{
+  "design": "RefrigeratorFoodManagement enclosure tolerance correction V0.5",
+  "units": "mm",
+  "status": "print matched corner coupons before full-size parts",
+  "reuse_without_reprint": [
+    "front_bezel_v0_1.stl"
+  ],
+  "changes_from_v0_4": [
+    "rear cavity enlarged from 123.8 x 195.8 to 124.6 x 196.6",
+    "ESP32 strap slots removed and replaced by four native-hole M2 screw posts",
+    "ESP32 assembly and rear BOOT/RESET holes moved 25 mm toward the top charging edge",
+    "rear BOOT/RESET holes mirrored in X for the physical outside bottom view",
+    "BOOT and RESET recessed labels added to the rear exterior",
+    "rear magnets increased from 6 to 10 and redistributed away from the ESP32 antenna and electronics",
+    "two legacy bottom pressure-relief slots closed; top USB-C opening retained",
+    "Lipo Rider and charging opening unchanged",
+    "2026-08-16: fit coupon corrected to carrier top-right plus rear-cover top-left"
+  ],
+  "fit": {
+    "carrier_outer": [
+      123.0,
+      195.0
+    ],
+    "rear_inner": [
+      124.6,
+      196.6
+    ],
+    "total_clearance": [
+      1.6,
+      1.6
+    ],
+    "per_side_clearance": [
+      0.8,
+      0.8
+    ],
+    "minimum_side_wall": [
+      1.7,
+      1.7
+    ],
+    "ledge_opening": [
+      120.6,
+      192.6
+    ],
+    "ledge_overlap_per_side": [
+      1.2,
+      1.2
+    ]
+  },
+  "esp32_mount": {
+    "mechanical_source": "https://docs.waveshare.com/ESP32-S3-DEV-KIT-N8R8",
+    "measurement_basis": "user-measured Waveshare ESP32-S3-DEV-KIT-N16R8 on 2026-08-22",
+    "board_size": [
+      25.4,
+      63.3
+    ],
+    "native_hole_diameter": 2.0,
+    "hole_pitch": [
+      22.0,
+      60.0
+    ],
+    "carrier_hole_centres": [
+      [
+        -46.0,
+        15.0
+      ],
+      [
+        -24.0,
+        15.0
+      ],
+      [
+        -46.0,
+        75.0
+      ],
+      [
+        -24.0,
+        75.0
+      ]
+    ],
+    "post_diameter": 5.8,
+    "post_top_z": 4.6,
+    "blind_pilot_diameter": 1.7,
+    "blind_pilot_depth": 2.5,
+    "fastener": "4 x M2 x 4 mm self-tapping, head diameter <= 3.6 mm",
+    "nominal_thread_engagement": 2.4,
+    "washers": "do not use washers on the two USB-side screws",
+    "button_tool": "non-metallic pin diameter <= 1.5 mm"
+  },
+  "button_alignment": {
+    "esp32_center": [
+      -35.0,
+      45.0
+    ],
+    "esp32_center_delta_from_previous_v0_5": [
+      0.0,
+      25.0
+    ],
+    "board_boot_center_component_view": [
+      -43.146,
+      15.905
+    ],
+    "board_reset_center_component_view": [
+      -27.758,
+      15.678
+    ],
+    "rear_boot_hole_model_center": [
+      43.146,
+      15.905
+    ],
+    "rear_reset_hole_model_center": [
+      27.758,
+      15.678
+    ],
+    "outside_bottom_view": "BOOT and RESET appear on the left; do not mirror the STL or SVG",
+    "rear_button_hole_y_delta_from_original_v0_5": 25.0,
+    "rear_button_hole_x_rule": "rear model x = negative board component-view x",
+    "rear_label": {
+      "type": "recessed 5x7 lettering",
+      "depth": 0.55,
+      "pixel": 0.45
+    }
+  },
+  "magnet_mount": {
+    "quantity": 10,
+    "magnet_size": [
+      10.0,
+      3.0
+    ],
+    "blind_pocket_size": [
+      10.4,
+      3.2
+    ],
+    "outer_skin_remaining": 0.8,
+    "rear_model_centres": [
+      [
+        52.0,
+        -70.0
+      ],
+      [
+        -0.0,
+        -70.0
+      ],
+      [
+        -52.0,
+        -70.0
+      ],
+      [
+        52.0,
+        -40.0
+      ],
+      [
+        -0.0,
+        -40.0
+      ],
+      [
+        -52.0,
+        -40.0
+      ],
+      [
+        52.0,
+        -10.0
+      ],
+      [
+        -0.0,
+        30.0
+      ],
+      [
+        -52.0,
+        35.0
+      ],
+      [
+        -52.0,
+        70.0
+      ]
+    ],
+    "assembled_projection_centres": [
+      [
+        -52.0,
+        -70.0
+      ],
+      [
+        0.0,
+        -70.0
+      ],
+      [
+        52.0,
+        -70.0
+      ],
+      [
+        -52.0,
+        -40.0
+      ],
+      [
+        0.0,
+        -40.0
+      ],
+      [
+        52.0,
+        -40.0
+      ],
+      [
+        -52.0,
+        -10.0
+      ],
+      [
+        0.0,
+        30.0
+      ],
+      [
+        52.0,
+        35.0
+      ],
+      [
+        52.0,
+        70.0
+      ]
+    ],
+    "arrangement": "asymmetric ten-point layout with electronics and antenna keep-outs",
+    "minimum_planar_clearance": {
+      "esp32_board": 17.1,
+      "esp32_pcb_antenna": 33.517,
+      "despi_c02": 17.161,
+      "lipo_rider_plus": 20.05
+    }
+  },
+  "bottom_wall": {
+    "legacy_pressure_relief_slots": "removed and closed",
+    "former_slot_centres": [
+      [
+        17.0,
+        -99.0,
+        7.0
+      ],
+      [
+        35.0,
+        -99.0,
+        7.0
+      ]
+    ],
+    "top_usb_c_opening": "retained"
+  },
+  "parameters": {
+    "case_width": 128.0,
+    "case_height": 200.0,
+    "corner_radius": 6.0,
+    "front_face_thickness": 3.0,
+    "screen_gap_depth": 2.2,
+    "midplate_thickness": 2.0,
+    "rear_cover_depth": 21.0,
+    "rear_skin_thickness": 4.0,
+    "rear_wall_thickness": 2.1,
+    "screen_body_width": 111.2,
+    "screen_body_height": 170.2,
+    "screen_pocket_width": 112.0,
+    "screen_pocket_height": 171.0,
+    "screen_window_width": 99.0,
+    "screen_window_height": 164.0,
+    "screen_center_y": -7.9,
+    "midplate_width": 123.0,
+    "midplate_height": 195.0,
+    "battery_width": 94.0,
+    "battery_height": 62.0,
+    "battery_max_thickness": 10.0,
+    "battery_center_x": 3.0,
+    "battery_center_y": -58.0,
+    "esp_width": 27.0,
+    "esp_height": 65.0,
+    "esp_center_x": -35.0,
+    "esp_center_y": 45.0,
+    "despi_width": 42.0,
+    "despi_height": 24.0,
+    "despi_center_x": 27.0,
+    "despi_center_y": -6.0,
+    "lipo_rider_width": 25.48,
+    "lipo_rider_height": 40.877,
+    "lipo_rider_center_x": 5.461,
+    "lipo_rider_center_y": 75.6885,
+    "magnet_diameter": 10.4,
+    "magnet_depth": 3.2,
+    "m2_clearance": 2.4,
+    "m2_insert_hole": 3.2,
+    "lipo_mount_post_top": 4.4,
+    "lipo_mount_pilot": 1.8,
+    "rear_inner_width": 124.6,
+    "rear_inner_height": 196.6,
+    "charge_cutout_width": 16.0,
+    "charge_cutout_height": 9.0,
+    "charge_cutout_center_x": 0.0,
+    "charge_cutout_center_y": 99.0,
+    "charge_cutout_center_z": 15.0,
+    "esp_button_access_diameter": 5.5,
+    "esp_button_counterbore_diameter": 8.5,
+    "esp_button_counterbore_depth": 1.2,
+    "esp_board_width": 25.4,
+    "esp_board_height": 63.3,
+    "esp_mount_hole_diameter": 2.0,
+    "esp_mount_pitch_x": 22.0,
+    "esp_mount_pitch_y": 60.0,
+    "esp_mount_bottom_offset_y": -30.0,
+    "esp_mount_top_offset_y": 30.0,
+    "esp_mount_post_diameter": 5.8,
+    "esp_mount_post_top": 4.6,
+    "esp_mount_pilot": 1.7,
+    "esp_mount_pilot_depth": 2.5,
+    "esp_board_thickness": 1.6,
+    "esp_mount_screw_length": 4.0,
+    "esp_screw_head_max_diameter": 3.6,
+    "esp_button_tool_max_diameter": 1.5
+  },
+  "parts": {
+    "middle_carrier_v0_5": {
+      "file": "middle_carrier_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 2700,
+      "faces": 5452,
+      "volume_mm3": 49414.39,
+      "bounds_mm": [
+        [
+          -61.5,
+          -97.5,
+          0.0
+        ],
+        [
+          61.5,
+          97.5,
+          7.0
+        ]
+      ],
+      "size_mm": [
+        123.0,
+        195.0,
+        7.0
+      ]
+    },
+    "rear_cover_v0_5": {
+      "file": "rear_cover_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 3807,
+      "faces": 7638,
+      "volume_mm3": 121519.69,
+      "bounds_mm": [
+        [
+          -64.0,
+          -100.0,
+          0.0
+        ],
+        [
+          64.0,
+          100.0,
+          21.0
+        ]
+      ],
+      "size_mm": [
+        128.0,
+        200.0,
+        21.0
+      ]
+    },
+    "fit_test_carrier_corner_v0_5": {
+      "file": "fit_test_carrier_corner_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 276,
+      "faces": 552,
+      "volume_mm3": 2484.93,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          33.5,
+          34.5,
+          7.0
+        ]
+      ],
+      "size_mm": [
+        33.5,
+        34.5,
+        7.0
+      ]
+    },
+    "fit_test_rear_corner_v0_5": {
+      "file": "fit_test_rear_corner_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 475,
+      "faces": 950,
+      "volume_mm3": 7651.8,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          36.0,
+          37.0,
+          21.0
+        ]
+      ],
+      "size_mm": [
+        36.0,
+        37.0,
+        21.0
+      ]
+    },
+    "fit_test_lipo_top_port_v0_5": {
+      "file": "fit_test_lipo_top_port_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 698,
+      "faces": 1396,
+      "volume_mm3": 5120.49,
+      "bounds_mm": [
+        [
+          -20.0,
+          -48.0,
+          0.0
+        ],
+        [
+          20.0,
+          2.1,
+          15.0
+        ]
+      ],
+      "size_mm": [
+        40.0,
+        50.1,
+        15.0
+      ]
+    },
+    "fit_test_button_hole_diameter_v0_5": {
+      "file": "fit_test_button_hole_diameter_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 552,
+      "faces": 1108,
+      "volume_mm3": 2158.89,
+      "bounds_mm": [
+        [
+          -17.0,
+          -9.0,
+          0.0
+        ],
+        [
+          17.0,
+          9.0,
+          4.0
+        ]
+      ],
+      "size_mm": [
+        34.0,
+        18.0,
+        4.0
+      ]
+    },
+    "fit_test_esp32_four_hole_mount_v0_5": {
+      "file": "fit_test_esp32_four_hole_mount_v0_5.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 820,
+      "faces": 1636,
+      "volume_mm3": 4569.49,
+      "bounds_mm": [
+        [
+          -15.7,
+          -34.65,
+          0.0
+        ],
+        [
+          15.7,
+          34.65,
+          4.6
+        ]
+      ],
+      "size_mm": [
+        31.4,
+        69.3,
+        4.6
+      ]
+    }
+  },
+  "templates": [
+    "placement_template_v0_5_1to1.svg",
+    "rear_button_hole_template_v0_5_1to1.svg"
+  ],
+  "previews": [
+    "carrier_rear_clearance_v0_5.png",
+    "esp32_four_hole_alignment_v0_5.png",
+    "enclosure_v0_5_four_hole_layout.png",
+    "rear_cover_bottom_view_v0_5.png",
+    "magnet_electronics_clearance_v0_5.png"
+  ]
+}

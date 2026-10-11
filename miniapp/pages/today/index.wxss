@@ -1,0 +1,81 @@
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.summary-card {
+  display: flex;
+  min-height: 150rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22rpx;
+  background: #ffffff;
+}
+
+.summary-value {
+  font-size: 50rpx;
+  font-weight: 700;
+}
+
+.summary-label {
+  margin-top: 4rpx;
+  color: #70766d;
+  font-size: 24rpx;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.action-button {
+  margin: 0;
+  font-size: 28rpx;
+}
+
+.food-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.food-row:last-child {
+  border-bottom: 0;
+}
+
+.food-name {
+  font-weight: 600;
+}
+
+.food-quantity {
+  margin-left: 12rpx;
+  color: #70766d;
+}
+
+.food-hint {
+  font-size: 25rpx;
+  font-weight: 600;
+}
+
+.demo-tip {
+  display: block;
+  text-align: center;
+  color: #969c95;
+  font-size: 23rpx;
+}
+
+.state-card {
+  text-align: center;
+}
+
+.retry-button {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}

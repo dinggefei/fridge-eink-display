@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">隐私与数据</text>
+    <text class="page-subtitle">查看隐私说明，管理家庭关系和个人数据</text>
+    <text class="status-red page-error" wx:if="{{errorMessage}}">{{errorMessage}}</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">隐私保护指引</text>
+    <text class="muted description">
+      查看本小程序收集的信息类型、使用目的、保存期限和联系方式。
+    </text>
+    <button class="secondary-button action" bindtap="openPrivacyGuide">
+      查看隐私保护指引
+    </button>
+  </view>
+
+  <view class="card">
+    <text class="section-title">退出当前家庭</text>
+    <view class="summary-row">
+      <text>{{householdName || "加载中…"}}</text>
+      <text class="muted">
+        {{currentRole === "admin" ? "管理员" : "普通成员"}}
+      </text>
+    </view>
+    <text class="muted description" wx:if="{{currentRole === 'member'}}">
+      退出后不能再查看该家庭的食材、成员和设备；你的其他家庭不受影响。
+    </text>
+    <text class="status-yellow description" wx:else>
+      管理员不能直接退出。删除个人账号前，必须先移除家庭中的其他成员。
+    </text>
+    <button
+      class="secondary-button danger-outline action"
+      bindtap="leaveHousehold"
+      loading="{{leaving}}"
+      disabled="{{loading || leaving}}"
+    >{{currentRole === "admin" ? "管理员不能直接退出" : "退出当前家庭"}}</button>
+  </view>
+
+  <view class="card danger-card">
+    <text class="section-title status-red">删除个人账号</text>
+    <text class="description">
+      删除个人身份、偏好和识别记录，并退出所有家庭。由你单独管理的家庭库存会删除，绑定设备会解绑。
+    </text>
+    <text class="muted description">
+      为保护其他成员，你管理的任一家庭仍有其他成员时，系统将拒绝删除。
+    </text>
+    <button
+      class="danger-button action"
+      bindtap="deleteAccount"
+      loading="{{deleting}}"
+      disabled="{{loading || deleting}}"
+    >删除个人账号及数据</button>
+  </view>
+</view>

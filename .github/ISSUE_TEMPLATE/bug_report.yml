@@ -1,0 +1,46 @@
+name: Bug report
+description: 报告可复现的软件、固件或结构问题
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 请勿提交密钥、令牌、用户数据、真实设备身份或生产服务器信息。
+  - type: dropdown
+    id: area
+    attributes:
+      label: 模块
+      options:
+        - Backend
+        - Mini Program
+        - ESP32 Firmware
+        - Enclosure / Hardware
+        - Kindle Client
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境与版本
+      description: 硬件型号、固件版本、系统、材料与打印参数等。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true

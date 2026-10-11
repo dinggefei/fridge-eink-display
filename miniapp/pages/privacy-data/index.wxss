@@ -1,0 +1,39 @@
+.description {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 25rpx;
+  line-height: 1.65;
+}
+
+.action {
+  margin-top: 24rpx;
+}
+
+.summary-row {
+  display: flex;
+  min-height: 72rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.danger-card {
+  border-color: #efd2cf;
+}
+
+.danger-outline {
+  border-color: #e4b7b3;
+  color: #b8352d;
+}
+
+.danger-button {
+  border-radius: 18rpx;
+  background: #b8352d;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.page-error {
+  display: block;
+  margin-top: 12rpx;
+}

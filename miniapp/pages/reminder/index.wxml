@@ -1,0 +1,57 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">到期提醒</text>
+    <text class="page-subtitle">每天按设定时间检查临期和过期食材</text>
+  </view>
+
+  <view class="card">
+    <view class="setting-row">
+      <text>启用提醒</text>
+      <switch checked="{{enabled}}" color="#246b4b" bindchange="onEnabledChange" />
+    </view>
+    <view class="setting-row">
+      <text>提醒时间</text>
+      <picker mode="time" value="{{reminderTime}}" bindchange="onTimeChange">
+        <text class="value">{{reminderTime}} ›</text>
+      </picker>
+    </view>
+    <view class="setting-row">
+      <text>提前提醒</text>
+      <picker
+        range="{{thresholdOptions}}"
+        value="{{thresholdDays - 1}}"
+        bindchange="onThresholdChange"
+      >
+        <text class="value">{{thresholdDays}} 天 ›</text>
+      </picker>
+    </view>
+    <button class="primary-button save-button" bindtap="savePreference">
+      保存设置
+    </button>
+  </view>
+
+  <view class="card">
+    <text class="section-title">微信订阅授权</text>
+    <text class="description">
+      微信每次授权只允许发送一次。当前可用 {{subscriptionGrants}} 次。
+    </text>
+    <text class="status-yellow template-tip" wx:if="{{deliveryMode === 'disabled'}}">
+      订阅模板尚未配置，正式发送暂时关闭。
+    </text>
+    <text class="status-green template-tip" wx:elif="{{deliveryMode === 'mock'}}">
+      当前为开发模拟发送模式。
+    </text>
+    <button class="secondary-button grant-button" bindtap="addGrant">
+      {{deliveryMode === "disabled" ? "查看模板说明" : "增加一次提醒授权"}}
+    </button>
+  </view>
+
+  <view class="card">
+    <text class="section-title">发送记录</text>
+    <view class="stats">
+      <view><text class="stat-number">{{deliveryCounts.sent || 0}}</text><text class="stat-label">成功</text></view>
+      <view><text class="stat-number">{{deliveryCounts.failed || 0}}</text><text class="stat-label">失败</text></view>
+      <view><text class="stat-number">{{deliveryCounts.pending || 0}}</text><text class="stat-label">待发送</text></view>
+    </view>
+  </view>
+</view>

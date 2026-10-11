@@ -1,0 +1,204 @@
+{
+  "design": "RefrigeratorFoodManagement portrait enclosure V0.1",
+  "units": "mm",
+  "status": "fit prototype; physical re-measurement required before production",
+  "parameters": {
+    "case_width": 128.0,
+    "case_height": 200.0,
+    "corner_radius": 6.0,
+    "front_face_thickness": 3.0,
+    "screen_gap_depth": 2.2,
+    "midplate_thickness": 2.0,
+    "rear_cover_depth": 21.0,
+    "rear_skin_thickness": 4.0,
+    "rear_wall_thickness": 2.1,
+    "screen_body_width": 111.2,
+    "screen_body_height": 170.2,
+    "screen_pocket_width": 112.0,
+    "screen_pocket_height": 171.0,
+    "screen_window_width": 99.0,
+    "screen_window_height": 164.0,
+    "screen_center_y": -7.9,
+    "midplate_width": 123.0,
+    "midplate_height": 195.0,
+    "battery_width": 63.0,
+    "battery_height": 95.0,
+    "battery_max_thickness": 10.0,
+    "battery_center_x": 20.0,
+    "battery_center_y": -38.0,
+    "esp_width": 27.0,
+    "esp_height": 65.0,
+    "esp_center_x": 0.0,
+    "esp_center_y": 59.0,
+    "despi_width": 42.0,
+    "despi_height": 24.0,
+    "despi_center_x": 35.0,
+    "despi_center_y": 24.0,
+    "lipo_rider_width": 27.0,
+    "lipo_rider_height": 43.0,
+    "lipo_rider_center_x": -40.0,
+    "lipo_rider_center_y": -78.0,
+    "magnet_diameter": 10.4,
+    "magnet_depth": 3.2,
+    "m2_clearance": 2.4,
+    "m2_insert_hole": 3.2
+  },
+  "parts": {
+    "front_bezel_v0_1": {
+      "file": "front_bezel_v0_1.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "vertices": 1172,
+      "faces": 2344,
+      "volume_mm3": 31335.08,
+      "bounds_mm": [
+        [
+          -64.0,
+          -100.0,
+          0.0
+        ],
+        [
+          64.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "size_mm": [
+        128.0,
+        200.0,
+        8.0
+      ]
+    },
+    "middle_carrier_v0_1": {
+      "file": "middle_carrier_v0_1.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "vertices": 1322,
+      "faces": 2716,
+      "volume_mm3": 48284.59,
+      "bounds_mm": [
+        [
+          -61.5,
+          -97.5,
+          0.0
+        ],
+        [
+          61.5,
+          97.5,
+          7.0
+        ]
+      ],
+      "size_mm": [
+        123.0,
+        195.0,
+        7.0
+      ]
+    },
+    "rear_cover_v0_1": {
+      "file": "rear_cover_v0_1.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "vertices": 2138,
+      "faces": 4304,
+      "volume_mm3": 126865.11,
+      "bounds_mm": [
+        [
+          -64.0,
+          -100.0,
+          0.0
+        ],
+        [
+          64.0,
+          100.0,
+          21.0
+        ]
+      ],
+      "size_mm": [
+        128.0,
+        200.0,
+        21.0
+      ]
+    },
+    "fit_test_screen_width_112mm": {
+      "file": "fit_test_screen_width_112mm.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "vertices": 116,
+      "faces": 228,
+      "volume_mm3": 6627.99,
+      "bounds_mm": [
+        [
+          -60.0,
+          -9.0,
+          0.0
+        ],
+        [
+          60.0,
+          9.0,
+          5.2
+        ]
+      ],
+      "size_mm": [
+        120.0,
+        18.0,
+        5.2
+      ]
+    },
+    "fit_test_m2_insert_and_magnet": {
+      "file": "fit_test_m2_insert_and_magnet.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "vertices": 378,
+      "faces": 756,
+      "volume_mm3": 5648.19,
+      "bounds_mm": [
+        [
+          -21.0,
+          -12.0,
+          0.0
+        ],
+        [
+          21.0,
+          12.0,
+          6.0
+        ]
+      ],
+      "size_mm": [
+        42.0,
+        24.0,
+        6.0
+      ]
+    },
+    "fit_test_battery_thickness_9mm": {
+      "file": "fit_test_battery_thickness_9mm.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "vertices": 16,
+      "faces": 28,
+      "volume_mm3": 3810.0,
+      "bounds_mm": [
+        [
+          -15.0,
+          -10.0,
+          0.0
+        ],
+        [
+          15.0,
+          10.0,
+          14.0
+        ]
+      ],
+      "size_mm": [
+        30.0,
+        20.0,
+        14.0
+      ]
+    }
+  }
+}

@@ -1,0 +1,136 @@
+.state-card {
+  text-align: center;
+}
+
+.retry-button {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 16rpx;
+  font-size: 25rpx;
+  font-weight: 600;
+}
+
+.picker-value {
+  display: flex;
+  min-height: 84rpx;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  border: 1rpx solid #dbe1dc;
+  border-radius: 16rpx;
+  background: #fbfcfa;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.todo-title {
+  margin-bottom: 8rpx;
+}
+
+.help {
+  display: block;
+  font-size: 24rpx;
+}
+
+.todo-count {
+  min-width: 74rpx;
+  padding: 8rpx 14rpx;
+  border-radius: 999rpx;
+  background: #eef5f1;
+  color: #246b4b;
+  font-size: 23rpx;
+  text-align: center;
+}
+
+.todo-edit-row,
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.todo-edit-row {
+  margin-top: 20rpx;
+}
+
+.todo-index {
+  display: flex;
+  width: 42rpx;
+  height: 42rpx;
+  flex: 0 0 42rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef5f1;
+  color: #246b4b;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.text-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 88rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #dbe1dc;
+  border-radius: 16rpx;
+  background: #fbfcfa;
+}
+
+.todo-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-remove-button {
+  flex: 0 0 auto;
+  border: 1rpx solid #e4b7b3;
+  background: #fff;
+  color: #b8352d;
+}
+
+.empty-state {
+  display: flex;
+  min-height: 220rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.empty-help {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+}
+
+.todo-actions {
+  margin-top: 28rpx;
+}
+
+.todo-action-button {
+  flex: 1;
+  margin: 0;
+}
+
+.screen-tip {
+  display: block;
+  text-align: center;
+  font-size: 23rpx;
+}
+
+.screen-tip {
+  color: #969c95;
+}

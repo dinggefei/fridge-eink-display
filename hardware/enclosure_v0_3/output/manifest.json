@@ -1,0 +1,205 @@
+{
+  "design": "RefrigeratorFoodManagement enclosure replacement V0.3",
+  "units": "mm",
+  "status": "full parts require fit-coupon approval before printing",
+  "reuse_without_reprint": [
+    "front_bezel_v0_1.stl"
+  ],
+  "photo_calibration_reference": {
+    "carrier": [
+      123.0,
+      195.0
+    ],
+    "note": "photo positions calibrated from four known rear-fastener centres; ESP32 then moved toward DESPI as requested"
+  },
+  "layout": {
+    "lipo_rider_center": [
+      5.461,
+      75.6885
+    ],
+    "lipo_mount_holes": [
+      [
+        15.788,
+        85.349
+      ],
+      [
+        -4.739,
+        85.349
+      ],
+      [
+        15.788,
+        57.79
+      ],
+      [
+        -4.739,
+        57.79
+      ]
+    ],
+    "lipo_usb_c_center": [
+      0.0,
+      89.65
+    ],
+    "lipo_usb_c_face": [
+      0.0,
+      97.0
+    ],
+    "esp32_center": [
+      -14.5,
+      20.0
+    ],
+    "despi_center": [
+      27.0,
+      -6.0
+    ],
+    "battery_center": [
+      3.0,
+      -58.0
+    ],
+    "rear_charge_cutout_center": [
+      0.0,
+      99.0,
+      15.0
+    ],
+    "rear_charge_cutout_size": [
+      16.0,
+      7.0,
+      9.0
+    ]
+  },
+  "verified_nominal_clearances_mm": {
+    "esp32_to_despi_horizontal": 7.0,
+    "lipo_to_esp32_vertical": 2.75,
+    "despi_to_battery_vertical": 9.0,
+    "usb_c_face_to_case_center_x": 0.0,
+    "usb_c_face_to_carrier_top_edge": 0.5
+  },
+  "parameters": {
+    "case_width": 128.0,
+    "case_height": 200.0,
+    "corner_radius": 6.0,
+    "front_face_thickness": 3.0,
+    "screen_gap_depth": 2.2,
+    "midplate_thickness": 2.0,
+    "rear_cover_depth": 21.0,
+    "rear_skin_thickness": 4.0,
+    "rear_wall_thickness": 2.1,
+    "screen_body_width": 111.2,
+    "screen_body_height": 170.2,
+    "screen_pocket_width": 112.0,
+    "screen_pocket_height": 171.0,
+    "screen_window_width": 99.0,
+    "screen_window_height": 164.0,
+    "screen_center_y": -7.9,
+    "midplate_width": 123.0,
+    "midplate_height": 195.0,
+    "battery_width": 94.0,
+    "battery_height": 62.0,
+    "battery_max_thickness": 10.0,
+    "battery_center_x": 3.0,
+    "battery_center_y": -58.0,
+    "esp_width": 27.0,
+    "esp_height": 65.0,
+    "esp_center_x": -14.5,
+    "esp_center_y": 20.0,
+    "despi_width": 42.0,
+    "despi_height": 24.0,
+    "despi_center_x": 27.0,
+    "despi_center_y": -6.0,
+    "lipo_rider_width": 25.48,
+    "lipo_rider_height": 40.877,
+    "lipo_rider_center_x": 5.461,
+    "lipo_rider_center_y": 75.6885,
+    "magnet_diameter": 10.4,
+    "magnet_depth": 3.2,
+    "m2_clearance": 2.4,
+    "m2_insert_hole": 3.2,
+    "lipo_mount_post_top": 4.4,
+    "lipo_mount_pilot": 1.8,
+    "charge_cutout_width": 16.0,
+    "charge_cutout_height": 9.0,
+    "charge_cutout_center_x": 0.0,
+    "charge_cutout_center_y": 99.0,
+    "charge_cutout_center_z": 15.0
+  },
+  "parts": {
+    "middle_carrier_v0_3": {
+      "file": "middle_carrier_v0_3.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 2024,
+      "faces": 4116,
+      "volume_mm3": 48875.0,
+      "bounds_mm": [
+        [
+          -61.5,
+          -97.5,
+          0.0
+        ],
+        [
+          61.5,
+          97.5,
+          7.0
+        ]
+      ],
+      "size_mm": [
+        123.0,
+        195.0,
+        7.0
+      ]
+    },
+    "rear_cover_v0_3": {
+      "file": "rear_cover_v0_3.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 2126,
+      "faces": 4276,
+      "volume_mm3": 127053.41,
+      "bounds_mm": [
+        [
+          -64.0,
+          -100.0,
+          0.0
+        ],
+        [
+          64.0,
+          100.0,
+          21.0
+        ]
+      ],
+      "size_mm": [
+        128.0,
+        200.0,
+        21.0
+      ]
+    },
+    "fit_test_lipo_top_port_v0_3": {
+      "file": "fit_test_lipo_top_port_v0_3.stl",
+      "watertight_after_reload": true,
+      "is_volume_after_reload": true,
+      "body_count_after_reload": 1,
+      "vertices": 698,
+      "faces": 1396,
+      "volume_mm3": 5120.49,
+      "bounds_mm": [
+        [
+          -20.0,
+          -48.0,
+          0.0
+        ],
+        [
+          20.0,
+          2.1,
+          15.0
+        ]
+      ],
+      "size_mm": [
+        40.0,
+        50.1,
+        15.0
+      ]
+    }
+  },
+  "template": "placement_template_v0_3_1to1.svg"
+}

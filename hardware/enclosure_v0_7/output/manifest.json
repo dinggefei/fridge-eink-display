@@ -1,0 +1,952 @@
+{
+  "design": "RefrigeratorFoodManagement compact closed enclosure V0.7",
+  "units": "mm",
+  "status": "engineering prototype; coupons required before full shell",
+  "preserves": [
+    "V0.6 remains unchanged",
+    "V0.7 carrier, electronics placement and 19 mm envelope remain unchanged",
+    "V0.7 rear outer outline, fastener centres and buttons remain unchanged",
+    "V0.7 magnet pockets now fit two 90 x 50 x 2 mm plus one 50 x 20 x 2 mm flexible sheets",
+    "V0.7 Rev E rear corner and front-post DFM clearances remain unchanged",
+    "V0.7 Rev F restores only the assembled-left top 1.8 mm band at 0.8 mm thickness; the lower wall stays 1.8 mm",
+    "V0.7 Rev G adds only the compact Lipo Rider SW1 access slot",
+    "V0.7 Rev H joins the LED and SW1 openings with a minimal 2.4 mm bridge",
+    "V0.7 Rev I replaces the Rev H profile with one regular 5.2 x 21.0 mm R1.0 opening",
+    "V0.7 USB-C opening remains 11.5 mm wide and grows from 5.5 to 7.5 mm high, centred at the same position",
+    "V0.7 front window, outer outline and four screw posts remain unchanged",
+    "V0.8 remains unchanged"
+  ],
+  "target_outer_size": [
+    120.0,
+    184.0,
+    19.0
+  ],
+  "comparison_to_v0_6": {
+    "v0_6_nominal": [
+      120.0,
+      184.0,
+      21.4
+    ],
+    "v0_7_nominal": [
+      120.0,
+      184.0,
+      19.0
+    ],
+    "thickness_reduction": 2.4
+  },
+  "enclosure": {
+    "architecture": "front bezel + recessed electronics carrier + locally reinforced rear shell",
+    "rear_internal_revision": "Rev I regular 5.2 x 21.0 mm R1.0 Lipo LED/SW1 opening, retaining Rev F left wall and Rev E DFM clearance",
+    "bottom_and_sides": "fully closed",
+    "fasteners": "4 x M2 x 14 mm self-tapping, head diameter <= 4.6 mm, head height <= 1.5 mm",
+    "fastener_engagement_in_front_boss": 3.4,
+    "front_screw_post_radius": 2.6,
+    "rear_internal_boss_relief_radius": 3.3,
+    "rear_internal_boss_relief_radial_clearance": 0.7,
+    "rear_internal_boss_relief_axial_depth_into_tube": 0.6,
+    "rear_internal_boss_relief_entry_chamfer": 0.5,
+    "rear_corner_entry_relief": {
+      "base_cavity_corner_radius_unchanged": 6.2,
+      "entry_depth": 1.2,
+      "radial_relief": 0.4,
+      "entry_relief_radius": 6.6000000000000005,
+      "mouth_chamfer": 0.5,
+      "maximum_mouth_radius": 7.1000000000000005,
+      "elephant_foot_contact_relief_within_chamfer": 0.3
+    },
+    "carrier_front_boss_relief_radius": 2.9,
+    "rear_cavity_depth": 15.2,
+    "assembled_carrier_height": 13.6,
+    "usable_height_above_carrier": 12.2,
+    "magnet_bar_local_height": 12.4,
+    "front_retainer_rev_f": {
+      "retained_sides": [
+        "top",
+        "bottom",
+        "left",
+        "upper-right arc",
+        "lower-right arc"
+      ],
+      "right_retainer_removed": true,
+      "retainer_width": 2.9,
+      "outer_edge_inset": 3.6,
+      "top_bottom_outer_edge_inset": 3.6,
+      "outer_corner_radius": 4.4,
+      "right_transition_inner_radius": 1.5,
+      "left_inner_corner_radius": 0.0,
+      "left_inner_corner_style": "square_90_degree",
+      "rear_inner_corner_radius": 6.2,
+      "radial_clearance_to_rear": 1.8,
+      "four_outer_corner_radii_equal": true,
+      "right_end_style": "continuous_inner_edges_to_outer_arcs_no_step",
+      "right_opening_span_from_inner_geometry": 171.0,
+      "right_horizontal_edges_y": [
+        -85.5,
+        85.5
+      ],
+      "independent_clear_span_constraint": null,
+      "right_vertical_rail_removed": true,
+      "screen_entry_side": "right",
+      "left_overlap_on_physical_panel": 2.1,
+      "measured_left_inactive_border_remaining": 6.9
+    },
+    "usb_c_opening": {
+      "width": 11.5,
+      "height": 7.5,
+      "model_center": [
+        0.0,
+        91.0,
+        7.0
+      ],
+      "vertical_drop_from_previous_revision": 3.0
+    },
+    "rear_left_edge_revision": {
+      "assembled_side": "left",
+      "flat_thinned_y_range": [
+        -85.0,
+        85.0
+      ],
+      "flat_thinned_span": 170.0,
+      "edge_drop": 0.0,
+      "edge_height": 16.6,
+      "lower_wall_thickness": 1.8,
+      "restored_top_band_height": 1.8,
+      "restored_top_band_thickness": 0.8,
+      "minimum_extrusion_lines_at_0p4mm": 2,
+      "inward_ledge_removed": true,
+      "opposite_right_edge_restored": true,
+      "pure_straight_length": 168.0,
+      "corner_transition_extension_each_end": 1.0
+    },
+    "lipo_indicator_window": {
+      "purpose": "charge status LED plus four-segment battery gauge",
+      "width": 4.5,
+      "height": 12.0,
+      "assembled_center": [
+        16.41,
+        70.824
+      ],
+      "rear_model_center": [
+        -16.41,
+        70.824
+      ],
+      "official_led_points_assembled": [
+        [
+          16.423,
+          74.592
+        ],
+        [
+          16.423,
+          72.941
+        ],
+        [
+          16.423,
+          69.639
+        ],
+        [
+          16.423,
+          71.29
+        ],
+        [
+          16.36,
+          65.656
+        ]
+      ]
+    },
+    "lipo_switch_access": {
+      "purpose": "operate the Lipo Rider Plus SW1 slider without removing the rear cover",
+      "width": 3.8,
+      "height": 7.0,
+      "corner_radius": 1.0,
+      "official_eagle_center": [
+        28.575,
+        25.186
+      ],
+      "assembled_center": [
+        15.407,
+        59.352
+      ],
+      "rear_model_center": [
+        -15.407,
+        59.352
+      ],
+      "official_package": [
+        2.7,
+        6.7,
+        3.2
+      ],
+      "operation": "fingernail or small non-metallic slider tool"
+    },
+    "lipo_combined_led_switch_opening": {
+      "revision": "Rev I",
+      "regular_opening_enabled": true,
+      "width": 5.2,
+      "height": 21.0,
+      "corner_radius": 1.0,
+      "assembled_center": [
+        16.084,
+        66.338
+      ],
+      "rear_model_center": [
+        -16.084,
+        66.338
+      ],
+      "shape": "single regular rounded rectangle",
+      "full_bounding_rectangle_used": true
+    },
+    "rear_button_labels": {
+      "outside_view_text": [
+        "BOOT",
+        "RESET"
+      ],
+      "pre_mirrored_in_model_x": true,
+      "position": "above_button_hole",
+      "vertical_offset_from_hole_center": 6.0,
+      "boot_label_model_center": [
+        50.146,
+        20.905
+      ],
+      "reset_label_model_center": [
+        34.758,
+        20.678
+      ],
+      "pixel_pitch": 0.5,
+      "nominal_stroke": 0.58,
+      "engraving_depth": 0.6,
+      "viewing_direction": "physical rear/bottom outside, USB-C edge at top"
+    }
+  },
+  "battery": {
+    "nominal_envelope": [
+      94.0,
+      62.0,
+      10.0
+    ],
+    "carrier_recess_depth": 0.5,
+    "underlay_max": 0.2,
+    "stack_from_carrier_underside": 11.1,
+    "clearance_below_magnet_bar_boss": 1.3
+  },
+  "magnets": {
+    "quantity": 3,
+    "type": "flexible ferrite magnetic powder plus rubber permanent-magnet sheet",
+    "nominal_pieces": [
+      [
+        90.0,
+        50.0,
+        2.0
+      ],
+      [
+        90.0,
+        50.0,
+        2.0
+      ],
+      [
+        50.0,
+        20.0,
+        2.0
+      ]
+    ],
+    "large_pair_orientation": "each 90 mm side vertical; 50 mm sides touch at X=0",
+    "large_pair_shared_pocket": [
+      100.6,
+      90.6,
+      2.2
+    ],
+    "small_pocket": [
+      20.6,
+      50.6,
+      2.2
+    ],
+    "xy_clearance_per_outer_edge": 0.3,
+    "outer_skin": 0.4,
+    "outer_skin_material": "PLA",
+    "adhesive": "factory pressure-sensitive backing or thin acrylic transfer adhesive",
+    "magnets_require_cutting": false,
+    "assembled_bars_xywh": [
+      [
+        -25.0,
+        -36.5,
+        50.0,
+        90.0
+      ],
+      [
+        25.0,
+        -36.5,
+        50.0,
+        90.0
+      ],
+      [
+        46.0,
+        55.0,
+        20.0,
+        50.0
+      ]
+    ],
+    "nominal_face_area_total_mm2": 10000.0,
+    "clearances": {
+      "magnet_to_esp32_board": 3.55,
+      "boss_to_esp32_board": 2.75,
+      "magnet_to_esp32_antenna": 51.85,
+      "boss_to_esp32_antenna": 51.05,
+      "magnet_to_despi_c02": 0.0,
+      "boss_to_despi_c02": 0.0,
+      "magnet_to_lipo_rider": 17.499,
+      "boss_to_lipo_rider": 16.699,
+      "boss_to_fastener_tube": 2.1,
+      "boss_to_button_counterbore": 1.478,
+      "boss_to_boss": 0.0,
+      "nominal_face_area_total_mm2": 10000.0
+    }
+  },
+  "components": {
+    "battery_center": [
+      0.0,
+      -50.5
+    ],
+    "esp32_center": [
+      -42.0,
+      44.0
+    ],
+    "esp32_holes": [
+      [
+        -53.0,
+        14.0
+      ],
+      [
+        -31.0,
+        14.0
+      ],
+      [
+        -53.0,
+        74.0
+      ],
+      [
+        -31.0,
+        74.0
+      ]
+    ],
+    "despi_center": [
+      29.0,
+      1.0
+    ],
+    "lipo_center": [
+      5.461,
+      67.4885
+    ]
+  },
+  "corner_coupons": {
+    "physical_corner": "upper-right",
+    "front_and_carrier_crop_bounds": [
+      25.0,
+      60.0,
+      55.0,
+      92.0
+    ],
+    "front_left_retainer_crop_bounds": [
+      -60.0,
+      -25.0,
+      55.0,
+      92.0
+    ],
+    "front_right_open_crop_bounds": [
+      25.0,
+      60.0,
+      55.0,
+      92.0
+    ],
+    "rear_rev_b_crop_bounds": [
+      -60.0,
+      -25.0,
+      55.0,
+      92.0
+    ],
+    "raw_stl_fastener_centres": {
+      "front": [
+        13.0,
+        32.9
+      ],
+      "carrier": [
+        13.0,
+        32.9
+      ],
+      "rear_rev_b": [
+        22.0,
+        32.9
+      ]
+    },
+    "assembled_fastener_centres_after_rear_turnover": {
+      "front": [
+        13.0,
+        32.9
+      ],
+      "carrier": [
+        13.0,
+        32.9
+      ],
+      "rear_rev_b": [
+        13.0,
+        32.9
+      ]
+    },
+    "preferred_rear_coupon": "fit_test_rear_corner_clearance_v0_7_rev_e.stl",
+    "preferred_rear_coupon_validates": [
+      "R3.3 front-post relief with 0.7 mm radial clearance",
+      "0.6 mm axial relief into the rear screw tube",
+      "0.5 mm x 45-degree fastener-mouth lead-in",
+      "first 1.2 mm rear-corner entry relief and mouth chamfer"
+    ]
+  },
+  "rear_openings_coupon": {
+    "crop_bounds": [
+      -27.0,
+      12.0,
+      55.0,
+      92.0
+    ],
+    "validates": [
+      "USB-C male plug insertion",
+      "five Lipo Rider LEDs visible",
+      "Lipo Rider SW1 can travel fully between ON and OFF",
+      "LED and SW1 share one regular 5.2 x 21.0 mm R1.0 opening"
+    ]
+  },
+  "usb_c_opening_coupon": {
+    "crop_bounds": [
+      -10.0,
+      10.0,
+      84.0,
+      92.0
+    ],
+    "filename": "fit_test_usb_c_opening_11p5x7p5_v0_7.stl",
+    "validates": [
+      "USB-C male plug passes through the 11.5 x 7.5 mm opening",
+      "opening remains centred at the existing horizontal and vertical position",
+      "top wall around the opening prints continuously"
+    ]
+  },
+  "rear_left_wall_coupon": {
+    "crop_bounds": [
+      -60.0,
+      -52.0,
+      78.0,
+      92.0
+    ],
+    "validates": [
+      "left inward ledge removed",
+      "left wall opening edge remains level at the full 16.6 mm height",
+      "original lower left wall remains 1.8 mm thick",
+      "only the restored 1.8 mm-high top band is 0.8 mm thick over the 170 mm span",
+      "upper transition reaches Y=85 mm without changing the R8 outer outline"
+    ]
+  },
+  "button_label_coupon": {
+    "crop_bounds": [
+      25.0,
+      58.0,
+      11.0,
+      24.5
+    ],
+    "validates": [
+      "BOOT and RESET read normally from the rear outside",
+      "0.58 mm nominal bitmap stroke slices clearly with a 0.4 mm nozzle",
+      "0.60 mm engraving remains visible without cutting through the base skin"
+    ]
+  },
+  "parts": {
+    "front_bezel_v0_7": {
+      "file": "front_bezel_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        6.0
+      ],
+      "volume_mm3": 15907.91
+    },
+    "electronics_carrier_v0_7": {
+      "file": "electronics_carrier_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        115.4,
+        179.4,
+        4.2
+      ],
+      "volume_mm3": 26948.88
+    },
+    "rear_cover_v0_7": {
+      "file": "rear_cover_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "rear_cover_v0_7_soft_magnets_2x90x50_1x50x20": {
+      "file": "rear_cover_v0_7_soft_magnets_2x90x50_1x50x20.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "rear_cover_v0_7_rev_e_dfm_clearance": {
+      "file": "rear_cover_v0_7_rev_e_dfm_clearance.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "rear_cover_v0_7_rev_f_flat_left_wall_0p8mm": {
+      "file": "rear_cover_v0_7_rev_f_flat_left_wall_0p8mm.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "rear_cover_v0_7_rev_g_lipo_switch_access": {
+      "file": "rear_cover_v0_7_rev_g_lipo_switch_access.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "rear_cover_v0_7_rev_h_combined_lipo_led_switch_opening": {
+      "file": "rear_cover_v0_7_rev_h_combined_lipo_led_switch_opening.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "rear_cover_v0_7_rev_i_regular_lipo_led_switch_opening": {
+      "file": "rear_cover_v0_7_rev_i_regular_lipo_led_switch_opening.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        120.0,
+        184.0,
+        16.6
+      ],
+      "volume_mm3": 38372.2
+    },
+    "fit_test_13_6mm_assembled_height_v0_7": {
+      "file": "fit_test_13_6mm_assembled_height_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        42.0,
+        20.0,
+        17.6
+      ],
+      "volume_mm3": 4012.8
+    },
+    "fit_test_12_2mm_battery_magnet_zone_v0_7": {
+      "file": "fit_test_12_2mm_battery_magnet_zone_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        42.0,
+        20.0,
+        16.4
+      ],
+      "volume_mm3": 3955.2
+    },
+    "fit_test_soft_magnet_2mm_skin_0p4_v0_7": {
+      "file": "fit_test_soft_magnet_2mm_skin_0p4_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        26.6,
+        56.6,
+        2.6
+      ],
+      "volume_mm3": 1612.24
+    },
+    "fit_test_lipo_usb_led_openings_v0_7": {
+      "file": "fit_test_lipo_usb_led_openings_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        39.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 2892.65
+    },
+    "fit_test_lipo_usb_led_switch_openings_v0_7_rev_g": {
+      "file": "fit_test_lipo_usb_led_switch_openings_v0_7_rev_g.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        39.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 2892.65
+    },
+    "fit_test_lipo_combined_led_switch_opening_v0_7_rev_h": {
+      "file": "fit_test_lipo_combined_led_switch_opening_v0_7_rev_h.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        39.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 2892.65
+    },
+    "fit_test_lipo_regular_led_switch_opening_v0_7_rev_i": {
+      "file": "fit_test_lipo_regular_led_switch_opening_v0_7_rev_i.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        39.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 2892.65
+    },
+    "fit_test_usb_c_opening_11p5x7p5_v0_7": {
+      "file": "fit_test_usb_c_opening_11p5x7p5_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        20.0,
+        8.0,
+        16.6
+      ],
+      "volume_mm3": 673.55
+    },
+    "fit_test_rear_left_flat_wall_0p8mm_v0_7_rev_f": {
+      "file": "fit_test_rear_left_flat_wall_0p8mm_v0_7_rev_f.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        8.0,
+        14.0,
+        16.6
+      ],
+      "volume_mm3": 589.81
+    },
+    "fit_test_boot_reset_labels_v0_7": {
+      "file": "fit_test_boot_reset_labels_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        33.0,
+        13.5,
+        1.4
+      ],
+      "volume_mm3": 494.18
+    },
+    "fit_test_front_corner_v0_7": {
+      "file": "fit_test_front_corner_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        6.0
+      ],
+      "volume_mm3": 1676.73
+    },
+    "fit_test_front_corner_v0_7_rev_b_uniform_3_6mm": {
+      "file": "fit_test_front_corner_v0_7_rev_b_uniform_3_6mm.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        6.0
+      ],
+      "volume_mm3": 1676.73
+    },
+    "fit_test_front_left_retainer_v0_7_rev_e_square_inner": {
+      "file": "fit_test_front_left_retainer_v0_7_rev_e_square_inner.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        6.0
+      ],
+      "volume_mm3": 1818.02
+    },
+    "fit_test_front_right_open_v0_7_rev_f_continuous_edge": {
+      "file": "fit_test_front_right_open_v0_7_rev_f_continuous_edge.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        6.0
+      ],
+      "volume_mm3": 1676.73
+    },
+    "fit_test_carrier_corner_v0_7": {
+      "file": "fit_test_carrier_corner_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        32.7,
+        34.7,
+        1.4
+      ],
+      "volume_mm3": 1545.57
+    },
+    "fit_test_carrier_corner_v0_7_rev_b_boss_relief_r2_9": {
+      "file": "fit_test_carrier_corner_v0_7_rev_b_boss_relief_r2_9.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        32.7,
+        34.7,
+        1.4
+      ],
+      "volume_mm3": 1545.57
+    },
+    "fit_test_rear_corner_v0_7": {
+      "file": "fit_test_rear_corner_v0_7.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 3393.0
+    },
+    "fit_test_rear_corner_v0_7_rev_b_opposite_side": {
+      "file": "fit_test_rear_corner_v0_7_rev_b_opposite_side.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 3393.0
+    },
+    "fit_test_rear_corner_v0_7_rev_c_boss_relief_r2_9": {
+      "file": "fit_test_rear_corner_v0_7_rev_c_boss_relief_r2_9.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 3393.0
+    },
+    "fit_test_rear_corner_clearance_v0_7_rev_e": {
+      "file": "fit_test_rear_corner_clearance_v0_7_rev_e.stl",
+      "watertight": true,
+      "is_volume": true,
+      "body_count": 1,
+      "size_mm": [
+        35.0,
+        37.0,
+        16.6
+      ],
+      "volume_mm3": 3393.0
+    }
+  },
+  "previews": [
+    "compact_enclosure_overview_v0_7.png",
+    "electronics_layout_v0_7.png",
+    "assembly_effect_v0_7.png",
+    "installed_effect_v0_7.png",
+    "exploded_view_v0_7.png",
+    "corner_fit_assembly_v0_7.png",
+    "rear_coupon_hole_revision_v0_7_rev_b.png",
+    "rear_openings_detail_v0_7.png",
+    "rear_left_wall_flat_revision_v0_7_rev_f.png",
+    "front_retainer_revision_v0_7_rev_f.png",
+    "rear_button_labels_outside_v0_7.png",
+    "rear_dfm_clearance_revision_v0_7_rev_e.png"
+  ],
+  "templates": [
+    "placement_template_v0_7_1to1.svg"
+  ],
+  "parameters": {
+    "case_width": 120.0,
+    "case_height": 184.0,
+    "corner_radius": 8.0,
+    "front_face_thickness": 2.4,
+    "front_feature_depth": 6.0,
+    "rear_depth": 16.6,
+    "assembled_thickness": 19.0,
+    "rear_skin": 1.4,
+    "rear_inner_width": 116.4,
+    "rear_inner_height": 180.4,
+    "rear_wall_min": 1.8,
+    "carrier_width": 115.4,
+    "carrier_height": 179.4,
+    "carrier_thickness": 1.4,
+    "carrier_fit_per_side": 0.5,
+    "screen_body_width": 111.2,
+    "screen_body_height": 170.2,
+    "screen_pocket_width": 112.0,
+    "screen_pocket_height": 171.0,
+    "screen_window_width": 99.0,
+    "screen_window_height": 164.0,
+    "screen_locator_outer_width": 112.8,
+    "screen_locator_outer_height": 176.8,
+    "screen_locator_depth": 1.8,
+    "battery_width": 94.0,
+    "battery_height": 62.0,
+    "battery_thickness": 10.0,
+    "battery_center_x": 0.0,
+    "battery_center_y": -50.5,
+    "esp_width": 25.4,
+    "esp_height": 63.3,
+    "esp_center_x": -42.0,
+    "esp_center_y": 44.0,
+    "esp_mount_pitch_x": 22.0,
+    "esp_mount_pitch_y": 60.0,
+    "esp_post_diameter": 5.8,
+    "esp_post_top": 4.2,
+    "esp_body_envelope": 8.0,
+    "esp_pilot": 1.7,
+    "esp_pilot_depth": 2.5,
+    "despi_width": 42.0,
+    "despi_height": 24.0,
+    "despi_center_x": 29.0,
+    "despi_center_y": 1.0,
+    "despi_body_envelope": 4.0,
+    "lipo_width": 25.48,
+    "lipo_height": 40.877,
+    "lipo_center_x": 5.461,
+    "lipo_center_y": 67.4885,
+    "lipo_post_diameter": 6.2,
+    "lipo_post_top": 4.0,
+    "lipo_body_envelope": 7.5,
+    "lipo_pilot": 1.8,
+    "case_fastener_pilot": 1.7,
+    "case_fastener_clearance": 2.4,
+    "case_fastener_post_diameter": 5.2,
+    "case_fastener_tube_diameter": 6.4,
+    "case_fastener_counterbore_diameter": 4.8,
+    "case_fastener_counterbore_depth": 2.4,
+    "case_fastener_length": 14.0,
+    "charge_cutout_width": 11.5,
+    "charge_cutout_height": 7.5,
+    "charge_cutout_center_x": 0.0,
+    "charge_cutout_center_y": 91.0,
+    "charge_cutout_center_z": 7.0,
+    "button_access_diameter": 4.2,
+    "button_counterbore_diameter": 7.2,
+    "button_counterbore_depth": 1.0,
+    "rear_inner_corner_radius": 6.2,
+    "front_retainer_width": 2.9,
+    "front_retainer_edge_inset": 3.6,
+    "front_retainer_outer_radius": 4.4,
+    "front_retainer_inner_radius": 1.5,
+    "front_retainer_left_inner_corner_radius": 0.0,
+    "front_retainer_left_inner_corner_style": "square_90_degree",
+    "front_retainer_to_rear_radial_clearance": 1.8,
+    "front_retainer_top_bottom_edge_inset": 3.6,
+    "front_retainer_right_end_style": "continuous_inner_edges_to_outer_arcs_no_step",
+    "front_right_retainer_removed": true,
+    "battery_recess_depth": 0.5,
+    "battery_underlay_max": 0.2,
+    "front_boss_relief_radial_clearance": 0.7,
+    "rear_boss_relief_axial_depth_into_tube": 0.6,
+    "rear_boss_relief_entry_chamfer": 0.5,
+    "rear_corner_entry_relief_depth": 1.2,
+    "rear_corner_entry_radial_relief": 0.4,
+    "rear_corner_entry_chamfer": 0.5,
+    "rear_corner_contact_relief": 0.3,
+    "carrier_front_boss_relief_diameter": 5.8,
+    "magnet_bar_length": 90.0,
+    "magnet_bar_width": 50.0,
+    "magnet_bar_thickness": 2.0,
+    "magnet_bar_xy_clearance_per_side": 0.3,
+    "magnet_bar_pocket_depth": 2.2,
+    "magnet_bar_outer_skin": 0.4,
+    "magnet_bar_boss_wall": 0.8,
+    "magnet_bar_boss_corner_radius": 1.8,
+    "magnet_coupon_width": 20.0,
+    "magnet_coupon_height": 50.0,
+    "charge_cutout_vertical_drop": 3.0,
+    "rear_left_flat_span": 170.0,
+    "rear_left_lower_wall_thickness": 1.8,
+    "rear_left_restored_band_height": 1.8,
+    "rear_left_restored_band_thickness": 0.8,
+    "rear_left_edge_drop": 0.0,
+    "rear_left_flat_y_min": -85.0,
+    "rear_left_flat_y_max": 85.0,
+    "rear_left_inward_ledge_removed": true,
+    "lipo_indicator_window_width": 4.5,
+    "lipo_indicator_window_height": 12.0,
+    "lipo_indicator_window_corner_radius": 1.5,
+    "lipo_switch_window_width": 3.8,
+    "lipo_switch_window_height": 7.0,
+    "lipo_switch_window_corner_radius": 1.0,
+    "lipo_switch_package_width": 2.7,
+    "lipo_switch_package_length": 6.7,
+    "lipo_regular_opening_width": 5.2,
+    "lipo_regular_opening_height": 21.0,
+    "lipo_regular_opening_corner_radius": 1.0,
+    "lipo_regular_opening_enabled": true,
+    "rear_label_pixel": 0.5,
+    "rear_label_gap": 0.4,
+    "rear_label_overlap": 0.08,
+    "rear_label_depth": 0.6,
+    "rear_label_pre_mirrored_for_bottom_view": true,
+    "rear_label_vertical_offset": 6.0,
+    "rear_label_position": "above_button_hole"
+  }
+}

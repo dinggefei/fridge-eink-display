@@ -1,0 +1,58 @@
+name: Backend tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: python -m pip install uv
+      - name: Install dependencies
+        run: uv sync --frozen
+      - name: Run tests
+        run: uv run pytest
+
+  clients:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run mini program tests
+        run: node --test miniapp/tests/*.test.cjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run Kindle client tests
+        run: |
+          python -m pip install pytest
+          python -m pytest -q kindle/tests
+
+  hardware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CAD validation dependencies
+        run: python -m pip install -r hardware/requirements.txt
+      - name: Validate V0.7 enclosure
+        run: python hardware/enclosure_v0_7/validate_enclosure_v0_7.py
+      - name: Validate V0.9 engineering enclosure
+        run: python hardware/enclosure_v0_9_ultrathin/validate_enclosure_v0_9.py

@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">我的</text>
+    <text class="page-subtitle">{{nickname}} · 管理家庭、设备和提醒</text>
+    <text class="status-red profile-error" wx:if="{{errorMessage}}">{{errorMessage}}</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">{{householdName}}</text>
+    <view class="setting-row setting-row-link" bindtap="goToHousehold">
+      <text>家庭设置</text>
+      <text class="muted">{{memberCount}} 人 ›</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="setting-row setting-row-link" bindtap="goToDevice">
+      <view>
+        <text class="setting-title">墨水屏设备</text>
+        <text class="setting-description">绑定设备并配置 2.4GHz Wi-Fi</text>
+      </view>
+      <text class="status-yellow">{{deviceStatus}} ›</text>
+    </view>
+    <view class="setting-row setting-row-link" bindtap="goToDisplaySettings">
+      <view>
+        <text class="setting-title">水墨屏显示</text>
+        <text class="setting-description">选择食材管理、黄历或独立相册</text>
+      </view>
+      <text class="muted">设置 ›</text>
+    </view>
+    <view class="setting-row setting-row-link" bindtap="goToReminder">
+      <text>每日提醒</text>
+      <text class="muted">设置 ›</text>
+    </view>
+    <view class="setting-row setting-row-link" bindtap="goToShelfLife">
+      <text>保鲜规则</text>
+      <text class="muted">管理 ›</text>
+    </view>
+    <view class="setting-row setting-row-link" bindtap="goToRecognitionHistory">
+      <text>识别记录</text>
+      <text class="muted">查看 ›</text>
+    </view>
+    <view class="setting-row setting-row-link" bindtap="goToPrivacyData">
+      <text>隐私与数据</text>
+      <text class="muted">管理 ›</text>
+    </view>
+  </view>
+</view>

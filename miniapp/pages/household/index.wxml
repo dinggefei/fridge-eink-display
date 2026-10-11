@@ -1,0 +1,82 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">家庭管理</text>
+    <text class="page-subtitle">加入多个家庭，并随时切换当前冰箱</text>
+    <text class="status-red error" wx:if="{{errorMessage}}">{{errorMessage}}</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">当前家庭</text>
+    <picker
+      range="{{households}}"
+      range-key="name"
+      bindchange="switchHousehold"
+    >
+      <view class="picker-value">
+        <text wx:for="{{households}}" wx:key="id" wx:if="{{item.id === currentHouseholdId}}">
+          {{item.name}}
+        </text>
+        <text class="muted">切换 ›</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="card">
+    <text class="section-title">冰箱名称</text>
+    <text class="muted help">该名称会显示在小程序和水墨屏顶部。</text>
+    <input
+      class="text-input name-input"
+      value="{{householdName}}"
+      maxlength="40"
+      bindinput="onHouseholdNameInput"
+      placeholder="例如：小明的冰箱"
+      disabled="{{currentRole !== 'admin' || savingName}}"
+    />
+    <button
+      wx:if="{{currentRole === 'admin'}}"
+      class="secondary-button action"
+      bindtap="saveHouseholdName"
+      loading="{{savingName}}"
+      disabled="{{savingName}}"
+    >保存名称</button>
+    <text class="muted permission-tip" wx:else>只有家庭管理员可以修改名称。</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">家庭成员</text>
+    <view class="member-row" wx:for="{{members}}" wx:key="user_id">
+      <view>
+        <text class="member-name">{{item.nickname || "微信用户"}}</text>
+        <text class="member-role">{{item.role === "admin" ? "管理员" : "普通成员"}}</text>
+      </view>
+      <button
+        wx:if="{{currentRole === 'admin' && item.role !== 'admin'}}"
+        class="remove-button"
+        size="mini"
+        data-member="{{item}}"
+        bindtap="removeMember"
+      >移除</button>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{currentRole === 'admin'}}">
+    <text class="section-title">邀请成员</text>
+    <text class="muted help">邀请码仅可使用一次，生成后 24 小时内有效。</text>
+    <button class="secondary-button action" bindtap="createInvitation">生成邀请码</button>
+    <view class="invite-result" wx:if="{{invitationCode}}">
+      <text class="invite-code">{{invitationCode}}</text>
+      <button size="mini" class="copy-button" bindtap="copyInvitation">复制</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">加入其他家庭</text>
+    <input
+      class="text-input"
+      placeholder="输入管理员发来的邀请码"
+      value="{{joinCode}}"
+      bindinput="onJoinCodeInput"
+    />
+    <button class="primary-button action" bindtap="joinHousehold">加入家庭</button>
+  </view>
+</view>

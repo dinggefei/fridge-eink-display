@@ -1,0 +1,306 @@
+.notice-card {
+  border-color: #eed79b;
+  background: #fff9e9;
+}
+
+.notice-title,
+.notice-text,
+.setting-title,
+.setting-description,
+.asset-name,
+.asset-symbol,
+.asset-price,
+.asset-change,
+.active-tip,
+.empty-title,
+.search-result-name,
+.search-result-symbol {
+  display: block;
+}
+
+.notice-title {
+  color: #8a6413;
+  font-weight: 650;
+}
+
+.notice-text {
+  margin-top: 8rpx;
+  color: #7f7356;
+  font-size: 23rpx;
+}
+
+.setting-row,
+.asset-heading,
+.asset-main,
+.asset-footer,
+.asset-actions,
+.search-type-tabs,
+.search-row,
+.search-result {
+  display: flex;
+  align-items: center;
+}
+
+.setting-row {
+  min-height: 104rpx;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+}
+
+.setting-row-link {
+  padding: 8rpx 0;
+}
+
+.setting-title {
+  font-weight: 650;
+}
+
+.setting-description {
+  max-width: 470rpx;
+  margin-top: 6rpx;
+  color: #858c84;
+  font-size: 21rpx;
+  line-height: 1.5;
+}
+
+.search-type-tabs {
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+  overflow-x: auto;
+}
+
+.search-type-tab {
+  flex: 1 0 auto;
+  min-width: 110rpx;
+  padding: 14rpx 12rpx;
+  border: 1rpx solid #d8ded8;
+  border-radius: 999rpx;
+  color: #646d65;
+  font-size: 23rpx;
+  text-align: center;
+}
+
+.search-type-tab-active {
+  border-color: #246b4b;
+  background: #eaf4ee;
+  color: #246b4b;
+  font-weight: 650;
+}
+
+.search-row {
+  gap: 12rpx;
+}
+
+.search-input {
+  min-width: 0;
+  height: 82rpx;
+  flex: 1;
+  padding: 0 20rpx;
+  border: 1rpx solid #d8ded8;
+  border-radius: 16rpx;
+  background: #fafbf9;
+  font-size: 25rpx;
+}
+
+.search-button,
+.result-add-button {
+  margin: 0;
+  border: 0;
+  background: #246b4b;
+  color: #ffffff;
+}
+
+.search-button {
+  width: 140rpx;
+  font-size: 25rpx;
+  line-height: 82rpx;
+}
+
+.search-empty {
+  padding: 26rpx 8rpx 6rpx;
+  text-align: center;
+}
+
+.search-result {
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eef1ed;
+}
+
+.search-result:last-child {
+  border-bottom: 0;
+}
+
+.search-result-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.search-result-name {
+  overflow: hidden;
+  font-size: 27rpx;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-result-symbol {
+  margin-top: 5rpx;
+  color: #737b74;
+  font-size: 21rpx;
+}
+
+.result-add-button {
+  width: 126rpx;
+  margin-left: 16rpx;
+  font-size: 23rpx;
+  line-height: 62rpx;
+}
+
+.result-added-button {
+  background: #e9eeea;
+  color: #7b847c;
+}
+
+.search-button::after,
+.result-add-button::after {
+  border: 0;
+}
+
+.asset-heading {
+  justify-content: space-between;
+  margin: 32rpx 2rpx 18rpx;
+}
+
+.asset-heading .section-title {
+  margin-bottom: 0;
+}
+
+.empty-card,
+.error-card {
+  text-align: center;
+}
+
+.empty-title {
+  margin-bottom: 10rpx;
+  font-weight: 650;
+}
+
+.retry-button {
+  width: 240rpx;
+  margin-top: 18rpx;
+}
+
+.asset-card {
+  border-left: 8rpx solid #c42b25;
+}
+
+.asset-main,
+.asset-footer {
+  justify-content: space-between;
+}
+
+.asset-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.asset-name {
+  overflow: hidden;
+  font-size: 31rpx;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asset-symbol {
+  margin-top: 5rpx;
+  color: #737b74;
+  font-size: 22rpx;
+}
+
+.asset-quote {
+  flex: 0 0 auto;
+  margin-left: 20rpx;
+  text-align: right;
+}
+
+.asset-price {
+  color: #111111;
+  font-size: 31rpx;
+  font-weight: 700;
+}
+
+.asset-change {
+  margin-top: 5rpx;
+  font-size: 25rpx;
+  font-weight: 650;
+}
+
+.change-up {
+  color: #c42b25;
+}
+
+.change-down {
+  color: #111111;
+}
+
+.asset-footer {
+  margin-top: 18rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #eef1ed;
+}
+
+.quote-status {
+  padding: 5rpx 14rpx;
+  border: 2rpx solid #d99a00;
+  border-radius: 999rpx;
+  font-size: 21rpx;
+}
+
+.asset-actions {
+  flex: 0 0 auto;
+  gap: 8rpx;
+}
+
+.order-button,
+.remove-button {
+  width: 96rpx;
+  min-width: 0;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 22rpx;
+  line-height: 58rpx;
+}
+
+.order-button {
+  color: #4c554d;
+}
+
+.remove-button {
+  color: #c42b25;
+}
+
+.order-button::after,
+.remove-button::after {
+  border: 0;
+}
+
+.activate-button {
+  margin: 34rpx 0 20rpx;
+}
+
+.active-tip {
+  padding: 10rpx 28rpx 50rpx;
+  color: #858c84;
+  font-size: 23rpx;
+  line-height: 1.6;
+  text-align: center;
+}

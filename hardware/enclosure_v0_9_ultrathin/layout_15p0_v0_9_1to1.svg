@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="184mm" viewBox="0 0 120 184">
+<style>text{font-family:Arial,"PingFang SC",sans-serif;font-size:2.7px;fill:#162b25}.outer{fill:#fafbf9;stroke:#173d32;stroke-width:.45}.inner{fill:none;stroke:#9aaba5;stroke-width:.3;stroke-dasharray:1.2 1}.battery{fill:#f4d47a;stroke:#9b6d00;stroke-width:.35}.board{fill:#bedbd0;stroke:#26745d;stroke-width:.35}.despi{fill:#cfd7ec;stroke:#526a9a;stroke-width:.35}.magnet{fill:#efb2a0;stroke:#a3422d;stroke-width:.35;fill-opacity:.72}.fastener{fill:none;stroke:#b42525;stroke-width:.35}.note{font-size:2.2px;fill:#566c64}</style>
+<rect class="outer" x="0.25" y="0.25" width="119.5" height="183.5" rx="8"/>
+<rect class="inner" x="1.800" y="1.800" width="116.400" height="180.400" rx="6.2"/>
+<text x="60" y="6" text-anchor="middle">V0.9 超薄排布研究｜1:1｜USB-C 在上</text>
+<rect class="magnet" x="9.700" y="83.200" width="50.600" height="90.600" rx="1.2"/><text x="35.000" y="128.500" text-anchor="middle">90×50×2</text>
+<rect class="magnet" x="59.700" y="83.200" width="50.600" height="90.600" rx="1.2"/><text x="85.000" y="128.500" text-anchor="middle">90×50×2</text>
+<rect class="magnet" x="95.700" y="11.700" width="20.600" height="50.600" rx="1.2"/><text x="106.000" y="37.000" text-anchor="middle">50×20×2</text>
+<rect class="battery" x="13.000" y="111.500" width="94.000" height="62.000" rx="1.2"/><text x="60.000" y="142.500" text-anchor="middle">电池 94×62×8</text>
+<rect class="board" x="5.300" y="16.350" width="25.400" height="63.300" rx="1.2"/><text x="18.000" y="48.000" text-anchor="middle">ESP32</text>
+<rect class="board" x="52.721" y="4.073" width="25.480" height="40.877" rx="1.2"/><text x="65.461" y="24.511" text-anchor="middle">Lipo</text>
+<rect class="despi" x="68.000" y="79.000" width="42.000" height="24.000" rx="1.2"/><text x="89.000" y="91.000" text-anchor="middle">DESPI</text>
+<circle class="fastener" cx="22.000" cy="179.900" r="2.6"/>
+<circle class="fastener" cx="98.000" cy="179.900" r="2.6"/>
+<circle class="fastener" cx="22.000" cy="4.100" r="2.6"/>
+<circle class="fastener" cx="98.000" cy="4.100" r="2.6"/>
+<text class="note" x="60" y="178" text-anchor="middle">橙色为后盖磁片投影；元件与磁片可投影重叠，但必须满足 Z 向净空</text>
+<text class="note" x="60" y="181.5" text-anchor="middle">研究图，不可直接用于制造；正式结构须先通过局部检具</text>
+</svg>
