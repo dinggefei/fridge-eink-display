@@ -252,7 +252,7 @@ def main():
     esp_right = P["esp_center_x"] + P["esp_width"] / 2.0
     despi_left = P["despi_center_x"] - P["despi_width"] / 2.0
     manifest = {
-        "design": "RefrigeratorFoodManagement enclosure replacement V0.4",
+        "design": "FridgeEInkDisplay enclosure replacement V0.4",
         "units": "mm",
         "status": "verify 1:1 templates and fit coupons before full-size print",
         "reuse_without_reprint": ["front_bezel_v0_1.stl"],

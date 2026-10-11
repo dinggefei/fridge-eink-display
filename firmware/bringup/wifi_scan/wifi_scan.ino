@@ -62,7 +62,7 @@ void setup() {
   delay(2000);
 
   Serial.println();
-  Serial.println("=== RefrigeratorFoodManagement Wi-Fi scan ===");
+  Serial.println("=== FridgeEInkDisplay Wi-Fi scan ===");
   Serial.printf("Wi-Fi MAC: %s\n", WiFi.macAddress().c_str());
 
   WiFi.mode(WIFI_STA);

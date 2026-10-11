@@ -6,7 +6,7 @@
     <string>com.rfm.backend</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/YOUR_USERNAME/Projects/RefrigeratorFoodManagement/backend/.venv/bin/uvicorn</string>
+        <string>/Users/YOUR_USERNAME/Projects/FridgeEInkDisplay/backend/.venv/bin/uvicorn</string>
         <string>app.main:app</string>
         <string>--host</string>
         <string>0.0.0.0</string>
@@ -14,7 +14,7 @@
         <string>8000</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/Users/YOUR_USERNAME/Projects/RefrigeratorFoodManagement/backend</string>
+    <string>/Users/YOUR_USERNAME/Projects/FridgeEInkDisplay/backend</string>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>

@@ -8,7 +8,7 @@ void setup() {
   const uint32_t psram_mb = ESP.getPsramSize() / (1024U * 1024U);
 
   Serial.println();
-  Serial.println("=== RefrigeratorFoodManagement board check ===");
+  Serial.println("=== FridgeEInkDisplay board check ===");
   Serial.printf("Chip model : %s\n", ESP.getChipModel());
   Serial.printf("Chip cores : %u\n", ESP.getChipCores());
   Serial.printf("CPU freq   : %u MHz\n", ESP.getCpuFreqMHz());

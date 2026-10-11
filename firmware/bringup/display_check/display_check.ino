@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <SPI.h>
 
-// RefrigeratorFoodManagement GDEM075F53/JD79665CA bring-up.
+// FridgeEInkDisplay GDEM075F53/JD79665CA bring-up.
 // Initialization sequence checked against Good Display's official
 // "A32-GDEM075F53" ESP32 sample dated 2026-07-09.
 //

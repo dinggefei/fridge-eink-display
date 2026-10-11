@@ -365,7 +365,7 @@ def main():
     stl_path.write_bytes(trimesh.exchange.stl.export_stl(mesh))
 
     manifest = {
-        "design": "RefrigeratorFoodManagement replacement middle carrier V0.2",
+        "design": "FridgeEInkDisplay replacement middle carrier V0.2",
         "units": "mm",
         "reuse_without_reprint": ["front_bezel_v0_1.stl", "rear_cover_v0_1.stl"],
         "rear_cover_fasteners": {

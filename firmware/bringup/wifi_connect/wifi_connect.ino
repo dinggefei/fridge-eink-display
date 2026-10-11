@@ -44,7 +44,7 @@ void setup() {
   delay(2000);
 
   Serial.println();
-  Serial.println("=== RefrigeratorFoodManagement Wi-Fi connect ===");
+  Serial.println("=== FridgeEInkDisplay Wi-Fi connect ===");
 
   if (!configurationReady()) {
     Serial.println("ERROR: edit secrets.h before uploading.");

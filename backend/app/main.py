@@ -59,7 +59,7 @@ from app.settings import get_settings
 
 
 app = FastAPI(
-    title="RefrigeratorFoodManagement API",
+    title="FridgeEInkDisplay API",
     version="0.1.0",
 )
 app.include_router(auth_router)
@@ -82,7 +82,7 @@ app.include_router(shelf_life_router)
 @app.get("/health", tags=["system"])
 def health() -> dict[str, str]:
     return {
-        "service": "refrigerator-food-management",
+        "service": "fridge-eink-display",
         "status": "ok",
     }
 

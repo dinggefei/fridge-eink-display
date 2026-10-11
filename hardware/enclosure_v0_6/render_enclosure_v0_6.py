@@ -144,7 +144,7 @@ def main():
 
     image = Image.new("RGB", (1900, 1450), "#f4f2ec")
     draw = ImageDraw.Draw(image)
-    draw.text((48, 30), "箱门鲜知 V0.6 紧凑封闭外壳", fill="#17352b", font=load_font(44))
+    draw.text((48, 30), "冰箱水墨屏 V0.6 紧凑封闭外壳", fill="#17352b", font=load_font(44))
     draw.text((51, 88), "按实际 STL 渲染｜120 × 184 × 21.4 mm｜三件式可维护结构", fill="#52665f", font=load_font(24))
 
     panels = [

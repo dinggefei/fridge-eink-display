@@ -1,4 +1,4 @@
-name: refrigerator-food-management
+name: fridge-eink-display
 
 services:
   postgres:
@@ -39,7 +39,7 @@ services:
       - internal
 
   recognition-storage-init:
-    image: refrigerator-food-management-backend:local
+    image: fridge-eink-display-backend:local
     user: "0:0"
     command:
       - sh
@@ -54,7 +54,7 @@ services:
       - internal
 
   firmware-storage-init:
-    image: refrigerator-food-management-backend:local
+    image: fridge-eink-display-backend:local
     user: "0:0"
     command:
       - sh
@@ -74,7 +74,7 @@ services:
       dockerfile: Dockerfile
       args:
         PYPI_INDEX_URL: ${PYPI_INDEX_URL:-https://pypi.org/simple}
-    image: refrigerator-food-management-backend:local
+    image: fridge-eink-display-backend:local
     restart: unless-stopped
     env_file:
       - .env
@@ -120,7 +120,7 @@ services:
       - internal
 
   recognition-worker:
-    image: refrigerator-food-management-backend:local
+    image: fridge-eink-display-backend:local
     restart: unless-stopped
     env_file:
       - .env

@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-// RefrigeratorFoodManagement DESPI-C02 signal-line diagnostic.
+// FridgeEInkDisplay DESPI-C02 signal-line diagnostic.
 // Disconnect the e-paper FPC before running this sketch. The sketch drives
 // each ESP32-to-DESPI control/data line LOW and HIGH slowly so that the voltage
 // can be checked directly at the matching DESPI-C02 header pin.

@@ -42,7 +42,7 @@
 `--skip-mini-program-code` 只适合测试工具，不可用于出售设备：
 
 ```bash
-cd /path/to/RefrigeratorFoodManagement/backend
+cd /path/to/FridgeEInkDisplay/backend
 
 uv run python -m tools.factory_device create-batch \
   --count 1 \

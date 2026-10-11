@@ -1010,7 +1010,7 @@ wheels = [
 ]
 
 [[package]]
-name = "refrigerator-food-management-backend"
+name = "fridge-eink-display-backend"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

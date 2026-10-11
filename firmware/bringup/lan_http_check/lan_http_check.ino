@@ -76,7 +76,7 @@ void setup() {
   delay(2000);
 
   Serial.println();
-  Serial.println("=== RefrigeratorFoodManagement LAN HTTP check ===");
+  Serial.println("=== FridgeEInkDisplay LAN HTTP check ===");
 
   if (!connectWifi()) {
     Serial.println("RESULT: FAIL");

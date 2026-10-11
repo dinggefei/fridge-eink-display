@@ -1,5 +1,5 @@
 {
-  "design": "RefrigeratorFoodManagement enclosure tolerance correction V0.5",
+  "design": "FridgeEInkDisplay enclosure tolerance correction V0.5",
   "units": "mm",
   "status": "print matched corner coupons before full-size parts",
   "reuse_without_reprint": [

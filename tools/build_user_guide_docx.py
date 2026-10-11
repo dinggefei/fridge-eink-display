@@ -14,7 +14,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-OUT = DOCS / "箱门鲜知_用户使用说明书_V1.0.docx"
+OUT = DOCS / "冰箱水墨屏_用户使用说明书_V1.0.docx"
 
 FONT = "PingFang SC"
 GREEN = RGBColor(21, 60, 53)
@@ -330,7 +330,7 @@ def style_document(doc: Document) -> None:
 
     header = section.header.paragraphs[0]
     header.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    set_run(header.add_run("箱门鲜知  |  用户使用说明书"), size=9, color=MUTED)
+    set_run(header.add_run("冰箱水墨屏  |  用户使用说明书"), size=9, color=MUTED)
     add_page_number(section.footer.paragraphs[0])
 
 
@@ -343,7 +343,7 @@ def add_cover(doc: Document) -> None:
 
     title = doc.add_paragraph(style="Title")
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    set_run(title.add_run("箱门鲜知"), size=30, bold=True, color=GREEN)
+    set_run(title.add_run("冰箱水墨屏"), size=30, bold=True, color=GREEN)
     subtitle = doc.add_paragraph(style="Subtitle")
     subtitle.alignment = WD_ALIGN_PARAGRAPH.CENTER
     set_run(subtitle.add_run("用户使用说明书"), size=15, color=MUTED)
@@ -376,7 +376,7 @@ def add_quick_start(doc: Document) -> None:
 
 def add_overview(doc: Document) -> None:
     add_heading(doc, "1. 产品用途", 1)
-    add_text(doc, "箱门鲜知安装在冰箱门外侧。用户在微信小程序中维护食材、保鲜日期和待办事项；设备每 5 分钟检查一次新画面，并在内容变化时刷新四色墨水屏。")
+    add_text(doc, "冰箱水墨屏安装在冰箱门外侧。用户在微信小程序中维护食材、保鲜日期和待办事项；设备每 5 分钟检查一次新画面，并在内容变化时刷新四色墨水屏。")
     add_bullets(doc, ["最多显示 15 项食材及建议食用状态。", "最多显示 3 条待办事项。", "显示当前家庭名称、设备小程序码和画面生成时间。"])
     add_callout(doc, "墨水屏特性", "断电后仍保留最后一幅画面是正常现象，不代表设备仍在联网。")
     add_figure(doc, SCREEN, "墨水屏显示内容示意", width=3.55)
@@ -649,10 +649,10 @@ def build() -> None:
     doc = Document()
     style_document(doc)
     core = doc.core_properties
-    core.title = "箱门鲜知用户使用说明书"
+    core.title = "冰箱水墨屏用户使用说明书"
     core.subject = "冰箱食材管理墨水屏设备使用、配网、充电、安装与故障处理"
-    core.author = "箱门鲜知"
-    core.keywords = "箱门鲜知, 墨水屏, 冰箱食材管理, 使用说明书"
+    core.author = "冰箱水墨屏"
+    core.keywords = "冰箱水墨屏, 墨水屏, 冰箱食材管理, 使用说明书"
     core.comments = "V1.0"
 
     add_cover(doc)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the RefrigeratorFoodManagement portrait enclosure prototype.
+"""Generate the FridgeEInkDisplay portrait enclosure prototype.
 
 The model is intentionally parameterized and conservative.  It is a V0.1 fit
 prototype for the measured GDEM075F53, ESP32-S3 board, DESPI-C02, an 806090
@@ -361,7 +361,7 @@ def render_meshes(items, path: Path):
     canvas = Image.new("RGB", (1800, 900), "#f6f4ef")
     draw = ImageDraw.Draw(canvas)
     title_font = None
-    draw.text((60, 40), "RefrigeratorFoodManagement enclosure V0.1", fill="#18332a", font=title_font)
+    draw.text((60, 40), "FridgeEInkDisplay enclosure V0.1", fill="#18332a", font=title_font)
     palette = [(54, 114, 88), (224, 178, 79), (74, 99, 137)]
     panels = [(40, 100, 560, 840), (620, 100, 1140, 840), (1200, 100, 1720, 840)]
     angles = np.radians([58.0, 0.0, -38.0])
@@ -413,7 +413,7 @@ def main():
     }
 
     manifest = {
-        "design": "RefrigeratorFoodManagement portrait enclosure V0.1",
+        "design": "FridgeEInkDisplay portrait enclosure V0.1",
         "units": "mm",
         "status": "fit prototype; physical re-measurement required before production",
         "parameters": P,

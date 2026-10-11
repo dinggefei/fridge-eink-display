@@ -378,7 +378,7 @@ def main():
     rear = trimesh.load_mesh(OUTPUT / "rear_cover_v0_7.stl")
     image = Image.new("RGB", (1900, 1450), "#f4f2ec")
     draw = ImageDraw.Draw(image)
-    draw.text((48, 30), "箱门鲜知 V0.7 轻薄封闭外壳", fill="#17352b", font=r06.load_font(44))
+    draw.text((48, 30), "冰箱水墨屏 V0.7 轻薄封闭外壳", fill="#17352b", font=r06.load_font(44))
     draw.text((51, 88), "按实际 STL 渲染｜120 × 184 × 19 mm｜9颗 38×9×1.5 mm N45 硬磁条", fill="#52665f", font=r06.load_font(24))
     panels = [
         (45, 140, 925, 715),

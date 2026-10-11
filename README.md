@@ -1,4 +1,4 @@
-# 箱门鲜知 / RefrigeratorFoodManagement
+# 冰箱水墨屏 / Fridge E-Ink Display
 
 一个可自行搭建的低功耗冰箱门水墨屏项目。项目使用 ESP32-S3、7.5 英寸四色
 电子纸、微信小程序和 FastAPI 后端，把食材、待办、照片、黄历天气、天气预报、

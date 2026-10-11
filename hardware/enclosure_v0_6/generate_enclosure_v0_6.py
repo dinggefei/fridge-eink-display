@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the compact, fully enclosed RefrigeratorFoodManagement V0.6 shell.
+"""Generate the compact, fully enclosed FridgeEInkDisplay V0.6 shell.
 
 V0.6 preserves the validated electronic hardware and measured mounting data
 from V0.5, but replaces the oversized 128 x 200 x ~29 mm stack with a compact
@@ -727,7 +727,7 @@ def main():
     draw_placement_svg(template)
 
     manifest = {
-        "design": "RefrigeratorFoodManagement compact closed enclosure V0.6",
+        "design": "FridgeEInkDisplay compact closed enclosure V0.6",
         "units": "mm",
         "status": "engineering prototype; print fit/depth coupons before full shell",
         "preserves": ["V0.5 remains unchanged", "existing screen, battery, ESP32, DESPI and Lipo Rider"],

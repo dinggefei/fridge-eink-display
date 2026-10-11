@@ -3,7 +3,7 @@
   "compileType": "miniprogram",
   "libVersion": "trial",
   "miniprogramRoot": "./",
-  "projectname": "RefrigeratorFoodManagement",
+  "projectname": "FridgeEInkDisplay",
   "setting": {
     "checkSiteMap": true,
     "coverView": true,

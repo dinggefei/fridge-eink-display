@@ -1,7 +1,7 @@
 [project]
-name = "refrigerator-food-management-backend"
+name = "fridge-eink-display-backend"
 version = "0.1.0"
-description = "FastAPI backend for RefrigeratorFoodManagement"
+description = "FastAPI backend for FridgeEInkDisplay"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.16,<2",

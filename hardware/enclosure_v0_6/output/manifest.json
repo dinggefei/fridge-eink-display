@@ -1,5 +1,5 @@
 {
-  "design": "RefrigeratorFoodManagement compact closed enclosure V0.6",
+  "design": "FridgeEInkDisplay compact closed enclosure V0.6",
   "units": "mm",
   "status": "engineering prototype; print fit/depth coupons before full shell",
   "preserves": [

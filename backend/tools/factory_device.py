@@ -319,7 +319,7 @@ def render_pairing_frame(
     draw.rectangle((38, 72, 160, 82), fill=PANEL_YELLOW)
     _center_text(
         draw,
-        "欢迎使用箱门鲜知",
+        "欢迎使用冰箱水墨屏",
         y=30,
         font=title_font,
         fill=PANEL_BLACK,

@@ -70,7 +70,7 @@ curl http://127.0.0.1:8000/health
 预期响应：
 
 ```json
-{"service":"refrigerator-food-management","status":"ok"}
+{"service":"fridge-eink-display","status":"ok"}
 ```
 
 `--host 0.0.0.0` 允许同一局域网中的 ESP32-S3 访问服务。首次启动时如果

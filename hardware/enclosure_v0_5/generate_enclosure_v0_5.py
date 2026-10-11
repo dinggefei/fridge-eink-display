@@ -793,7 +793,7 @@ def main():
     ledge_overlap_y = (P["midplate_height"] - ledge_open_h) / 2.0
 
     manifest = {
-        "design": "RefrigeratorFoodManagement enclosure tolerance correction V0.5",
+        "design": "FridgeEInkDisplay enclosure tolerance correction V0.5",
         "units": "mm",
         "status": "print matched corner coupons before full-size parts",
         "reuse_without_reprint": ["front_bezel_v0_1.stl"],

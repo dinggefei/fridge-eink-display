@@ -482,7 +482,7 @@ def main():
     battery_top = P["battery_center_y"] + P["battery_height"] / 2.0
 
     manifest = {
-        "design": "RefrigeratorFoodManagement enclosure replacement V0.3",
+        "design": "FridgeEInkDisplay enclosure replacement V0.3",
         "units": "mm",
         "status": "full parts require fit-coupon approval before printing",
         "reuse_without_reprint": ["front_bezel_v0_1.stl"],

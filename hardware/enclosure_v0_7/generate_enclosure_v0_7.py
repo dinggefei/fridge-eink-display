@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the 120 x 184 x 19 mm RefrigeratorFoodManagement V0.7 enclosure.
+"""Generate the 120 x 184 x 19 mm FridgeEInkDisplay V0.7 enclosure.
 
 V0.7 keeps the V0.6 outline and electronics placement.  The current rear-cover
 revision replaces the previous nine hard magnet bars with two 90 x 50 x 2 mm
@@ -1279,7 +1279,7 @@ def main():
         P["assembled_thickness"] - P["case_fastener_counterbore_depth"] - P["front_feature_depth"]
     )
     manifest = {
-        "design": "RefrigeratorFoodManagement compact closed enclosure V0.7",
+        "design": "FridgeEInkDisplay compact closed enclosure V0.7",
         "units": "mm",
         "status": "engineering prototype; coupons required before full shell",
         "preserves": [

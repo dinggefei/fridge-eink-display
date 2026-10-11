@@ -1,1 +1,1 @@
-"""RefrigeratorFoodManagement backend."""
+"""FridgeEInkDisplay backend."""

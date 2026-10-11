@@ -38,7 +38,7 @@ constexpr char kBackendBaseUrl[] = "http://192.168.1.100:8000";
 
 ```text
 HTTP status : 200
-Response    : {"service":"refrigerator-food-management","status":"ok"}
+Response    : {"service":"fridge-eink-display","status":"ok"}
 RESULT: PASS
 ```
 

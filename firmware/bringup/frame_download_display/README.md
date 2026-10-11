@@ -30,7 +30,7 @@ Wi-Fi 和服务端地址不再写死在源码中。首次启动时，固件开�
 1. 在 Mac 上启动 FastAPI：
 
    ```bash
-   cd /path/to/RefrigeratorFoodManagement/backend
+   cd /path/to/FridgeEInkDisplay/backend
    uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
    ```
 

@@ -1,5 +1,5 @@
 {
-  "design": "RefrigeratorFoodManagement enclosure replacement V0.4",
+  "design": "FridgeEInkDisplay enclosure replacement V0.4",
   "units": "mm",
   "status": "verify 1:1 templates and fit coupons before full-size print",
   "reuse_without_reprint": [

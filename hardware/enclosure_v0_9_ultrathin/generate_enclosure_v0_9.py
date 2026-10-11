@@ -445,7 +445,7 @@ def main() -> None:
     )
 
     manifest = {
-        "design": "RefrigeratorFoodManagement V0.9 ultrathin enclosure prototype",
+        "design": "FridgeEInkDisplay V0.9 ultrathin enclosure prototype",
         "units": "mm",
         "status": "engineering prototype; print all required coupons before full shell",
         "preserves": [

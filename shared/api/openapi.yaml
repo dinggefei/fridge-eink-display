@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: RefrigeratorFoodManagement API
+  title: FridgeEInkDisplay API
   version: 0.1.0
   description: 微信小程序、服务端与 ESP32 设备共同使用的 MVP API 基线。
 servers:
@@ -1802,7 +1802,7 @@ components:
       properties:
         service:
           type: string
-          const: refrigerator-food-management
+          const: fridge-eink-display
         status:
           type: string
           const: ok
